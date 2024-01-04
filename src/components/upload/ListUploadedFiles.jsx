@@ -1,30 +1,45 @@
-import { useCallback, useContext, useState } from 'react'
+import { useContext } from 'react'
 import UploadedFilesContext from '../../context/UploadedFilesContext'
-import { FaDownload } from 'react-icons/fa'
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
 
 function ListUploadedFiles() {
-  const { uploadedFiles } = useContext(UploadedFilesContext)
+  const { uploadedFiles, setUploadedFiles } = useContext(UploadedFilesContext)
 
-  const files = uploadedFiles.map((file) => {
-    const htmlUrl = 'http://localhost:7001/show/' + file.id
+  const reorder = (list, startIndex, endIndex) => {
+    const result = Array.from(list)
+    const [removed] = result.splice(startIndex, 1)
+    result.splice(endIndex, 0, removed)
 
-    return (
-      <li key={file.id}>
-        <a href={htmlUrl} target='_blank'>
-          <div className='flex mt-2'>
-            <FaDownload className='mr-2'/>
-            {file.filename} - {file.size} bytes{' '}
-          </div>
-        </a>
-      </li>
-    )
-  })
+    return result
+  }
+
+  const onDragEnd = ({ destination, source }) => {
+    if (!destination) return
+    setUploadedFiles(reorder(uploadedFiles, source.index, destination.index))
+  }
 
   return (
-    <div>
-      <h4>Uploaded files</h4>
-      <ul>{files}</ul>
-    </div>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId='droppable'>
+        {(provided) => (
+          <div ref={provided.innerRef} {...provided.droppableProps}>
+            {uploadedFiles.map((file, index) => (
+              <Draggable key={file.id} index={index} draggableId={file.id}>
+                {(provided, snapshot) => (
+                  <div
+                    ref={provided.innerRef}
+                    {...provided.draggableProps}
+                    {...provided.dragHandleProps}
+                  >
+                    {file.filename} - {file.size} bytes{' '}
+                  </div>
+                )}
+              </Draggable>
+            ))}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
   )
 }
 

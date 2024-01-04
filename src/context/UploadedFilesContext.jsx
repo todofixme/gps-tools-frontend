@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from 'react'
+import { createContext, useState } from 'react'
 import http from '../components/http-common'
 
 const UploadedFilesContext = createContext()
@@ -29,6 +29,7 @@ export const UploadedFilesProvider = ({ children }) => {
         filesToUpload,
         setFilesToUpload,
         uploadedFiles,
+        setUploadedFiles,
         uploadFile,
       }}
     >

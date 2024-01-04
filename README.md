@@ -9,6 +9,7 @@
 `npm install axios`
 `npm install --save react-dropzone`
 `npm i react-router-dom react-icons`
+`npm install @hello-pangea/dnd --save`
 
 # React + Vite
 
