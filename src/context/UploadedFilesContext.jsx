@@ -12,7 +12,7 @@ export const UploadedFilesProvider = ({ children }) => {
     formData.append('file', file)
 
     const result = await http
-      .post('/files', formData, {
+      .post('/upload/files', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
