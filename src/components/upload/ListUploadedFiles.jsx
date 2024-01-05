@@ -2,11 +2,16 @@ import { useContext, useState } from 'react'
 import UploadedFilesContext from '../../context/UploadedFilesContext'
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
 import { FaTrashCan, FaEllipsisVertical } from 'react-icons/fa6'
-import API from '../http-common'
 
 function ListUploadedFiles() {
-  const { uploadedFiles, setUploadedFiles, mergedFile, setMergedFile } =
-    useContext(UploadedFilesContext)
+  const {
+    uploadedFiles,
+    setUploadedFiles,
+    mergedFile,
+    setMergedFile,
+    removeUploadedFile,
+    mergeFiles,
+  } = useContext(UploadedFilesContext)
 
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list)
@@ -21,18 +26,12 @@ function ListUploadedFiles() {
     setUploadedFiles(reorder(uploadedFiles, source.index, destination.index))
   }
 
-  const handleMergeRequest = () => {
-    const params = uploadedFiles.map((file) => 'fileId=' + file.id)
-    const joinedParams = params.join('&')
-
-    API.post('/merge?' + joinedParams).then((response) => {
-      setMergedFile(response.data)
-      setUploadedFiles([])
-    })
-  }
-
   const handleReset = () => {
     setMergedFile(null)
+  }
+
+  const removeFile = (file) => () => {
+    removeUploadedFile(file)
   }
 
   return (
@@ -52,7 +51,7 @@ function ListUploadedFiles() {
                     >
                       <FaEllipsisVertical />
                       {file.filename} - {file.size} bytes{' '}
-                      <FaTrashCan className='ml-1' />
+                      <FaTrashCan className='ml-1' onClick={removeFile(file)} />
                     </div>
                   )}
                 </Draggable>
@@ -65,7 +64,7 @@ function ListUploadedFiles() {
 
       <div>
         {uploadedFiles.length > 0 && (
-          <button className='btn btn-active' onClick={handleMergeRequest}>
+          <button className='btn btn-active' onClick={mergeFiles}>
             Merge
           </button>
         )}
