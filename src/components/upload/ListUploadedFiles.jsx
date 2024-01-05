@@ -1,10 +1,12 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import UploadedFilesContext from '../../context/UploadedFilesContext'
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
 import { FaTrashCan, FaEllipsisVertical } from 'react-icons/fa6'
+import API from '../http-common'
 
 function ListUploadedFiles() {
-  const { uploadedFiles, setUploadedFiles } = useContext(UploadedFilesContext)
+  const { uploadedFiles, setUploadedFiles, mergedFile, setMergedFile } =
+    useContext(UploadedFilesContext)
 
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list)
@@ -20,7 +22,17 @@ function ListUploadedFiles() {
   }
 
   const handleMergeRequest = () => {
-    uploadedFiles.map((file) => console.log(file))
+    const params = uploadedFiles.map((file) => 'fileId=' + file.id)
+    const joinedParams = params.join('&')
+
+    API.post('/merge?' + joinedParams).then((response) => {
+      setMergedFile(response.data)
+      setUploadedFiles([])
+    })
+  }
+
+  const handleReset = () => {
+    setMergedFile(null)
   }
 
   return (
@@ -56,6 +68,18 @@ function ListUploadedFiles() {
           <button className='btn btn-active' onClick={handleMergeRequest}>
             Merge
           </button>
+        )}
+      </div>
+
+      <div>
+        {mergedFile !== null && (
+          <>
+            <a href={mergedFile.href}>{mergedFile.filename}</a>
+            <br />
+            <button className='btn btn-active' onClick={handleReset}>
+              Reset
+            </button>
+          </>
         )}
       </div>
     </>

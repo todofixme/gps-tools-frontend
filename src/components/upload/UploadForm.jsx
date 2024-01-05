@@ -3,7 +3,7 @@ import { useDropzone } from 'react-dropzone'
 import UploadedFilesContext from '../../context/UploadedFilesContext'
 
 function UploadForm() {
-  const { filesToUpload, setFilesToUpload, uploadFile } =
+  const { filesToUpload, setFilesToUpload, uploadFile, mergedFile } =
     useContext(UploadedFilesContext)
 
   const onDrop = useCallback(
@@ -45,36 +45,41 @@ function UploadForm() {
 
   return (
     <>
-      <form onSubmit={handleOnSubmit}>
-        <div>
-          <section className='container'>
-            <div {...getRootProps({ className: 'dropzone' })}>
-              <input {...getInputProps()} />
-              {isDragActive ? (
-                <p>Drop the files here ...</p>
-              ) : (
-                <p>Drag 'n' drop some files here, or click to select files</p>
+      {mergedFile === null && (
+        <form onSubmit={handleOnSubmit}>
+          <div>
+            <section className='container'>
+              <div {...getRootProps({ className: 'dropzone' })}>
+                <input {...getInputProps()} />
+                {isDragActive ? (
+                  <p>Drop the files here ...</p>
+                ) : (
+                  <p>Drag 'n' drop some files here, or click to select files</p>
+                )}
+              </div>
+
+              {files.length > 0 && (
+                <aside>
+                  <h4>Files to upload</h4>
+                  <ul>{files}</ul>
+                </aside>
               )}
-            </div>
-            <aside>
-              <h4>Files to upload</h4>
-              <ul>{files}</ul>
-            </aside>
-          </section>
-        </div>
+            </section>
+          </div>
 
-        <div>
-          <button className='btn {filesToUpload.length == 0 ? "btn-disabled" : "btn-active"}'>
-            Submit
-          </button>
-        </div>
+          <div>
+            <button className='btn {filesToUpload.length == 0 ? "btn-disabled" : "btn-active"}'>
+              Submit
+            </button>
+          </div>
 
-        <div>
-          {filesToUpload.length > 0 && (
-            <button onClick={removeAllFiles}>Remove All</button>
-          )}
-        </div>
-      </form>
+          <div>
+            {filesToUpload.length > 0 && (
+              <button onClick={removeAllFiles}>Remove All</button>
+            )}
+          </div>
+        </form>
+      )}
     </>
   )
 }
