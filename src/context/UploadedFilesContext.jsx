@@ -4,7 +4,6 @@ import http from '../components/http-common'
 const UploadedFilesContext = createContext()
 
 export const UploadedFilesProvider = ({ children }) => {
-  const [filesToUpload, setFilesToUpload] = useState([])
   const [uploadedFiles, setUploadedFiles] = useState([])
   const [mergedFile, setMergedFile] = useState(null)
 
@@ -21,14 +20,11 @@ export const UploadedFilesProvider = ({ children }) => {
       .then((r) => r.data)
 
     setUploadedFiles((prevState) => [...prevState, result[0]])
-    setFilesToUpload((prevState) => prevState.filter((f) => f !== file))
   }
 
   return (
     <UploadedFilesContext.Provider
       value={{
-        filesToUpload,
-        setFilesToUpload,
         uploadedFiles,
         setUploadedFiles,
         mergedFile,
