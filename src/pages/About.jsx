@@ -3,9 +3,9 @@ import React from 'react'
 function About() {
   return (
     <>
-      <h1 className='text-6xl mb-4'>GPX Merge</h1>
+      <h1 className='text-6xl mb-4'>GPS Tools</h1>
       <p className='mb-4 text-2xl font-light'>
-        A React app to merge GPX files.
+        An app dealing with GPS files.
       </p>
       <p className='text-lg text-gray-400'>
         Version <span className='text-white'>1.0.0</span>

@@ -3,7 +3,7 @@ import UploadedFilesContext from '../../context/UploadedFilesContext'
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
 import { FaTrashCan, FaEllipsisVertical } from 'react-icons/fa6'
 
-function ListUploadedFiles() {
+function MergeFiles() {
   const {
     uploadedFiles,
     setUploadedFiles,
@@ -85,4 +85,4 @@ function ListUploadedFiles() {
   )
 }
 
-export default ListUploadedFiles
+export default MergeFiles
