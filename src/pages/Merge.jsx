@@ -5,7 +5,7 @@ import MergeFiles from '../components/merge/MergeFiles'
 function Merge() {
   return (
     <div>
-      <h1 className='text-6xl'>GPX-Merge</h1>
+      <h1 className='text-6xl pb-6'>GPX-Merge</h1>
       <UploadForm />
       <MergeFiles />
     </div>

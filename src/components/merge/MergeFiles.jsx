@@ -1,7 +1,9 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import UploadedFilesContext from '../../context/UploadedFilesContext'
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
 import { FaTrashCan, FaEllipsisVertical } from 'react-icons/fa6'
+import VisualizeTrack from './VisualizeTrack'
+import { FiDownload } from 'react-icons/fi'
 
 function MergeFiles() {
   const {
@@ -73,11 +75,17 @@ function MergeFiles() {
       <div>
         {mergedFile !== null && (
           <>
-            <a href={mergedFile.href}>{mergedFile.filename}</a>
+            <div>
+              <a href={mergedFile.href}>
+                <FiDownload className='inline mr-1' />
+                {mergedFile.filename}
+              </a>
+            </div>
             <br />
-            <button className='btn btn-active' onClick={handleReset}>
+            <button className='btn btn-active mb-4' onClick={handleReset}>
               Reset
             </button>
+            <VisualizeTrack trackId={mergedFile.id} />
           </>
         )}
       </div>
