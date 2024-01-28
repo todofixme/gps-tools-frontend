@@ -76,7 +76,7 @@ function MergeFiles() {
         {mergedFile !== null && (
           <>
             <div>
-              <a href={mergedFile.href}>
+              <a href={mergedFile.href + '?m=dl'}>
                 <FiDownload className='inline mr-1' />
                 {mergedFile.filename}
               </a>
