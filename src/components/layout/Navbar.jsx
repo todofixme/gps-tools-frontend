@@ -5,7 +5,7 @@ import React from 'react'
 import { FaToggleOff, FaToggleOn } from 'react-icons/fa'
 
 const ThemeSwitcher = () => {
-  const [theme, setTheme] = React.useState('light')
+  const [theme, setTheme] = React.useState('dark')
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark')
   }
