@@ -1,6 +1,30 @@
 import { FaGlobe } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import React from 'react'
+import { FaToggleOff, FaToggleOn } from 'react-icons/fa'
+
+const ThemeSwitcher = () => {
+  const [theme, setTheme] = React.useState('light')
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
+
+  React.useEffect(() => {
+    document.querySelector('html').setAttribute('data-theme', theme)
+  }, [theme])
+  return (
+    <label className='swap'>
+      <input onClick={toggleTheme} type='checkbox' />
+      <div className='swap-on'>
+        <FaToggleOn className='text-2xl' />
+      </div>
+      <div className='swap-off'>
+        <FaToggleOff className='text-2xl' />
+      </div>
+    </label>
+  )
+}
 
 function Navbar({ title }) {
   return (
@@ -24,6 +48,7 @@ function Navbar({ title }) {
             <Link to='/about' className='btn btn-ghost btn-sm rounded-btn'>
               About
             </Link>
+            <ThemeSwitcher />
           </div>
         </div>
       </div>
