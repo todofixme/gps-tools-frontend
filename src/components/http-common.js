@@ -1,8 +1,7 @@
 import axios from 'axios'
 
 export default axios.create({
-  // baseURL: 'http://localhost:7001',
-  baseURL: 'https://gps-backend.tigerflanke.de',
+  baseURL: import.meta.env.VITE_BACKEND_BASE_URL,
   headers: {
     'Content-type': 'application/json',
   },
