@@ -1,19 +1,28 @@
-import { useState, useEffect, createRef } from 'react'
-import GpxParser from 'gpxparser'
-import API from '../http-common'
-import 'leaflet/dist/leaflet.css'
-import { MdCenterFocusStrong } from 'react-icons/md'
-
+import { useState, useEffect, createRef, RefObject } from 'react'
 import { MapContainer, TileLayer, Polyline, useMap } from 'react-leaflet'
+import {
+  LatLngBoundsExpression,
+  LatLngExpression,
+  LatLngTuple,
+  Polyline as LeafletPolyline,
+} from 'leaflet'
+import 'leaflet/dist/leaflet.css'
+import GpxParser from 'gpxparser'
+import { MdCenterFocusStrong } from 'react-icons/md'
+import API from '../common/gps-backend-api'
 
-function VisualizeTrack({ trackId }) {
+type VisualizeTrackProps = {
+  trackId: string
+}
+
+const VisualizeTrack: React.FC<VisualizeTrackProps> = ({ trackId }) => {
   const [isLoading, setIsLoading] = useState(true)
-  const [positions, setPositions] = useState([])
-  const [bounds, setBounds] = useState([
+  const [positions, setPositions] = useState<LatLngExpression[]>([])
+  const [bounds, setBounds] = useState<LatLngBoundsExpression>([
     [0, 0],
     [0, 0],
   ])
-  const polylineRef = createRef()
+  const polylineRef = createRef<LeafletPolyline>()
 
   useEffect(() => {
     setIsLoading(true)
@@ -21,10 +30,10 @@ function VisualizeTrack({ trackId }) {
       var gpx = new GpxParser()
       gpx.parse(file.data)
 
-      var _positions = gpx.tracks[0].points.map((point) => [
+      var _positions: LatLngTuple[] = gpx.tracks[0].points.map((point) => [
         point.lat,
         point.lon,
-      ])
+      ]) as LatLngTuple[]
       setPositions(_positions)
 
       const lats = []
@@ -42,7 +51,7 @@ function VisualizeTrack({ trackId }) {
       const _bounds = [
         [minlat, minlng],
         [maxlat, maxlng],
-      ]
+      ] as LatLngBoundsExpression
       setBounds(_bounds)
 
       setIsLoading(false)
@@ -73,11 +82,15 @@ function VisualizeTrack({ trackId }) {
   )
 }
 
-const FitBoundsButton = ({ polylineRef }) => {
+type FitBoundsButtonProps = {
+  polylineRef: RefObject<LeafletPolyline>
+}
+
+const FitBoundsButton: React.FC<FitBoundsButtonProps> = ({ polylineRef }) => {
   const map = useMap()
 
   const handleFitBounds = () => {
-    map.fitBounds(polylineRef.current.getBounds())
+    map.fitBounds(polylineRef.current!.getBounds())
   }
 
   return (

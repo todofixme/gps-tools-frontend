@@ -1,11 +1,16 @@
-import { useContext } from 'react'
-import UploadedFilesContext from '../../context/UploadedFilesContext'
-import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from '@hello-pangea/dnd'
 import { FaTrashCan, FaEllipsisVertical } from 'react-icons/fa6'
-import VisualizeTrack from './VisualizeTrack'
 import { FiDownload } from 'react-icons/fi'
+import { useUploadContext } from '../../context/UploadContext'
+import VisualizeTrack from './VisualizeTrack'
+import { UploadedFile } from '../../@types/upload'
 
-function MergeFiles() {
+const MergeFiles = () => {
   const {
     uploadedFiles,
     setUploadedFiles,
@@ -13,9 +18,13 @@ function MergeFiles() {
     setMergedFile,
     removeUploadedFile,
     mergeFiles,
-  } = useContext(UploadedFilesContext)
+  } = useUploadContext()
 
-  const reorder = (list, startIndex, endIndex) => {
+  const reorder = (
+    list: Array<UploadedFile>,
+    startIndex: number,
+    endIndex: number
+  ) => {
     const result = Array.from(list)
     const [removed] = result.splice(startIndex, 1)
     result.splice(endIndex, 0, removed)
@@ -23,7 +32,8 @@ function MergeFiles() {
     return result
   }
 
-  const onDragEnd = ({ destination, source }) => {
+  const onDragEnd = (result: DropResult) => {
+    const { source, destination } = result
     if (!destination) return
     setUploadedFiles(reorder(uploadedFiles, source.index, destination.index))
   }
@@ -32,9 +42,12 @@ function MergeFiles() {
     setMergedFile(null)
   }
 
-  const removeFile = (file) => () => {
+  const removeFile = (file: UploadedFile) => () => {
     removeUploadedFile(file)
   }
+
+  const addThousandsSeparator = (x: number, separator: string) =>
+    x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator)
 
   return (
     <>
@@ -44,15 +57,17 @@ function MergeFiles() {
             <div ref={provided.innerRef} {...provided.droppableProps}>
               {uploadedFiles.map((file, index) => (
                 <Draggable key={file.id} index={index} draggableId={file.id}>
-                  {(provided, snapshot) => (
+                  {(provided) => (
                     <div
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      className='flex mb-1 mt-1'
+                      className='flex mb-1 mt-1 bg-slate-700'
                     >
                       <FaEllipsisVertical />
-                      {file.filename} - {file.size} bytes{' '}
+                      {file.filename} -{' '}
+                      {addThousandsSeparator(Math.round(file.size / 1024), '.')}
+                      kB{' '}
                       <FaTrashCan className='ml-1' onClick={removeFile(file)} />
                     </div>
                   )}
@@ -64,7 +79,7 @@ function MergeFiles() {
         </Droppable>
       </DragDropContext>
 
-      <div>
+      <div className='mt-7'>
         {uploadedFiles.length > 0 && (
           <button className='btn btn-active' onClick={mergeFiles}>
             Merge
@@ -82,7 +97,7 @@ function MergeFiles() {
               </a>
             </div>
             <br />
-            <button className='btn btn-active mb-4' onClick={handleReset}>
+            <button className='btn btn-active mb-7' onClick={handleReset}>
               Reset
             </button>
             <VisualizeTrack trackId={mergedFile.id} />
