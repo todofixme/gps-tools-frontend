@@ -1,6 +1,7 @@
 import { createContext, useContext, useState } from 'react'
 import { UploadedFile, UploadContextType } from '../@types/upload'
 import API from '../components/common/gps-backend-api'
+import { useFeedbackContext } from './FeedbackContext'
 
 export const UploadContext = createContext<UploadContextType | null>(null)
 
@@ -11,6 +12,7 @@ export type UploadProviderType = {
 export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
   const [uploadedFiles, setUploadedFiles] = useState<Array<UploadedFile>>([])
   const [mergedFile, setMergedFile] = useState<UploadedFile | null>(null)
+  const { setError } = useFeedbackContext()
 
   const uploadFile = async (file: File) => {
     const formData = new FormData()
@@ -20,9 +22,11 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    }).then((response) =>
-      setUploadedFiles((prevState) => [...prevState, response.data[0]])
-    )
+    })
+      .then((response) =>
+        setUploadedFiles((prevState) => [...prevState, response.data[0]])
+      )
+      .catch(() => setError('Failed to upload files. Sorry!'))
   }
 
   const removeUploadedFile = async (file: UploadedFile) => {
