@@ -1,0 +1,42 @@
+name: Deploy on Prod
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  publish:
+    name: Deploy to Cloudflare Pages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: "lts/*"
+    - name: Install dependencies
+      run: npm clean-install
+    - name: Build app
+      run: npm run build
+    - name: Publish to Cloudflare Pages
+      uses: cloudflare/pages-action@v1
+      with:
+        apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        accountId: ecd489582d7b1c1217dfce5ddfcd812e
+        projectName: gps-tools
+        directory: dist
+        # Optional: Enable this if you want to have GitHub Deployments triggered
+        gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+        # Optional: Switch what branch you are publishing to.
+        # By default this will be the branch which triggered this workflow
+        branch: main
+        # Optional: Change the working directory
+        # workingDirectory: my-site
+        # Optional: Change the Wrangler version, allows you to point to a specific version or a tag such as `beta`
+        # wranglerVersion: '3'
