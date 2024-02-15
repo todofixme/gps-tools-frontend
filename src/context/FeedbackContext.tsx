@@ -30,7 +30,7 @@ export const FeedbackProvider: React.FC<FeedbackProviderType> = ({
       payload: { type: 'error', message },
     })
 
-    setTimeout(() => dispatchFeedback({ type: REMOVE_FEEDBACK }), 3000)
+    setTimeout(() => dispatchFeedback({ type: REMOVE_FEEDBACK }), 5000)
   }
 
   const removeFeedback = () => {
