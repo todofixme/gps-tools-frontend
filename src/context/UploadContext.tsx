@@ -29,7 +29,15 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
       .then((response) =>
         setUploadedFiles((prevState) => [...prevState, response.data[0]])
       )
-      .catch(() => setError('Failed to upload files. Sorry!'))
+      .catch((error) => {
+        if (error.code === 'ERR_NETWORK') {
+          setError('The backend server is not available at the moment. Sorry!')
+        } else if (error.code === 'ERR_BAD_REQUEST') {
+          setError("Couldn't process some files. Was it really GPS data?")
+        } else {
+          setError('Failed to upload files. Sorry!')
+        }
+      })
       .finally(() => setLoading(false))
   }
 
