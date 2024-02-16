@@ -14,4 +14,5 @@ export type UploadContextType = {
   uploadFile: (fileToUpload: File) => void
   removeUploadedFile: (fileToRemove: UploadedFile) => void
   mergeFiles: () => void
+  isLoading: Boolean
 }

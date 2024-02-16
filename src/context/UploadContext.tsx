@@ -12,9 +12,12 @@ export type UploadProviderType = {
 export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
   const [uploadedFiles, setUploadedFiles] = useState<Array<UploadedFile>>([])
   const [mergedFile, setMergedFile] = useState<UploadedFile | null>(null)
+  const [isLoading, setLoading] = useState<Boolean>(false)
   const { setError } = useFeedbackContext()
 
   const uploadFile = async (file: File) => {
+    setLoading(true)
+
     const formData = new FormData()
     formData.append('file', file)
 
@@ -27,6 +30,7 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
         setUploadedFiles((prevState) => [...prevState, response.data[0]])
       )
       .catch(() => setError('Failed to upload files. Sorry!'))
+      .finally(() => setLoading(false))
   }
 
   const removeUploadedFile = async (file: UploadedFile) => {
@@ -58,6 +62,7 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
         uploadFile,
         removeUploadedFile,
         mergeFiles,
+        isLoading,
       }}
     >
       {children}
