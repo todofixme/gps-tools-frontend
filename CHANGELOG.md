@@ -1,3 +1,16 @@
+# [0.4.0](https://github.com/devshred/gps-tools-frontend/compare/v0.3.0...v0.4.0) (2024-02-29)
+
+
+### Bug Fixes
+
+* **layout:** label of merge-button ([54671ad](https://github.com/devshred/gps-tools-frontend/commit/54671adde64987ddeb438c9e7353767c4e689fc6))
+* **merge:** avoid merging a single file ([7ae3eab](https://github.com/devshred/gps-tools-frontend/commit/7ae3eab398023e5259db4f3da9cb54c49c753422))
+
+
+### Features
+
+* **visual:** show waypoints ([cacf1f8](https://github.com/devshred/gps-tools-frontend/commit/cacf1f84a5288d3a6e92c8e2ebc048df075b39af))
+
 # [0.3.0](https://github.com/devshred/gps-tools-frontend/compare/v0.2.0...v0.3.0) (2024-02-16)
 
 
