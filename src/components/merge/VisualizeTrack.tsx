@@ -1,5 +1,12 @@
 import { useState, useEffect, createRef, RefObject } from 'react'
-import { MapContainer, TileLayer, Polyline, useMap } from 'react-leaflet'
+import {
+  MapContainer,
+  TileLayer,
+  Polyline,
+  useMap,
+  Marker,
+  Popup,
+} from 'react-leaflet'
 import {
   LatLngBoundsExpression,
   LatLngExpression,
@@ -10,6 +17,7 @@ import 'leaflet/dist/leaflet.css'
 import GpxParser from 'gpxparser'
 import { MdCenterFocusStrong } from 'react-icons/md'
 import API from '../common/gps-backend-api'
+import { WayPoint } from '../../@types/gps'
 
 type VisualizeTrackProps = {
   trackId: string
@@ -18,6 +26,7 @@ type VisualizeTrackProps = {
 const VisualizeTrack: React.FC<VisualizeTrackProps> = ({ trackId }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [positions, setPositions] = useState<LatLngExpression[]>([])
+  const [markerPositions, setMarkerPositions] = useState<WayPoint[]>([])
   const [bounds, setBounds] = useState<LatLngBoundsExpression>([
     [0, 0],
     [0, 0],
@@ -29,6 +38,12 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({ trackId }) => {
     API.get('/files/' + trackId).then((file) => {
       var gpx = new GpxParser()
       gpx.parse(file.data)
+
+      var _markerPositions: WayPoint[] = gpx.waypoints.map((point) => ({
+        position: [point.lat, point.lon],
+        name: point.name,
+      })) as WayPoint[]
+      setMarkerPositions(_markerPositions)
 
       var _positions: LatLngTuple[] = gpx.tracks[0].points.map((point) => [
         point.lat,
@@ -77,6 +92,11 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({ trackId }) => {
         positions={positions}
         ref={polylineRef}
       />
+      {markerPositions.map((waypoint, index) => (
+        <Marker position={waypoint.position} key={index}>
+          <Popup>{waypoint.name}</Popup>
+        </Marker>
+      ))}
       <FitBoundsButton polylineRef={polylineRef} />
     </MapContainer>
   )

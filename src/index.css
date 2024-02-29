@@ -28,3 +28,8 @@
     opacity: 0.8;
     cursor: pointer;
 }
+
+.leaflet-div-icon {
+  background: transparent;
+  border: none;
+}
