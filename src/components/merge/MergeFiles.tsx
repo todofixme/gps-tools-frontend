@@ -82,7 +82,8 @@ const MergeFiles = () => {
       <div className='mt-7'>
         {uploadedFiles.length > 0 && (
           <button className='btn btn-active' onClick={mergeFiles}>
-            Merge
+            {uploadedFiles.length == 1 && 'Visualize'}
+            {uploadedFiles.length > 1 && 'Merge & Visualize'}
           </button>
         )}
       </div>
