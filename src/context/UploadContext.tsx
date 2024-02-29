@@ -50,14 +50,20 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
   }
 
   const mergeFiles = () => {
-    const params = uploadedFiles.map((file) => 'fileId=' + file.id)
-    const joinedParams = params.join('&')
-
-    API.post('/merge?' + joinedParams).then((response) => {
-      setMergedFile(response.data)
-      uploadedFiles.forEach((file) => API.delete('/files/' + file.id))
+    if (uploadedFiles.length == 1) {
+      // no need to merge
+      setMergedFile(uploadedFiles[0])
       setUploadedFiles([])
-    })
+    } else {
+      const params = uploadedFiles.map((file) => 'fileId=' + file.id)
+      const joinedParams = params.join('&')
+
+      API.post('/merge?' + joinedParams).then((response) => {
+        setMergedFile(response.data)
+        uploadedFiles.forEach((file) => API.delete('/files/' + file.id))
+        setUploadedFiles([])
+      })
+    }
   }
 
   return (
