@@ -25,6 +25,7 @@ type VisualizeTrackProps = {
 
 const VisualizeTrack: React.FC<VisualizeTrackProps> = ({ trackId }) => {
   const [isLoading, setIsLoading] = useState(true)
+  const [trackTitle, setTrackTitle] = useState<string>('')
   const [positions, setPositions] = useState<LatLngExpression[]>([])
   const [markerPositions, setMarkerPositions] = useState<WayPoint[]>([])
   const [bounds, setBounds] = useState<LatLngBoundsExpression>([
@@ -69,6 +70,10 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({ trackId }) => {
       ] as LatLngBoundsExpression
       setBounds(_bounds)
 
+      if (gpx.metadata !== undefined && gpx.metadata.name !== undefined) {
+        setTrackTitle(gpx.metadata.name)
+      }
+
       setIsLoading(false)
     })
   }, [trackId])
@@ -82,23 +87,29 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({ trackId }) => {
   }
 
   return (
-    <MapContainer bounds={bounds}>
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
-      />
-      <Polyline
-        pathOptions={{ fillColor: 'red', color: 'blue' }}
-        positions={positions}
-        ref={polylineRef}
-      />
-      {markerPositions.map((waypoint, index) => (
-        <Marker position={waypoint.position} key={index}>
-          <Popup>{waypoint.name}</Popup>
-        </Marker>
-      ))}
-      <FitBoundsButton polylineRef={polylineRef} />
-    </MapContainer>
+    <>
+      <br />
+      {trackTitle.length > 0 && (
+        <div className='mb-7'>Trackname: {trackTitle}</div>
+      )}
+      <MapContainer bounds={bounds}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+        />
+        <Polyline
+          pathOptions={{ fillColor: 'red', color: 'blue' }}
+          positions={positions}
+          ref={polylineRef}
+        />
+        {markerPositions.map((waypoint, index) => (
+          <Marker position={waypoint.position} key={index}>
+            <Popup>{waypoint.name}</Popup>
+          </Marker>
+        ))}
+        <FitBoundsButton polylineRef={polylineRef} />
+      </MapContainer>
+    </>
   )
 }
 
