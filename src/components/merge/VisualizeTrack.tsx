@@ -1,4 +1,12 @@
-import { useState, useEffect, createRef, RefObject } from 'react'
+import {
+  useState,
+  useEffect,
+  createRef,
+  RefObject,
+  useRef,
+  SetStateAction,
+  Dispatch,
+} from 'react'
 import {
   MapContainer,
   TileLayer,
@@ -15,17 +23,22 @@ import {
 } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import GpxParser from 'gpxparser'
+import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
+import sanitizeHtml from 'sanitize-html'
 import { MdCenterFocusStrong } from 'react-icons/md'
 import API from '../common/gps-backend-api'
 import { WayPoint } from '../../@types/gps'
 
 type VisualizeTrackProps = {
   trackId: string
+  setTrackname: Dispatch<SetStateAction<string>>
 }
 
-const VisualizeTrack: React.FC<VisualizeTrackProps> = ({ trackId }) => {
+const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
+  trackId,
+  setTrackname,
+}) => {
   const [isLoading, setIsLoading] = useState(true)
-  const [trackTitle, setTrackTitle] = useState<string>('')
   const [positions, setPositions] = useState<LatLngExpression[]>([])
   const [markerPositions, setMarkerPositions] = useState<WayPoint[]>([])
   const [bounds, setBounds] = useState<LatLngBoundsExpression>([
@@ -33,6 +46,7 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({ trackId }) => {
     [0, 0],
   ])
   const polylineRef = createRef<LeafletPolyline>()
+  const tracknameRef = useRef('')
 
   useEffect(() => {
     setIsLoading(true)
@@ -71,7 +85,8 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({ trackId }) => {
       setBounds(_bounds)
 
       if (gpx.metadata !== undefined && gpx.metadata.name !== undefined) {
-        setTrackTitle(gpx.metadata.name)
+        tracknameRef.current = gpx.metadata.name
+        setTrackname(gpx.metadata.name.trim())
       }
 
       setIsLoading(false)
@@ -86,12 +101,33 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({ trackId }) => {
     return <div>Error...</div>
   }
 
+  const handleChange = (evt: ContentEditableEvent) => {
+    tracknameRef.current = evt.currentTarget.innerHTML
+  }
+
+  const handleBlur = () => {
+    const sanitizeConf = {
+      allowedTags: [],
+      allowedAttributes: {},
+    }
+
+    setTrackname(sanitizeHtml(tracknameRef.current, sanitizeConf).trim())
+  }
+
   return (
     <>
       <br />
-      {trackTitle.length > 0 && (
-        <div className='mb-7'>Trackname: {trackTitle}</div>
-      )}
+      <div className='mb-7 grid'>
+        <div className='text-xs'>Trackname</div>
+        <ContentEditable
+          html={tracknameRef.current}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        <div>
+          <hr />
+        </div>
+      </div>
       <MapContainer bounds={bounds}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

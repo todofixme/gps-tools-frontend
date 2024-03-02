@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   DragDropContext,
   Droppable,
@@ -19,6 +20,8 @@ const MergeFiles = () => {
     removeUploadedFile,
     mergeFiles,
   } = useUploadContext()
+
+  const [trackname, setTrackname] = useState<string>('')
 
   const reorder = (
     list: Array<UploadedFile>,
@@ -92,7 +95,13 @@ const MergeFiles = () => {
         {mergedFile !== null && (
           <>
             <div>
-              <a href={mergedFile.href + '?m=dl'}>
+              <a
+                href={
+                  mergedFile.href +
+                  '?m=dl' +
+                  (trackname.length > 0 ? `&name=${trackname}` : '')
+                }
+              >
                 <FiDownload className='inline mr-1' />
                 {mergedFile.filename}
               </a>
@@ -101,7 +110,10 @@ const MergeFiles = () => {
             <button className='btn btn-active mb-7' onClick={handleReset}>
               Reset
             </button>
-            <VisualizeTrack trackId={mergedFile.id} />
+            <VisualizeTrack
+              trackId={mergedFile.id}
+              setTrackname={setTrackname}
+            />
           </>
         )}
       </div>

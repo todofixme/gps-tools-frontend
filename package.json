@@ -16,12 +16,14 @@
     "gpxparser": "^3.0.8",
     "leaflet": "^1.9.4",
     "react": "^18.2.0",
+    "react-contenteditable": "^3.3.7",
     "react-daisyui": "^5.0.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-icons": "^5.0.1",
     "react-leaflet": "^4.2.1",
     "react-router-dom": "^6.21.3",
+    "sanitize-html": "^2.12.1",
     "vite-plugin-package-version": "^1.1.0"
   },
   "devDependencies": {
@@ -29,6 +31,7 @@
     "@semantic-release/git": "^10.0.1",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
+    "@types/sanitize-html": "^2.11.0",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
