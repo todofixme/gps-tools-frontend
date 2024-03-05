@@ -15,24 +15,35 @@ import {
   Marker,
   Popup,
 } from 'react-leaflet'
-import {
+import L, {
   LatLngBoundsExpression,
   LatLngExpression,
   LatLngTuple,
   Polyline as LeafletPolyline,
 } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+import icon from 'leaflet/dist/images/marker-icon.png'
+import iconShadow from 'leaflet/dist/images/marker-shadow.png'
 import GpxParser from 'gpxparser'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
-import sanitizeHtml from 'sanitize-html'
 import { MdCenterFocusStrong } from 'react-icons/md'
 import API from '../common/gps-backend-api'
 import { WayPoint } from '../../@types/gps'
+import { sanitizeFilename } from '../common/tools'
 
 type VisualizeTrackProps = {
   trackId: string
   setTrackname: Dispatch<SetStateAction<string>>
 }
+
+let DefaultIcon = L.icon({
+  iconUrl: icon,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+})
+
+L.Marker.prototype.options.icon = DefaultIcon
 
 const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
   trackId,
@@ -86,7 +97,7 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
 
       if (gpx.metadata !== undefined && gpx.metadata.name !== undefined) {
         tracknameRef.current = gpx.metadata.name
-        setTrackname(gpx.metadata.name.trim())
+        setTrackname(sanitizeFilename(gpx.metadata.name))
       }
 
       setIsLoading(false)
@@ -106,12 +117,9 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
   }
 
   const handleBlur = () => {
-    const sanitizeConf = {
-      allowedTags: [],
-      allowedAttributes: {},
-    }
-
-    setTrackname(sanitizeHtml(tracknameRef.current, sanitizeConf).trim())
+    const sanitized = sanitizeFilename(tracknameRef.current)
+    tracknameRef.current = sanitized
+    setTrackname(sanitized)
   }
 
   return (

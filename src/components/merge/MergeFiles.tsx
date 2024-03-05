@@ -103,7 +103,7 @@ const MergeFiles = () => {
                 }
               >
                 <FiDownload className='inline mr-1' />
-                {mergedFile.filename}
+                {trackname}.gpx
               </a>
             </div>
             <br />
