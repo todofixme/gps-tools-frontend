@@ -1,3 +1,16 @@
+# [0.5.0](https://github.com/devshred/gps-tools-frontend/compare/v0.4.0...v0.5.0) (2024-03-05)
+
+
+### Bug Fixes
+
+* **download:** sanitize edited trackname ([627e825](https://github.com/devshred/gps-tools-frontend/commit/627e82558c7b50f122854893c2b1db48e981404b))
+
+
+### Features
+
+* **download:** add functionality to change name of a track ([15a46c4](https://github.com/devshred/gps-tools-frontend/commit/15a46c40ed3d82c379cd3b8f351dfe9083366425))
+* **visual:** show trackname ([5da413d](https://github.com/devshred/gps-tools-frontend/commit/5da413d35e23b7bbb97f47c9d3a41f18a4cd3bdb))
+
 # [0.4.0](https://github.com/devshred/gps-tools-frontend/compare/v0.3.0...v0.4.0) (2024-02-29)
 
 
