@@ -1,3 +1,10 @@
+# [0.6.0](https://github.com/devshred/gps-tools-frontend/compare/v0.5.0...v0.6.0) (2024-03-12)
+
+
+### Features
+
+* **download:** download as TCX ([e50c4ed](https://github.com/devshred/gps-tools-frontend/commit/e50c4ed51035857bdce8b2fcd375f1b0c8e6747c))
+
 # [0.5.0](https://github.com/devshred/gps-tools-frontend/compare/v0.4.0...v0.5.0) (2024-03-05)
 
 
