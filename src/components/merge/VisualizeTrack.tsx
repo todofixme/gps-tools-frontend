@@ -61,7 +61,12 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
 
   useEffect(() => {
     setIsLoading(true)
-    API.get('/files/' + trackId).then((file) => {
+    const config = {
+      headers: {
+        accept: 'application/gpx+xml',
+      },
+    }
+    API.get('/files/' + trackId, config).then((file) => {
       var gpx = new GpxParser()
       gpx.parse(file.data)
 

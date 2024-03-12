@@ -98,12 +98,23 @@ const MergeFiles = () => {
               <a
                 href={
                   mergedFile.href +
-                  '?m=dl' +
+                  '?mode=dl&type=gpx' +
                   (trackname.length > 0 ? `&name=${trackname}` : '')
                 }
               >
                 <FiDownload className='inline mr-1' />
                 {trackname}.gpx
+              </a>
+              <br />
+              <a
+                href={
+                  mergedFile.href +
+                  '?mode=dl&type=tcx' +
+                  (trackname.length > 0 ? `&name=${trackname}` : '')
+                }
+              >
+                <FiDownload className='inline mr-1' />
+                {trackname}.tcx
               </a>
             </div>
             <br />
