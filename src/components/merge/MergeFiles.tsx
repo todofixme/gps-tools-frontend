@@ -6,10 +6,10 @@ import {
   DropResult,
 } from '@hello-pangea/dnd'
 import { FaTrashCan, FaEllipsisVertical } from 'react-icons/fa6'
-import { FiDownload } from 'react-icons/fi'
 import { useUploadContext } from '../../context/UploadContext'
 import VisualizeTrack from './VisualizeTrack'
 import { UploadedFile } from '../../@types/upload'
+import DownloadLink from './DownloadLink'
 
 const MergeFiles = () => {
   const {
@@ -95,27 +95,9 @@ const MergeFiles = () => {
         {mergedFile !== null && (
           <>
             <div>
-              <a
-                href={
-                  mergedFile.href +
-                  '?mode=dl&type=gpx' +
-                  (trackname.length > 0 ? `&name=${trackname}` : '')
-                }
-              >
-                <FiDownload className='inline mr-1' />
-                {trackname}.gpx
-              </a>
+              <DownloadLink type='gpx' trackname={trackname} />
               <br />
-              <a
-                href={
-                  mergedFile.href +
-                  '?mode=dl&type=tcx' +
-                  (trackname.length > 0 ? `&name=${trackname}` : '')
-                }
-              >
-                <FiDownload className='inline mr-1' />
-                {trackname}.tcx
-              </a>
+              <DownloadLink type='tcx' trackname={trackname} />
             </div>
             <br />
             <button className='btn btn-active mb-7' onClick={handleReset}>
