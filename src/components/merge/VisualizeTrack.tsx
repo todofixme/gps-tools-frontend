@@ -30,6 +30,7 @@ import { MdCenterFocusStrong } from 'react-icons/md'
 import API from '../common/gps-backend-api'
 import { WayPoint } from '../../@types/gps'
 import { sanitizeFilename } from '../common/tools'
+import { FaPenToSquare } from 'react-icons/fa6'
 
 type VisualizeTrackProps = {
   trackId: string
@@ -58,6 +59,7 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
   ])
   const polylineRef = createRef<LeafletPolyline>()
   const tracknameRef = useRef('')
+  const tracknameInputFieldRef: React.RefObject<HTMLElement> = useRef(null)
 
   useEffect(() => {
     setIsLoading(true)
@@ -132,13 +134,20 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
       <br />
       <div className='mb-7 grid'>
         <div className='text-xs'>Trackname</div>
-        <ContentEditable
-          html={tracknameRef.current}
-          onChange={handleChange}
-          onBlur={handleBlur}
-        />
-        <div>
-          <hr />
+        <div className='underline flex'>
+          <ContentEditable
+            html={tracknameRef.current}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            innerRef={tracknameInputFieldRef}
+          />
+          &nbsp;
+          <FaPenToSquare
+            className='mx-0 relative top-1'
+            onClick={() => {
+              tracknameInputFieldRef?.current?.focus()
+            }}
+          />
         </div>
       </div>
       <MapContainer bounds={bounds}>

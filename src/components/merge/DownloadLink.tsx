@@ -20,7 +20,7 @@ const DownloadLink: React.FC<DownloadLinkProps> = ({ type, trackname }) => {
           (trackname.length > 0 ? `&name=${trackname}` : '')
         }
       >
-        <FiDownload className='inline mr-1' />
+        <FiDownload className='inline mr-1 relative bottom-0.5' />
         Download as {type.toUpperCase()}
       </a>
     )

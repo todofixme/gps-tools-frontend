@@ -67,11 +67,14 @@ const MergeFiles = () => {
                       {...provided.dragHandleProps}
                       className='flex mb-1 mt-1 bg-slate-700'
                     >
-                      <FaEllipsisVertical />
+                      <FaEllipsisVertical className='relative top-1' />
                       {file.filename} -{' '}
                       {addThousandsSeparator(Math.round(file.size / 1024), '.')}
                       kB{' '}
-                      <FaTrashCan className='ml-1' onClick={removeFile(file)} />
+                      <FaTrashCan
+                        className='ml-1 relative top-1'
+                        onClick={removeFile(file)}
+                      />
                     </div>
                   )}
                 </Draggable>

@@ -28,12 +28,13 @@ const UploadForm: React.FC = () => {
               <input {...getInputProps()} />
               {isDragActive ? (
                 <p>
-                  <FiUpload className='inline' /> Drop the files here ...
+                  <FiUpload className='inline relative bottom-0.5' /> Drop the
+                  files here ...
                 </p>
               ) : (
                 <p>
-                  <FiUpload className='inline' /> Drag 'n' drop some files here,
-                  or click to select files
+                  <FiUpload className='inline relative bottom-0.5' /> Drag 'n'
+                  drop some files here, or click to select files
                 </p>
               )}
             </div>
