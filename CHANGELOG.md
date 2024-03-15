@@ -1,3 +1,11 @@
+# [0.7.0](https://github.com/devshred/gps-tools-frontend/compare/v0.6.0...v0.7.0) (2024-03-15)
+
+
+### Features
+
+* **download:** improve readability of download links ([8ac6444](https://github.com/devshred/gps-tools-frontend/commit/8ac64440cf9d208a224d066d6e682e5bb647df73))
+* **layout:** improve UX ([c7f2b5b](https://github.com/devshred/gps-tools-frontend/commit/c7f2b5ba6aa97e342acd8f973b9464035cf6dfd9))
+
 # [0.6.0](https://github.com/devshred/gps-tools-frontend/compare/v0.5.0...v0.6.0) (2024-03-12)
 
 
