@@ -1,3 +1,11 @@
+# [0.8.0](https://github.com/devshred/gps-tools-frontend/compare/v0.7.0...v0.8.0) (2024-03-22)
+
+
+### Features
+
+* **layout:** change theme-switcher to sun/moon ([d68820a](https://github.com/devshred/gps-tools-frontend/commit/d68820a77fce6688fbdc5d12b1e9613e29043fd8))
+* **layout:** improve visibility of dropzone ([5482da2](https://github.com/devshred/gps-tools-frontend/commit/5482da2e82bbcce7b8ea83bcf158be13f43bb3e5))
+
 # [0.7.0](https://github.com/devshred/gps-tools-frontend/compare/v0.6.0...v0.7.0) (2024-03-15)
 
 
