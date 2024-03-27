@@ -1,15 +1,16 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
   DragDropContext,
-  Droppable,
   Draggable,
+  Droppable,
   DropResult,
 } from '@hello-pangea/dnd'
-import { FaTrashCan, FaEllipsisVertical } from 'react-icons/fa6'
+import { FaEllipsisVertical, FaTrashCan } from 'react-icons/fa6'
 import { useUploadContext } from '../../context/UploadContext'
 import VisualizeTrack from './VisualizeTrack'
 import { UploadedFile } from '../../@types/upload'
 import DownloadLink from './DownloadLink'
+import { GeoJsonObject } from 'geojson'
 
 const MergeFiles = () => {
   const {
@@ -22,6 +23,7 @@ const MergeFiles = () => {
   } = useUploadContext()
 
   const [trackname, setTrackname] = useState<string>('')
+  const [geoJson, setGeoJson] = useState<GeoJsonObject | null>(null)
 
   const reorder = (
     list: Array<UploadedFile>,
@@ -98,9 +100,17 @@ const MergeFiles = () => {
         {mergedFile !== null && (
           <>
             <div>
-              <DownloadLink type='gpx' trackname={trackname} />
+              <DownloadLink
+                type='gpx'
+                trackname={trackname}
+                geoJson={geoJson}
+              />
               <br />
-              <DownloadLink type='tcx' trackname={trackname} />
+              <DownloadLink
+                type='tcx'
+                trackname={trackname}
+                geoJson={geoJson}
+              />
             </div>
             <br />
             <button className='btn btn-active mb-7' onClick={handleReset}>
@@ -109,6 +119,7 @@ const MergeFiles = () => {
             <VisualizeTrack
               trackId={mergedFile.id}
               setTrackname={setTrackname}
+              setGeoJson={setGeoJson}
             />
           </>
         )}

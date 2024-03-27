@@ -20,3 +20,15 @@ export const sanitizeFilename = (input: string) => {
     return 'unnamed'
   }
 }
+
+export const decodeFromBase64 = (input: string) => {
+  const binString = atob(input)
+  const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0))
+  return new TextDecoder().decode(bytes)
+}
+
+export const encodeToBase64 = (input: string) => {
+  const bytes = new TextEncoder().encode(input)
+  const binString = String.fromCodePoint(...bytes)
+  return btoa(binString)
+}

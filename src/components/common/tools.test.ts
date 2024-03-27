@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { sanitizeFilename } from './tools'
+import { decodeFromBase64, encodeToBase64, sanitizeFilename } from './tools'
 
 describe('sanitizeFilename', () => {
   it('nothing to sanitize', () => {
@@ -45,5 +45,17 @@ describe('sanitizeFilename', () => {
   it(`convert lower-than as html`, () => {
     const sanitized = sanitizeFilename('Foo &lt; Bar')
     expect(sanitized).toStrictEqual('Foo < Bar')
+  })
+})
+
+describe('Base64 encode/decode', () => {
+  it('encode UTF-8', () => {
+    const encoded = encodeToBase64('Hotel Don Cándido')
+    expect(encoded).toStrictEqual('SG90ZWwgRG9uIEPDoW5kaWRv')
+  })
+
+  it('decode UTF-8', () => {
+    const encoded = decodeFromBase64('SG90ZWwgRG9uIEPDoW5kaWRv')
+    expect(encoded).toStrictEqual('Hotel Don Cándido')
   })
 })

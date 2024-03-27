@@ -1,20 +1,13 @@
-import {
-  useState,
-  useEffect,
+import React, {
   createRef,
-  RefObject,
-  useRef,
-  SetStateAction,
   Dispatch,
+  SetStateAction,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
 } from 'react'
-import {
-  MapContainer,
-  TileLayer,
-  Polyline,
-  useMap,
-  Marker,
-  Popup,
-} from 'react-leaflet'
+import { MapContainer, Polyline, TileLayer } from 'react-leaflet'
 import L, {
   LatLngBoundsExpression,
   LatLngExpression,
@@ -26,15 +19,21 @@ import icon from 'leaflet/dist/images/marker-icon.png'
 import iconShadow from 'leaflet/dist/images/marker-shadow.png'
 import GpxParser from 'gpxparser'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
-import { MdCenterFocusStrong } from 'react-icons/md'
 import API from '../common/gps-backend-api'
 import { WayPoint } from '../../@types/gps'
 import { sanitizeFilename } from '../common/tools'
 import { FaPenToSquare } from 'react-icons/fa6'
+import { v4 as uuidv4 } from 'uuid'
+import DraggableMarker from './DraggableMarker.tsx'
+import Control from 'react-leaflet-custom-control'
+import FitBoundsButton from './FitBoundsButton.tsx'
+import NewMarkerButton from './NewMarkerButton.tsx'
+import { Feature, FeatureCollection, GeoJsonObject } from 'geojson'
 
 type VisualizeTrackProps = {
   trackId: string
   setTrackname: Dispatch<SetStateAction<string>>
+  setGeoJson: (geoJson: GeoJsonObject) => void
 }
 
 let DefaultIcon = L.icon({
@@ -49,6 +48,7 @@ L.Marker.prototype.options.icon = DefaultIcon
 const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
   trackId,
   setTrackname,
+  setGeoJson,
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   const [positions, setPositions] = useState<LatLngExpression[]>([])
@@ -60,6 +60,13 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
   const polylineRef = createRef<LeafletPolyline>()
   const tracknameRef = useRef('')
   const tracknameInputFieldRef: React.RefObject<HTMLElement> = useRef(null)
+  const geoJson = useMemo(
+    () => generateGeoJson(markerPositions),
+    [markerPositions]
+  )
+  useEffect(() => {
+    setGeoJson(geoJson)
+  }, [geoJson])
 
   useEffect(() => {
     setIsLoading(true)
@@ -73,8 +80,10 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
       gpx.parse(file.data)
 
       var _markerPositions: WayPoint[] = gpx.waypoints.map((point) => ({
+        id: uuidv4(),
         position: [point.lat, point.lon],
         name: point.name,
+        type: 'GENERIC',
       })) as WayPoint[]
       setMarkerPositions(_markerPositions)
 
@@ -129,6 +138,26 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
     setTrackname(sanitized)
   }
 
+  function generateGeoJson(markerPositions: WayPoint[]): FeatureCollection {
+    return {
+      type: 'FeatureCollection',
+      features: markerPositions.map(
+        (waypoint) =>
+          ({
+            type: 'Feature',
+            properties: {
+              name: waypoint.name,
+              type: waypoint.type,
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [waypoint.position[1], waypoint.position[0]],
+            },
+          } as Feature)
+      ),
+    }
+  }
+
   return (
     <>
       <br />
@@ -150,6 +179,7 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
           />
         </div>
       </div>
+
       <MapContainer bounds={bounds}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -160,32 +190,26 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
           positions={positions}
           ref={polylineRef}
         />
-        {markerPositions.map((waypoint, index) => (
-          <Marker position={waypoint.position} key={index}>
-            <Popup>{waypoint.name}</Popup>
-          </Marker>
+        {markerPositions.map((waypoint) => (
+          <DraggableMarker
+            key={waypoint.id}
+            position={waypoint.position}
+            waypoint={waypoint}
+            markerPositions={markerPositions}
+            setMarkerPositions={setMarkerPositions}
+          />
         ))}
-        <FitBoundsButton polylineRef={polylineRef} />
+        <Control prepend position='topright'>
+          <div className='flex flex-col'>
+            <FitBoundsButton polylineRef={polylineRef} />
+            <NewMarkerButton
+              markerState={markerPositions}
+              markerStateSetter={setMarkerPositions}
+            />
+          </div>
+        </Control>
       </MapContainer>
     </>
-  )
-}
-
-type FitBoundsButtonProps = {
-  polylineRef: RefObject<LeafletPolyline>
-}
-
-const FitBoundsButton: React.FC<FitBoundsButtonProps> = ({ polylineRef }) => {
-  const map = useMap()
-
-  const handleFitBounds = () => {
-    map.fitBounds(polylineRef.current!.getBounds())
-  }
-
-  return (
-    <button id='fitBoundsButton' onClick={handleFitBounds}>
-      <MdCenterFocusStrong className='text-5xl text-black' />
-    </button>
   )
 }
 
