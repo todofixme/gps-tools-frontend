@@ -6,8 +6,15 @@ export default {
     'node_modules/react-daisyui/dist/**/*.js',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        sans: ['Roboto', 'sans-serif'],
+        serif: ['Cooper', 'serif'],
+      },
+    },
   },
   plugins: [require('daisyui')],
-  themes: ['light', 'dark'],
+  daisyui: {
+    themes: ['dark', 'light'],
+  },
 }
