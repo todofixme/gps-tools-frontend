@@ -1,3 +1,17 @@
+# [0.9.0](https://github.com/devshred/gps-tools-frontend/compare/v0.8.0...v0.9.0) (2024-03-30)
+
+
+### Bug Fixes
+
+* **build:** fix build issues ([97b0b21](https://github.com/devshred/gps-tools-frontend/commit/97b0b21eabc97293d0679b2f0cf8b1cdcbc51864))
+* **layout:** adjust wording to highlight new function to upload FIT-files ([87cda91](https://github.com/devshred/gps-tools-frontend/commit/87cda91a002e5f59e65d9e0f52ad29c2f97ab918))
+
+
+### Features
+
+* **layout:** better visibility with new styles, fonts and theme-switcher ([ba463a0](https://github.com/devshred/gps-tools-frontend/commit/ba463a07b5e46a30e02d810a12175b0e20a6a2f6))
+* **visual:** add, change and remove waypoints ([180b4e4](https://github.com/devshred/gps-tools-frontend/commit/180b4e43b01de49420af607a1c8af3d638afeb07))
+
 # [0.8.0](https://github.com/devshred/gps-tools-frontend/compare/v0.7.0...v0.8.0) (2024-03-22)
 
 
