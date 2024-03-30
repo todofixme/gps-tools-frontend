@@ -79,7 +79,7 @@ const UploadForm: React.FC = () => {
               ) : (
                 <p>
                   <FiUpload className='inline relative bottom-0.5' /> Drag 'n'
-                  drop some files here, or click to select files
+                  drop GPX- or FIT-files, or click to select files.
                 </p>
               )}
             </div>
