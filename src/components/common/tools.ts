@@ -23,7 +23,7 @@ export const sanitizeFilename = (input: string) => {
 
 export const decodeFromBase64 = (input: string) => {
   const binString = atob(input)
-  const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0))
+  const bytes = Uint8Array.from(binString, (m) => m.codePointAt(0) ?? 0)
   return new TextDecoder().decode(bytes)
 }
 

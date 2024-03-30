@@ -10,14 +10,6 @@
     font-display: swap;
     src: url(/fonts/Roboto-Regular.woff) format('woff'),
       url(/fonts/Roboto-Regular.woff2) format('woff2');
-  },
-  @font-face {
-    font-family: 'Cooper';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url(/fonts/Cooper-Medium.woff) format('woff'),
-    url(/fonts/Cooper-Medium.woff2) format('woff2');
   }
 }
 
