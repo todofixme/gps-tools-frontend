@@ -1,3 +1,11 @@
+## [0.9.1](https://github.com/devshred/gps-tools-frontend/compare/v0.9.0...v0.9.1) (2024-03-31)
+
+
+### Bug Fixes
+
+* **layout:** unclutter navbar ([649ca33](https://github.com/devshred/gps-tools-frontend/commit/649ca332dd26a0059c245f36ee4c9321b3d13b20))
+* **merge:** improve error handling ([2f59b13](https://github.com/devshred/gps-tools-frontend/commit/2f59b13405c367c57a0cfb830eaac4c7cbdf893d))
+
 # [0.9.0](https://github.com/devshred/gps-tools-frontend/compare/v0.8.0...v0.9.0) (2024-03-30)
 
 
