@@ -22,9 +22,6 @@ const Navbar: React.FC<Props> = ({ title }) => (
           <Link to='/' className='btn btn-ghost btn-sm rounded-btn'>
             Home
           </Link>
-          <Link to='/merge' className='btn btn-ghost btn-sm rounded-btn'>
-            GPX-Merge
-          </Link>
           <Link to='/about' className='btn btn-ghost btn-sm rounded-btn'>
             About
           </Link>
