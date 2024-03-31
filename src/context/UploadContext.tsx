@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from 'react'
-import { UploadedFile, UploadContextType } from '../@types/upload'
+import { UploadContextType, UploadedFile } from '../@types/upload'
 import API from '../components/common/gps-backend-api'
 import { useFeedbackContext } from './FeedbackContext'
 
@@ -42,11 +42,22 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
   }
 
   const removeUploadedFile = async (file: UploadedFile) => {
-    API.delete('/files/' + file.id).then(() => {
-      const newFiles = [...uploadedFiles]
-      newFiles.splice(newFiles.indexOf(file), 1)
-      setUploadedFiles(newFiles)
-    })
+    API.delete('/files/' + file.id)
+      .catch((error) => {
+        if (error.code === 'ERR_NETWORK') {
+          setError('The backend server is not available at the moment. Sorry!')
+        } else if (error.code === 'ERR_BAD_REQUEST') {
+        }
+      })
+      .finally(() => {
+        const newFiles = [...uploadedFiles]
+        newFiles.splice(newFiles.indexOf(file), 1)
+        setUploadedFiles((oldFiles) => {
+          const newFiles = [...oldFiles]
+          newFiles.splice(newFiles.indexOf(file), 1)
+          return newFiles
+        })
+      })
   }
 
   const mergeFiles = () => {
@@ -58,11 +69,28 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
       const params = uploadedFiles.map((file) => 'fileId=' + file.id)
       const joinedParams = params.join('&')
 
-      API.post('/merge?' + joinedParams).then((response) => {
-        setMergedFile(response.data)
-        uploadedFiles.forEach((file) => API.delete('/files/' + file.id))
-        setUploadedFiles([])
-      })
+      API.post('/merge?' + joinedParams)
+        .then((response) => {
+          setMergedFile(response.data)
+          uploadedFiles.forEach((file) => API.delete('/files/' + file.id))
+          setUploadedFiles([])
+        })
+        .catch((error) => {
+          if (error.code === 'ERR_NETWORK') {
+            setError(
+              'The backend server is not available at the moment. Sorry!'
+            )
+          } else if (error.code === 'ERR_BAD_REQUEST') {
+            const grammaticalNumber =
+              uploadedFiles.length == 1 ? 'file' : 'files'
+            setError(
+              `The ${grammaticalNumber} could not be found on the server. Please upload again!`
+            )
+            uploadedFiles.map((file) => removeUploadedFile(file))
+          } else {
+            setError('Failed to merge files. Sorry!')
+          }
+        })
     }
   }
 
