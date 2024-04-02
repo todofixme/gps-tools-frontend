@@ -8,15 +8,13 @@ import React, {
   useState,
 } from 'react'
 import { MapContainer, Polyline, TileLayer } from 'react-leaflet'
-import L, {
+import {
   LatLngBoundsExpression,
   LatLngExpression,
   LatLngTuple,
   Polyline as LeafletPolyline,
 } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import icon from 'leaflet/dist/images/marker-icon.png'
-import iconShadow from 'leaflet/dist/images/marker-shadow.png'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
 import API from '../common/gps-backend-api'
 import { PoiType, WayPoint } from '../../@types/gps'
@@ -40,15 +38,6 @@ type VisualizeTrackProps = {
   setTrackname: Dispatch<SetStateAction<string>>
   setGeoJson: (geoJson: GeoJsonObject) => void
 }
-
-let DefaultIcon = L.icon({
-  iconUrl: icon,
-  shadowUrl: iconShadow,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-})
-
-L.Marker.prototype.options.icon = DefaultIcon
 
 const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
   trackId,
@@ -213,6 +202,7 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
             waypoint={waypoint}
             markerPositions={markerPositions}
             setMarkerPositions={setMarkerPositions}
+            type={waypoint.type}
           />
         ))}
         <Control prepend position='topright'>
