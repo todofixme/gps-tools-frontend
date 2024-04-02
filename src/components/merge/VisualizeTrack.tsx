@@ -17,10 +17,9 @@ import L, {
 import 'leaflet/dist/leaflet.css'
 import icon from 'leaflet/dist/images/marker-icon.png'
 import iconShadow from 'leaflet/dist/images/marker-shadow.png'
-import GpxParser from 'gpxparser'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
 import API from '../common/gps-backend-api'
-import { WayPoint } from '../../@types/gps'
+import { PoiType, WayPoint } from '../../@types/gps'
 import { sanitizeFilename } from '../common/tools'
 import { FaPenToSquare } from 'react-icons/fa6'
 import { v4 as uuidv4 } from 'uuid'
@@ -28,7 +27,13 @@ import DraggableMarker from './DraggableMarker.tsx'
 import Control from 'react-leaflet-custom-control'
 import FitBoundsButton from './FitBoundsButton.tsx'
 import NewMarkerButton from './NewMarkerButton.tsx'
-import { Feature, FeatureCollection, GeoJsonObject } from 'geojson'
+import {
+  Feature,
+  FeatureCollection,
+  GeoJsonObject,
+  LineString,
+  Point,
+} from 'geojson'
 
 type VisualizeTrackProps = {
   trackId: string
@@ -72,30 +77,36 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
     setIsLoading(true)
     const config = {
       headers: {
-        accept: 'application/gpx+xml',
+        accept: 'application/geo+json',
       },
     }
     API.get('/files/' + trackId, config).then((file) => {
-      var gpx = new GpxParser()
-      gpx.parse(file.data)
+      const feat: FeatureCollection = file.data as FeatureCollection
 
-      var _markerPositions: WayPoint[] = gpx.waypoints.map((point) => ({
-        id: uuidv4(),
-        position: [point.lat, point.lon],
-        name: point.name,
-        type: 'GENERIC',
-      })) as WayPoint[]
+      var _markerPositions: WayPoint[] = feat.features
+        .filter((f) => f.geometry.type == 'Point')
+        .map((feat) => {
+          const point: Point = feat.geometry as Point
+          const type: PoiType = feat.properties?.type ?? 'GENERIC'
+
+          return {
+            id: uuidv4(),
+            position: [point.coordinates[0], point.coordinates[1]],
+            name: feat.properties?.name ?? 'unnamed',
+            type: type,
+          }
+        }) as WayPoint[]
       setMarkerPositions(_markerPositions)
 
-      var _positions: LatLngTuple[] = gpx.tracks[0].points.map((point) => [
-        point.lat,
-        point.lon,
-      ]) as LatLngTuple[]
+      const _positions: LatLngTuple[] = feat.features
+        .filter((f) => f.geometry.type == 'LineString')
+        .flatMap((line) => (line.geometry as LineString).coordinates)
+        .map((position) => [position[1], position[0]]) as LatLngTuple[]
       setPositions(_positions)
 
       const lats = []
       const lngs = []
-      for (var i = 0; i < _positions.length; i++) {
+      for (let i = 0; i < _positions.length; i++) {
         lats.push(_positions[i][0])
         lngs.push(_positions[i][1])
       }
@@ -111,10 +122,15 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
       ] as LatLngBoundsExpression
       setBounds(_bounds)
 
-      if (gpx.metadata !== undefined && gpx.metadata.name !== undefined) {
-        tracknameRef.current = gpx.metadata.name
-        setTrackname(sanitizeFilename(gpx.metadata.name))
+      const lines = feat.features.filter((f) => f.geometry.type == 'LineString')
+      let trackName: string
+      if (lines?.[0]?.properties?.['name']) {
+        trackName = lines[0].properties['name']
+      } else {
+        trackName = 'unnamed'
       }
+      tracknameRef.current = trackName
+      setTrackname(sanitizeFilename(trackName))
 
       setIsLoading(false)
     })

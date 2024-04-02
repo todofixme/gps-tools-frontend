@@ -1,6 +1,6 @@
 import { LatLngTuple } from 'leaflet'
 
-type PoiType =
+export type PoiType =
   | 'GENERIC'
   | 'SUMMIT'
   | 'VALLEY'
