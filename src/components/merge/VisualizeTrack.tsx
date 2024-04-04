@@ -2,6 +2,7 @@ import React, {
   createRef,
   Dispatch,
   SetStateAction,
+  useCallback,
   useEffect,
   useMemo,
   useRef,
@@ -9,6 +10,7 @@ import React, {
 } from 'react'
 import { MapContainer, Polyline, TileLayer } from 'react-leaflet'
 import {
+  LatLng,
   LatLngBoundsExpression,
   LatLngExpression,
   LatLngTuple,
@@ -16,15 +18,9 @@ import {
 } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
-import API from '../common/gps-backend-api'
-import { PoiType, WayPoint } from '../../@types/gps'
-import { sanitizeFilename } from '../common/tools'
-import { FaPenToSquare } from 'react-icons/fa6'
-import { v4 as uuidv4 } from 'uuid'
-import DraggableMarker from './DraggableMarker.tsx'
 import Control from 'react-leaflet-custom-control'
-import FitBoundsButton from './FitBoundsButton.tsx'
-import NewMarkerButton from './NewMarkerButton.tsx'
+import { v4 as uuidv4 } from 'uuid'
+import { FaPenToSquare } from 'react-icons/fa6'
 import {
   Feature,
   FeatureCollection,
@@ -32,6 +28,12 @@ import {
   LineString,
   Point,
 } from 'geojson'
+import { PoiType, WayPoint } from '../../@types/gps'
+import API from '../common/gps-backend-api'
+import { sanitizeFilename } from '../common/tools'
+import DraggableMarker from './DraggableMarker.tsx'
+import FitBoundsButton from './FitBoundsButton.tsx'
+import NewMarkerButton from './NewMarkerButton.tsx'
 
 type VisualizeTrackProps = {
   trackId: string
@@ -125,14 +127,6 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
     })
   }, [trackId])
 
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
-
-  if (!positions) {
-    return <div>Error...</div>
-  }
-
   const handleChange = (evt: ContentEditableEvent) => {
     tracknameRef.current = evt.currentTarget.innerHTML
   }
@@ -163,7 +157,57 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
     }
   }
 
-  return (
+  const changeMarkerPosition = useCallback(
+    (markerId: string, newPosition: LatLng) => {
+      setMarkerPositions((prevState) =>
+        prevState.map((wp) =>
+          wp.id === markerId
+            ? {
+                ...wp,
+                position: [newPosition.lat, newPosition.lng],
+              }
+            : wp
+        )
+      )
+    },
+    []
+  )
+
+  const changeMarkerName = useCallback((markerId: string, newName: string) => {
+    setMarkerPositions((prevState) =>
+      prevState.map((wp) =>
+        wp.id === markerId
+          ? {
+              ...wp,
+              name: newName ?? '',
+            }
+          : wp
+      )
+    )
+  }, [])
+
+  const changeMarkerType = useCallback((markerId: string, newType: PoiType) => {
+    setMarkerPositions((prevState) =>
+      prevState.map((wp) =>
+        wp.id === markerId
+          ? {
+              ...wp,
+              type: newType ?? 'GENERIC',
+            }
+          : wp
+      )
+    )
+  }, [])
+
+  const removeMarker = useCallback((id: string) => {
+    setMarkerPositions((prevState) => prevState.filter((wp) => wp.id !== id))
+  }, [])
+
+  return isLoading ? (
+    <div>Loading...</div>
+  ) : !positions ? (
+    <div>Error...</div>
+  ) : (
     <>
       <br />
       <div className='mb-7 grid'>
@@ -191,27 +235,24 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
           url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
         <Polyline
-          pathOptions={{ fillColor: 'red', color: 'blue' }}
+          pathOptions={{ fillColor: 'red', color: '#1a73e4' }}
           positions={positions}
           ref={polylineRef}
         />
         {markerPositions.map((waypoint) => (
           <DraggableMarker
             key={waypoint.id}
-            position={waypoint.position}
             waypoint={waypoint}
-            markerPositions={markerPositions}
-            setMarkerPositions={setMarkerPositions}
-            type={waypoint.type}
+            changeMarkerPosition={changeMarkerPosition}
+            changeMarkerName={changeMarkerName}
+            changeMarkerType={changeMarkerType}
+            removeMarker={removeMarker}
           />
         ))}
         <Control prepend position='topright'>
           <div className='flex flex-col'>
             <FitBoundsButton polylineRef={polylineRef} />
-            <NewMarkerButton
-              markerState={markerPositions}
-              markerStateSetter={setMarkerPositions}
-            />
+            <NewMarkerButton setMarkerPositions={setMarkerPositions} />
           </div>
         </Control>
       </MapContainer>

@@ -1,18 +1,11 @@
-import React, {
-  Dispatch,
-  FocusEvent,
-  SetStateAction,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
-import L, { LatLngTuple } from 'leaflet'
+import React, { FocusEvent, memo, useMemo, useRef, useState } from 'react'
+import L, { LatLng } from 'leaflet'
 import { Marker, Popup } from 'react-leaflet'
 import { FaTrashCan } from 'react-icons/fa6'
 import { PoiType, WayPoint } from '../../@types/gps.ts'
 import icon from 'leaflet/dist/images/marker-icon.png'
 import iconShadow from 'leaflet/dist/images/marker-shadow.png'
-import foodIcon from '/public/icons/restaurant.png'
+import foodIcon from '/icons/food.png'
 
 const DefaultIcon = L.icon({
   iconUrl: icon,
@@ -29,78 +22,51 @@ const FoodIcon = L.icon({
 })
 
 type DraggableMarkerProps = {
-  position: LatLngTuple
   waypoint: WayPoint
-  markerPositions: WayPoint[]
-  setMarkerPositions: Dispatch<SetStateAction<WayPoint[]>>
-  type: PoiType
+  changeMarkerPosition: (markerId: string, newPosition: LatLng) => void
+  changeMarkerName: (markerId: string, newName: string) => void
+  changeMarkerType: (markerId: string, newType: PoiType) => void
+  removeMarker: (markerId: string) => void
 }
 
 const DraggableMarker: React.FC<DraggableMarkerProps> = ({
-  position,
   waypoint,
-  markerPositions,
-  setMarkerPositions,
-  type,
+  changeMarkerPosition,
+  changeMarkerName,
+  changeMarkerType,
+  removeMarker,
 }) => {
-  const [selectedType, setSelectedType] = useState<PoiType>(type)
+  const [selectedType, setSelectedType] = useState<PoiType>(waypoint.type)
   const myInputRef = useRef<HTMLDivElement>(null)
-
-  const changePosition = (event: L.DragEndEvent) => {
-    const newPosition = event.target.getLatLng()
-    setMarkerPositions(
-      markerPositions.map((wp) =>
-        wp.id === waypoint.id
-          ? {
-              ...wp,
-              position: [newPosition.lat, newPosition.lng],
-            }
-          : wp
-      )
-    )
-  }
-
-  const changeName = (event: FocusEvent) => {
-    const newContent = event.target.textContent
-    setMarkerPositions(
-      markerPositions.map((wp) =>
-        wp.id === waypoint.id
-          ? {
-              ...wp,
-              name: newContent ?? '',
-            }
-          : wp
-      )
-    )
-  }
-
-  const changeType = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newType = event.target.value as PoiType
-    setMarkerPositions(
-      markerPositions.map((wp) =>
-        wp.id === waypoint.id
-          ? {
-              ...wp,
-              type: newType ?? 'GENERIC',
-            }
-          : wp
-      )
-    )
-    setSelectedType(event.target.value as PoiType)
-  }
-
-  const removeWaypoint = (id: string) => () => {
-    setMarkerPositions(markerPositions.filter((wp) => wp.id !== id))
-  }
 
   const icon = useMemo(
     () => (selectedType === 'FOOD' ? FoodIcon : DefaultIcon),
     [selectedType]
   )
 
+  const changePosition = (event: L.DragEndEvent) => {
+    const newPosition = event.target.getLatLng()
+    changeMarkerPosition(waypoint.id, newPosition)
+  }
+
+  const changeName = (event: FocusEvent<HTMLDivElement>) => {
+    const newName = event.target.textContent ?? ''
+    changeMarkerName(waypoint.id, newName)
+  }
+
+  const changeType = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const newType = event.target.value as PoiType
+    setSelectedType(newType)
+    changeMarkerType(waypoint.id, newType)
+  }
+
+  const remove = () => {
+    removeMarker(waypoint.id)
+  }
+
   return (
     <Marker
-      position={position}
+      position={waypoint.position}
       draggable
       eventHandlers={{ dragend: changePosition }}
       key={waypoint.id}
@@ -142,10 +108,7 @@ const DraggableMarker: React.FC<DraggableMarkerProps> = ({
 
           <div className='flex justify-between'>
             <div>
-              <FaTrashCan
-                className='mt-1 relative self-end'
-                onClick={removeWaypoint(waypoint.id)}
-              />
+              <FaTrashCan className='mt-1 relative self-end' onClick={remove} />
             </div>
           </div>
         </div>
@@ -154,4 +117,4 @@ const DraggableMarker: React.FC<DraggableMarkerProps> = ({
   )
 }
 
-export default DraggableMarker
+export default memo(DraggableMarker)

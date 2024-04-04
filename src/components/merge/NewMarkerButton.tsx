@@ -1,17 +1,15 @@
-import React from 'react'
+import React, { Dispatch, SetStateAction } from 'react'
 import { useMap } from 'react-leaflet'
 import { WayPoint } from '../../@types/gps.ts'
 import { v4 as uuidv4 } from 'uuid'
 import { MdAddLocation } from 'react-icons/md'
 
 type NewMarkerButtonProps = {
-  markerState: Array<WayPoint>
-  markerStateSetter: (markerPositions: Array<WayPoint>) => void
+  setMarkerPositions: Dispatch<SetStateAction<WayPoint[]>>
 }
 
 const NewMarkerButton: React.FC<NewMarkerButtonProps> = ({
-  markerState: markerPositions,
-  markerStateSetter: setMarkerPositions,
+  setMarkerPositions: setMarkerPositions,
 }) => {
   const map = useMap()
 
@@ -23,7 +21,7 @@ const NewMarkerButton: React.FC<NewMarkerButtonProps> = ({
       name: 'unnamed',
       type: 'GENERIC',
     }
-    setMarkerPositions([...markerPositions, waypoint])
+    setMarkerPositions((prevState) => [...prevState, waypoint])
   }
 
   return (
