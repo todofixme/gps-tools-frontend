@@ -8,7 +8,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import { MapContainer, Polyline, TileLayer } from 'react-leaflet'
+import { LayersControl, MapContainer, Polyline, TileLayer } from 'react-leaflet'
 import {
   LatLng,
   LatLngBoundsExpression,
@@ -53,6 +53,39 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
     [0, 0],
     [0, 0],
   ])
+  const [baseLayer, setBaseLayer] = useState('OpenStreetMap')
+  const baseLayers = {
+    OpenStreetMap: (
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+      />
+    ),
+    OpenTopoMap: (
+      <TileLayer
+        attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+        url='https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'
+      />
+    ),
+    CyclOSM: (
+      <TileLayer
+        attribution='<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url='https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png'
+      />
+    ),
+    CartoDB: (
+      <TileLayer
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+        url='https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
+      />
+    ),
+    'Esri.WorldImagery': (
+      <TileLayer
+        attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+        url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+      />
+    ),
+  }
   const polylineRef = createRef<LeafletPolyline>()
   const tracknameRef = useRef('')
   const tracknameInputFieldRef: React.RefObject<HTMLElement> = useRef(null)
@@ -230,10 +263,43 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
       </div>
 
       <MapContainer bounds={bounds}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
-        />
+        <LayersControl position='topright'>
+          <LayersControl.BaseLayer
+            name='OpenStreetMap'
+            checked={baseLayer === 'OpenStreetMap'}
+            onChange={() => setBaseLayer('OpenStreetMap')}
+          >
+            {baseLayers['OpenStreetMap']}
+          </LayersControl.BaseLayer>
+          <LayersControl.BaseLayer
+            name='OpenTopoMap'
+            checked={baseLayer === 'OpenTopoMap'}
+            onChange={() => setBaseLayer('OpenTopoMap')}
+          >
+            {baseLayers['OpenTopoMap']}
+          </LayersControl.BaseLayer>
+          <LayersControl.BaseLayer
+            name='CyclOSM'
+            checked={baseLayer === 'CyclOSM'}
+            onChange={() => setBaseLayer('CyclOSM')}
+          >
+            {baseLayers['CyclOSM']}
+          </LayersControl.BaseLayer>
+          <LayersControl.BaseLayer
+            name='CartoDB'
+            checked={baseLayer === 'CartoDB'}
+            onChange={() => setBaseLayer('CartoDB')}
+          >
+            {baseLayers['CartoDB']}
+          </LayersControl.BaseLayer>
+          <LayersControl.BaseLayer
+            name='Esri.WorldImagery'
+            checked={baseLayer === 'Esri.WorldImagery'}
+            onChange={() => setBaseLayer('Esri.WorldImagery')}
+          >
+            {baseLayers['Esri.WorldImagery']}
+          </LayersControl.BaseLayer>
+        </LayersControl>
         <Polyline
           pathOptions={{ fillColor: 'red', color: '#1a73e4' }}
           positions={positions}
