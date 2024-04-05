@@ -5,7 +5,7 @@ import {
   Droppable,
   DropResult,
 } from '@hello-pangea/dnd'
-import { FaEllipsisVertical, FaTrashCan } from 'react-icons/fa6'
+import { FaCircleInfo, FaEllipsisVertical, FaTrashCan } from 'react-icons/fa6'
 import { useUploadContext } from '../../context/UploadContext'
 import VisualizeTrack from './VisualizeTrack'
 import { UploadedFile } from '../../@types/upload'
@@ -23,6 +23,7 @@ const MergeFiles = () => {
   } = useUploadContext()
 
   const [trackname, setTrackname] = useState<string>('')
+  const [optimizeWaypoints, setOptimizeWaypoints] = useState<boolean>(false)
   const [geoJson, setGeoJson] = useState<GeoJsonObject | null>(null)
 
   const reorder = (
@@ -99,18 +100,41 @@ const MergeFiles = () => {
       <div>
         {mergedFile !== null && (
           <>
-            <div>
-              <DownloadLink
-                type='gpx'
-                trackname={trackname}
-                geoJson={geoJson}
-              />
-              <br />
-              <DownloadLink
-                type='tcx'
-                trackname={trackname}
-                geoJson={geoJson}
-              />
+            <div className='flex flex-row'>
+              <div>
+                <DownloadLink
+                  type='gpx'
+                  trackname={trackname}
+                  optimizeWaypoints={optimizeWaypoints}
+                  geoJson={geoJson}
+                />
+                <br />
+                <DownloadLink
+                  type='tcx'
+                  trackname={trackname}
+                  optimizeWaypoints={optimizeWaypoints}
+                  geoJson={geoJson}
+                />
+              </div>
+              <div className='flex items-center ml-6'>
+                <input
+                  id='default-checkbox'
+                  type='checkbox'
+                  onChange={(e) => setOptimizeWaypoints(e.target.checked)}
+                  value=''
+                  className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+                />
+                <label htmlFor='default-checkbox' className='ms-2'>
+                  Optimize Waypoints
+                </label>
+                &nbsp;
+                <div
+                  className='tooltip'
+                  data-tip='Waypoints that are closer than 500m to the track will be moved to a point on the track. This can improve readability on some GPS-devices, since these are having problems with points located not directly on the track.'
+                >
+                  <FaCircleInfo className='' />
+                </div>
+              </div>
             </div>
             <br />
             <button className='btn btn-active mb-7' onClick={handleReset}>

@@ -7,12 +7,14 @@ import { encodeToBase64 } from '../common/tools.ts'
 type DownloadLinkProps = {
   type: string
   trackname: string
+  optimizeWaypoints: boolean
   geoJson?: GeoJsonObject | null
 }
 
 const DownloadLink: React.FC<DownloadLinkProps> = ({
   type,
   trackname,
+  optimizeWaypoints,
   geoJson,
 }) => {
   const { mergedFile } = useUploadContext()
@@ -24,6 +26,7 @@ const DownloadLink: React.FC<DownloadLinkProps> = ({
           mergedFile.href +
           '?mode=dl&type=' +
           type +
+          (optimizeWaypoints ? '&mode=opt' : '') +
           (trackname.length > 0 ? `&name=${trackname}` : '') +
           (geoJson != null
             ? `&wp=${encodeToBase64(JSON.stringify(geoJson))}`
