@@ -68,7 +68,7 @@ const MergeFiles = () => {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      className='flex mb-1 mt-1 bg-slate-700'
+                      className='flex mb-1 mt-1 bg-base-content text-base-200/80 p-1 rounded-md'
                     >
                       <FaEllipsisVertical className='relative top-1' />
                       {file.filename} -{' '}
