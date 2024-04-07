@@ -7,7 +7,7 @@ const Home = () => (
       First functionallity that can be used:{' '}
       <a href='/merge' className='flex'>
         <FaAngleRight />
-        GPX-Merge
+        GPS-Merge
       </a>
     </p>
   </div>
