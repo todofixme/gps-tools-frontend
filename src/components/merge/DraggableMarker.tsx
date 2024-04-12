@@ -3,23 +3,124 @@ import L, { LatLng } from 'leaflet'
 import { Marker, Popup } from 'react-leaflet'
 import { FaTrashCan } from 'react-icons/fa6'
 import { PoiType, WayPoint } from '../../@types/gps.ts'
-import icon from 'leaflet/dist/images/marker-icon.png'
 import iconShadow from 'leaflet/dist/images/marker-shadow.png'
-import foodIcon from '/icons/food.png'
+import iconGeneric from '/icons/Generic.svg'
+import iconSummit from '/icons/Summit.svg'
+import iconValley from '/icons/Valley.svg'
+import iconWater from '/icons/Water.svg'
+import iconFood from '/icons/Food.svg'
+import iconDanger from '/icons/Danger.svg'
+import iconLeft from '/icons/Left.svg'
+import iconRight from '/icons/Right.svg'
+import iconStraight from '/icons/Straight.svg'
+import iconFirstAid from '/icons/FirstAid.svg'
+import iconResidence from '/icons/Residence.svg'
+import iconSprint from '/icons/Sprint.svg'
 
-const DefaultIcon = L.icon({
-  iconUrl: icon,
+const GenericIcon = L.icon({
+  iconUrl: iconGeneric,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+})
+
+const SummitIcon = L.icon({
+  iconUrl: iconSummit,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+})
+
+const ValleyIcon = L.icon({
+  iconUrl: iconValley,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+})
+
+const WaterIcon = L.icon({
+  iconUrl: iconWater,
   shadowUrl: iconShadow,
   iconSize: [25, 41],
   iconAnchor: [12, 41],
 })
 
 const FoodIcon = L.icon({
-  iconUrl: foodIcon,
+  iconUrl: iconFood,
   shadowUrl: iconShadow,
-  iconSize: [38, 41],
-  iconAnchor: [18, 41],
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
 })
+
+const DangerIcon = L.icon({
+  iconUrl: iconDanger,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+})
+
+const LeftIcon = L.icon({
+  iconUrl: iconLeft,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+})
+
+const RightIcon = L.icon({
+  iconUrl: iconRight,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+})
+
+const StraightIcon = L.icon({
+  iconUrl: iconStraight,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+})
+
+const FirstAidIcon = L.icon({
+  iconUrl: iconFirstAid,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+})
+
+const ResicenceIcon = L.icon({
+  iconUrl: iconResidence,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+})
+
+const SprintIcon = L.icon({
+  iconUrl: iconSprint,
+  shadowUrl: iconShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+})
+
+type MapOfIcons = Record<PoiType, L.Icon<L.IconOptions>>
+const iconMap: MapOfIcons = {
+  GENERIC: GenericIcon,
+  SUMMIT: SummitIcon,
+  VALLEY: ValleyIcon,
+  WATER: WaterIcon,
+  FOOD: FoodIcon,
+  DANGER: DangerIcon,
+  LEFT: LeftIcon,
+  RIGHT: RightIcon,
+  STRAIGHT: StraightIcon,
+  FIRST_AID: FirstAidIcon,
+  FOURTH_CATEGORY: SummitIcon,
+  THIRD_CATEGORY: SummitIcon,
+  SECOND_CATEGORY: SummitIcon,
+  FIRST_CATEGORY: SummitIcon,
+  HORS_CATEGORY: SummitIcon,
+  RESIDENCE: ResicenceIcon,
+  SPRINT: SprintIcon,
+}
 
 type DraggableMarkerProps = {
   waypoint: WayPoint
@@ -40,7 +141,7 @@ const DraggableMarker: React.FC<DraggableMarkerProps> = ({
   const myInputRef = useRef<HTMLDivElement>(null)
 
   const icon = useMemo(
-    () => (selectedType === 'FOOD' ? FoodIcon : DefaultIcon),
+    () => iconMap[selectedType] ?? GenericIcon,
     [selectedType]
   )
 
