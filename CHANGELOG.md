@@ -1,3 +1,23 @@
+# [0.10.0](https://github.com/devshred/gps-tools-frontend/compare/v0.9.1...v0.10.0) (2024-04-12)
+
+
+### Bug Fixes
+
+* **layout:** fix build issue caused by map tilelayer-switcher ([44258dd](https://github.com/devshred/gps-tools-frontend/commit/44258dd3058efff7b08984bf9fb9c7d05636b657))
+* **layout:** fix naming ([29f56cf](https://github.com/devshred/gps-tools-frontend/commit/29f56cf1444078e45577a8488052f136b020b798))
+* **layout:** improve visibility ([ec59973](https://github.com/devshred/gps-tools-frontend/commit/ec59973bd8bbc1ad4829b3d4efd3bc47701bcd63))
+* **react:** optimize re-rendering ([c3ebe9f](https://github.com/devshred/gps-tools-frontend/commit/c3ebe9f8de6254a6ab1def1e3f28e437baac8a6c)), closes [#4](https://github.com/devshred/gps-tools-frontend/issues/4)
+
+
+### Features
+
+* **download:** option to optimize waypoints ([2052422](https://github.com/devshred/gps-tools-frontend/commit/2052422cd6355060e2a3094d914a7ee8ea0525d4))
+* **layout:** add intro text ([fbea6e5](https://github.com/devshred/gps-tools-frontend/commit/fbea6e5d37b499d2f9c6c9d9329fb4d32f00d5a0))
+* **visual:** add additional tile providers ([b52b02e](https://github.com/devshred/gps-tools-frontend/commit/b52b02e50befec0ec594b47d85a0739b7a917a21))
+* **visual:** add icons for waypoint types ([08b09e3](https://github.com/devshred/gps-tools-frontend/commit/08b09e3388e81bf7d1b8d4f9e37915928b016687))
+* **visual:** change type of waypoints ([552bfa5](https://github.com/devshred/gps-tools-frontend/commit/552bfa517ae8b316841106d665cd2ea83887f7fd))
+* **visual:** visualization is now based on GeoJSON ([4f30765](https://github.com/devshred/gps-tools-frontend/commit/4f307652a5d21585ff70b0d905e324c645f83b20))
+
 ## [0.9.1](https://github.com/devshred/gps-tools-frontend/compare/v0.9.0...v0.9.1) (2024-03-31)
 
 
