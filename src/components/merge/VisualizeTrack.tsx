@@ -20,7 +20,7 @@ import 'leaflet/dist/leaflet.css'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
 import Control from 'react-leaflet-custom-control'
 import { v4 as uuidv4 } from 'uuid'
-import { FaPenToSquare } from 'react-icons/fa6'
+import { FaEye, FaEyeSlash, FaPenToSquare } from 'react-icons/fa6'
 import {
   Feature,
   FeatureCollection,
@@ -54,6 +54,7 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
     [0, 0],
   ])
 
+  const [showPolyline, setShowPolyline] = useState(true)
   const polylineRef = createRef<LeafletPolyline>()
   const tracknameRef = useRef('')
   const tracknameInputFieldRef: React.RefObject<HTMLElement> = useRef(null)
@@ -204,6 +205,34 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
     setMarkerPositions((prevState) => prevState.filter((wp) => wp.id !== id))
   }, [])
 
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (document.activeElement?.id === 'editTrackname') {
+        return null
+      }
+      if (event.key === 'm') {
+        setShowPolyline(false)
+      }
+    }
+
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if (document.activeElement?.id === 'editTrackname') {
+        return null
+      }
+      if (event.key === 'm') {
+        setShowPolyline(true)
+      }
+    }
+
+    document.addEventListener('keypress', handleKeyPress)
+    document.addEventListener('keyup', handleKeyUp)
+
+    return () => {
+      document.removeEventListener('keypress', handleKeyPress)
+      document.removeEventListener('keyup', handleKeyPress)
+    }
+  }, [])
+
   return isLoading ? (
     <div>Loading...</div>
   ) : !positions ? (
@@ -211,22 +240,38 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
   ) : (
     <>
       <br />
-      <div className='mb-7 grid'>
-        <div className='text-xs'>Trackname</div>
-        <div className='underline flex'>
-          <ContentEditable
-            html={tracknameRef.current}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            innerRef={tracknameInputFieldRef}
-          />
-          &nbsp;
-          <FaPenToSquare
-            className='mx-0 relative top-1'
-            onClick={() => {
-              tracknameInputFieldRef?.current?.focus()
-            }}
-          />
+      <div>
+        <div className='mb-5'>
+          <div className='text-'>Trackname</div>
+          <div className='flex underline'>
+            <ContentEditable
+              id='editTrackname'
+              html={tracknameRef.current}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              innerRef={tracknameInputFieldRef}
+            />
+            &nbsp;
+            <FaPenToSquare
+              className='mx-0 relative top-1'
+              onClick={() => {
+                tracknameInputFieldRef?.current?.focus()
+              }}
+            />
+          </div>
+        </div>
+        <div className='mb-2 tooltip' data-tip='Mute track on map (M)'>
+          {showPolyline ? (
+            <FaEye
+              className='top-1 text-2xl'
+              onClick={() => setShowPolyline(false)}
+            />
+          ) : (
+            <FaEyeSlash
+              className='top-1 text-2xl'
+              onClick={() => setShowPolyline(true)}
+            />
+          )}
         </div>
       </div>
 
@@ -255,11 +300,13 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
             />
           </LayersControl.BaseLayer>
         </LayersControl>
-        <Polyline
-          pathOptions={{ fillColor: 'red', color: '#27e' }}
-          positions={positions}
-          ref={polylineRef}
-        />
+        {showPolyline && (
+          <Polyline
+            pathOptions={{ fillColor: 'red', color: '#27e' }}
+            positions={positions}
+            ref={polylineRef}
+          />
+        )}
         {markerPositions.map((waypoint) => (
           <DraggableMarker
             key={waypoint.id}
