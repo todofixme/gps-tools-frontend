@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { UploadContextType, UploadedFile } from '../@types/upload'
 import API from '../components/common/gps-backend-api'
 import { useFeedbackContext } from './FeedbackContext'
@@ -14,6 +15,7 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
   const [mergedFile, setMergedFile] = useState<UploadedFile | null>(null)
   const [isLoading, setLoading] = useState<Boolean>(false)
   const { setError } = useFeedbackContext()
+  const navigate = useNavigate()
 
   const uploadFile = async (file: File) => {
     setLoading(true)
@@ -47,6 +49,9 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
         if (error.code === 'ERR_NETWORK') {
           setError('The backend server is not available at the moment. Sorry!')
         } else if (error.code === 'ERR_BAD_REQUEST') {
+          setError('Something went wrong. Sorry!')
+        } else {
+          setError('Failed to delete file. Sorry!')
         }
       })
       .finally(() => {
@@ -65,6 +70,7 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
       // no need to merge
       setMergedFile(uploadedFiles[0])
       setUploadedFiles([])
+      navigate('/track/' + uploadedFiles[0].id)
     } else {
       const params = uploadedFiles.map((file) => 'fileId=' + file.id)
       const joinedParams = params.join('&')
@@ -74,6 +80,7 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
           setMergedFile(response.data)
           uploadedFiles.forEach((file) => API.delete('/files/' + file.id))
           setUploadedFiles([])
+          navigate('/track/' + response.data.id)
         })
         .catch((error) => {
           if (error.code === 'ERR_NETWORK') {

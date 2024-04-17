@@ -1,7 +1,5 @@
 import React, {
   createRef,
-  Dispatch,
-  SetStateAction,
   useCallback,
   useEffect,
   useMemo,
@@ -20,33 +18,26 @@ import 'leaflet/dist/leaflet.css'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
 import Control from 'react-leaflet-custom-control'
 import { v4 as uuidv4 } from 'uuid'
-import { FaEye, FaEyeSlash, FaPenToSquare } from 'react-icons/fa6'
-import {
-  Feature,
-  FeatureCollection,
-  GeoJsonObject,
-  LineString,
-  Point,
-} from 'geojson'
+import { FaCircleInfo, FaEye, FaEyeSlash, FaPenToSquare } from 'react-icons/fa6'
+import { Feature, FeatureCollection, LineString, Point } from 'geojson'
 import { PoiType, WayPoint } from '../../@types/gps'
 import API from '../common/gps-backend-api'
 import { sanitizeFilename } from '../common/tools'
 import DraggableMarker from './DraggableMarker.tsx'
 import FitBoundsButton from './FitBoundsButton.tsx'
 import NewMarkerButton from './NewMarkerButton.tsx'
+import DownloadLink from './DownloadLink.tsx'
+import { useNavigate } from 'react-router-dom'
 
 type VisualizeTrackProps = {
   trackId: string
-  setTrackname: Dispatch<SetStateAction<string>>
-  setGeoJson: (geoJson: GeoJsonObject) => void
 }
 
-const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
-  trackId,
-  setTrackname,
-  setGeoJson,
-}) => {
+const VisualizeTrack: React.FC<VisualizeTrackProps> = ({ trackId }) => {
   const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [trackname, setTrackname] = useState<string>('')
+  const [optimizeWaypoints, setOptimizeWaypoints] = useState<boolean>(false)
   const [positions, setPositions] = useState<LatLngExpression[]>([])
   const [markerPositions, setMarkerPositions] = useState<WayPoint[]>([])
   const [bounds, setBounds] = useState<LatLngBoundsExpression>([
@@ -58,13 +49,11 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
   const polylineRef = createRef<LeafletPolyline>()
   const tracknameRef = useRef('')
   const tracknameInputFieldRef: React.RefObject<HTMLElement> = useRef(null)
-  const geoJson = useMemo(
+  const markerGeoJson = useMemo(
     () => generateGeoJson(markerPositions),
     [markerPositions]
   )
-  useEffect(() => {
-    setGeoJson(geoJson)
-  }, [geoJson])
+  const navigate = useNavigate()
 
   useEffect(() => {
     setIsLoading(true)
@@ -73,60 +62,71 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
         accept: 'application/geo+json',
       },
     }
-    API.get('/files/' + trackId, config).then((file) => {
-      const feat: FeatureCollection = file.data as FeatureCollection
+    API.get('/files/' + trackId, config)
+      .then((file) => {
+        const feat: FeatureCollection = file.data as FeatureCollection
 
-      var _markerPositions: WayPoint[] = feat.features
-        .filter((f) => f.geometry.type == 'Point')
-        .map((feat) => {
-          const point: Point = feat.geometry as Point
-          const type: PoiType = feat.properties?.type ?? 'GENERIC'
+        let _markerPositions: WayPoint[] = feat.features
+          .filter((f) => f.geometry.type == 'Point')
+          .map((feat) => {
+            const point: Point = feat.geometry as Point
+            const type: PoiType = feat.properties?.type ?? 'GENERIC'
 
-          return {
-            id: uuidv4(),
-            position: [point.coordinates[0], point.coordinates[1]],
-            name: feat.properties?.name ?? 'unnamed',
-            type: type,
-          }
-        }) as WayPoint[]
-      setMarkerPositions(_markerPositions)
+            return {
+              id: uuidv4(),
+              position: [point.coordinates[0], point.coordinates[1]],
+              name: feat.properties?.name ?? 'unnamed',
+              type: type,
+            }
+          }) as WayPoint[]
+        setMarkerPositions(_markerPositions)
 
-      const _positions: LatLngTuple[] = feat.features
-        .filter((f) => f.geometry.type == 'LineString')
-        .flatMap((line) => (line.geometry as LineString).coordinates)
-        .map((position) => [position[1], position[0]]) as LatLngTuple[]
-      setPositions(_positions)
+        const _positions: LatLngTuple[] = feat.features
+          .filter((f) => f.geometry.type == 'LineString')
+          .flatMap((line) => (line.geometry as LineString).coordinates)
+          .map((position) => [position[1], position[0]]) as LatLngTuple[]
+        setPositions(_positions)
 
-      const lats = []
-      const lngs = []
-      for (let i = 0; i < _positions.length; i++) {
-        lats.push(_positions[i][0])
-        lngs.push(_positions[i][1])
-      }
+        const lats = []
+        const lngs = []
+        for (let i = 0; i < _positions.length; i++) {
+          lats.push(_positions[i][0])
+          lngs.push(_positions[i][1])
+        }
 
-      const minlat = Math.min.apply(null, lats)
-      const maxlat = Math.max.apply(null, lats)
-      const minlng = Math.min.apply(null, lngs)
-      const maxlng = Math.max.apply(null, lngs)
+        const minlat = Math.min.apply(null, lats)
+        const maxlat = Math.max.apply(null, lats)
+        const minlng = Math.min.apply(null, lngs)
+        const maxlng = Math.max.apply(null, lngs)
 
-      const _bounds = [
-        [minlat, minlng],
-        [maxlat, maxlng],
-      ] as LatLngBoundsExpression
-      setBounds(_bounds)
+        const _bounds = [
+          [minlat, minlng],
+          [maxlat, maxlng],
+        ] as LatLngBoundsExpression
+        setBounds(_bounds)
 
-      const lines = feat.features.filter((f) => f.geometry.type == 'LineString')
-      let trackName: string
-      if (lines?.[0]?.properties?.['name']) {
-        trackName = lines[0].properties['name']
-      } else {
-        trackName = 'unnamed'
-      }
-      tracknameRef.current = trackName
-      setTrackname(sanitizeFilename(trackName))
+        const lines = feat.features.filter(
+          (f) => f.geometry.type == 'LineString'
+        )
+        let trackName: string
+        if (lines?.[0]?.properties?.['name']) {
+          trackName = lines[0].properties['name']
+        } else {
+          trackName = 'unnamed'
+        }
+        tracknameRef.current = trackName
+        setTrackname(sanitizeFilename(trackName))
 
-      setIsLoading(false)
-    })
+        setIsLoading(false)
+      })
+      .catch((error) => {
+        if (error.response?.status === 404) {
+          setError('Track not found.')
+        } else {
+          setError('Failed to load track. Sorry!')
+        }
+        setIsLoading(false)
+      })
   }, [trackId])
 
   const handleChange = (evt: ContentEditableEvent) => {
@@ -233,12 +233,61 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
     }
   }, [])
 
+  const handleReset = () => {
+    navigate('/merge')
+  }
+
   return isLoading ? (
     <div>Loading...</div>
+  ) : error ? (
+    <div>{error}</div>
   ) : !positions ? (
     <div>Error...</div>
   ) : (
     <>
+      <div>
+        <button className='btn btn-active m-7' onClick={handleReset}>
+          Start working on a new file.
+        </button>
+        <div className='flex flex-row'>
+          <div>
+            <DownloadLink
+              fileId={trackId}
+              type='gpx'
+              trackname={trackname}
+              optimizeWaypoints={optimizeWaypoints}
+              geoJson={markerGeoJson}
+            />
+            <br />
+            <DownloadLink
+              fileId={trackId}
+              type='tcx'
+              trackname={trackname}
+              optimizeWaypoints={optimizeWaypoints}
+              geoJson={markerGeoJson}
+            />
+          </div>
+          <div className='flex items-center ml-6'>
+            <input
+              id='default-checkbox'
+              type='checkbox'
+              onChange={(e) => setOptimizeWaypoints(e.target.checked)}
+              value=''
+              className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
+            />
+            <label htmlFor='default-checkbox' className='ms-2'>
+              Optimize Waypoints
+            </label>
+            &nbsp;
+            <div
+              className='tooltip'
+              data-tip='Waypoints that are closer than 500m to the track will be moved to a point on the track. This can improve readability on some GPS-devices, since these are having problems with points located not directly on the track.'
+            >
+              <FaCircleInfo className='' />
+            </div>
+          </div>
+        </div>
+      </div>
       <br />
       <div>
         <div className='mb-5'>
