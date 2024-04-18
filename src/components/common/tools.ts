@@ -1,4 +1,6 @@
 import DOMPurify from 'dompurify'
+import { WayPoint } from '../../@types/gps.ts'
+import { Feature, FeatureCollection } from 'geojson'
 
 export const sanitizeFilename = (input: string) => {
   var sanitized = input
@@ -31,4 +33,26 @@ export const encodeToBase64 = (input: string) => {
   const bytes = new TextEncoder().encode(input)
   const binString = String.fromCodePoint(...bytes)
   return btoa(binString)
+}
+
+export const generateGeoJson = (
+  markerPositions: WayPoint[]
+): FeatureCollection => {
+  return {
+    type: 'FeatureCollection',
+    features: markerPositions.map(
+      (waypoint) =>
+        ({
+          type: 'Feature',
+          properties: {
+            name: waypoint.name,
+            type: waypoint.type,
+          },
+          geometry: {
+            type: 'Point',
+            coordinates: [waypoint.position[1], waypoint.position[0]],
+          },
+        } as Feature)
+    ),
+  }
 }

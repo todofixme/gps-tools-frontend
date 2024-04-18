@@ -1,5 +1,12 @@
 import { describe, it, expect } from 'vitest'
-import { decodeFromBase64, encodeToBase64, sanitizeFilename } from './tools'
+import {
+  decodeFromBase64,
+  encodeToBase64,
+  generateGeoJson,
+  sanitizeFilename,
+} from './tools'
+import { WayPoint } from '../../@types/gps'
+import { v4 as uuidv4 } from 'uuid'
 
 describe('sanitizeFilename', () => {
   it('nothing to sanitize', () => {
@@ -57,5 +64,55 @@ describe('Base64 encode/decode', () => {
   it('decode UTF-8', () => {
     const encoded = decodeFromBase64('SG90ZWwgRG9uIEPDoW5kaWRv')
     expect(encoded).toStrictEqual('Hotel Don Cándido')
+  })
+})
+
+describe('generate GeoJSON', () => {
+  it('generate', () => {
+    const id1 = uuidv4()
+    const id2 = uuidv4()
+    const given: WayPoint[] = [
+      {
+        id: id1,
+        position: [11, 12],
+        name: 'way point 1',
+        type: 'GENERIC',
+      },
+      {
+        id: id2,
+        position: [12, 22],
+        name: 'way point 2',
+        type: 'FOOD',
+      },
+    ]
+    const actual = generateGeoJson(given)
+
+    expect(actual).toEqual({
+      features: [
+        {
+          geometry: {
+            coordinates: [12, 11],
+            type: 'Point',
+          },
+          properties: {
+            name: 'way point 1',
+            type: 'GENERIC',
+          },
+          type: 'Feature',
+        },
+        {
+          geometry: {
+            coordinates: [22, 12],
+            type: 'Point',
+          },
+          properties: {
+            name: 'way point 2',
+            type: 'FOOD',
+          },
+          type: 'Feature',
+        },
+      ],
+      type: 'FeatureCollection',
+    })
   })
 })
