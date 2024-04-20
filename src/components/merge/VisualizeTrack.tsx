@@ -1,5 +1,11 @@
 import React, { createRef, useCallback, useEffect, useState } from 'react'
-import { LayersControl, MapContainer, Polyline, TileLayer } from 'react-leaflet'
+import {
+  LayersControl,
+  MapContainer,
+  Polyline,
+  TileLayer,
+  ZoomControl,
+} from 'react-leaflet'
 import {
   LatLng,
   LatLngBoundsExpression,
@@ -13,6 +19,7 @@ import { PoiType, WayPoint } from '../../@types/gps'
 import DraggableMarker from './DraggableMarker.tsx'
 import FitBoundsButton from './FitBoundsButton.tsx'
 import NewMarkerButton from './NewMarkerButton.tsx'
+import MarkerSearch from './MarkerSearch.tsx'
 
 type VisualizeTrackProps = {
   bounds: LatLngBoundsExpression
@@ -78,7 +85,10 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
-      if (document.activeElement?.id === 'editTrackname') {
+      if (
+        document.activeElement?.id === 'editTrackname' ||
+        document.activeElement?.id === 'markerSearchInput'
+      ) {
         return null
       }
       if (event.key === 'm') {
@@ -87,7 +97,10 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
     }
 
     const handleKeyUp = (event: KeyboardEvent) => {
-      if (document.activeElement?.id === 'editTrackname') {
+      if (
+        document.activeElement?.id === 'editTrackname' ||
+        document.activeElement?.id === 'markerSearchInput'
+      ) {
         return null
       }
       if (event.key === 'm') {
@@ -122,11 +135,14 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
         </div>
       </div>
 
-      <MapContainer bounds={bounds}>
+      <MapContainer bounds={bounds} zoomControl={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
+        <Control position='topleft'>
+          <MarkerSearch setMarkerPositions={setMarkerPositions} />
+        </Control>
         <LayersControl position='topright'>
           <LayersControl.BaseLayer name='Streets' checked={true}>
             <TileLayer
@@ -164,6 +180,7 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
             removeMarker={removeMarker}
           />
         ))}
+        <ZoomControl position='topright' />
         <Control prepend position='topright'>
           <div className='flex flex-col'>
             <FitBoundsButton polylineRef={polylineRef} />

@@ -1,5 +1,6 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
+  convertOsmToPoiType,
   decodeFromBase64,
   encodeToBase64,
   generateGeoJson,
@@ -114,5 +115,42 @@ describe('generate GeoJSON', () => {
       ],
       type: 'FeatureCollection',
     })
+  })
+})
+
+describe('convert OSM key and value to PoiType', () => {
+  it('convert amenity / food', () => {
+    const actual = convertOsmToPoiType('amenity', 'cafe')
+    expect(actual).toStrictEqual('FOOD')
+  })
+
+  it('convert amenity / non-food', () => {
+    const actual = convertOsmToPoiType('amenity', 'library')
+    expect(actual).toStrictEqual('GENERIC')
+  })
+
+  it('convert mountain pass', () => {
+    const actual = convertOsmToPoiType('mountain_pass', '')
+    expect(actual).toStrictEqual('SUMMIT')
+  })
+
+  it('convert peak', () => {
+    const actual = convertOsmToPoiType('natural', 'peak')
+    expect(actual).toStrictEqual('SUMMIT')
+  })
+
+  it('convert saddle', () => {
+    const actual = convertOsmToPoiType('natural', 'saddle')
+    expect(actual).toStrictEqual('SUMMIT')
+  })
+
+  it('convert hotel', () => {
+    const actual = convertOsmToPoiType('tourism', 'hotel')
+    expect(actual).toStrictEqual('RESIDENCE')
+  })
+
+  it('convert / fallback', () => {
+    const actual = convertOsmToPoiType('unknown', 'whatever')
+    expect(actual).toStrictEqual('GENERIC')
   })
 })
