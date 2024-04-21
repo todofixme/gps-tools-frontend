@@ -1,3 +1,13 @@
+# [0.11.0](https://github.com/devshred/gps-tools-frontend/compare/v0.10.0...v0.11.0) (2024-04-21)
+
+
+### Features
+
+* **merge:** fixed URL for merged file ([6161088](https://github.com/devshred/gps-tools-frontend/commit/616108851465b38e8427cc530c2c94c16ce80de1))
+* **site:** describe project at about page ([825f5e3](https://github.com/devshred/gps-tools-frontend/commit/825f5e3f9315805ee2ce0a6165f06ee8c1a0a921))
+* **visual:** add button to mute/disable polyline ([c01a9a2](https://github.com/devshred/gps-tools-frontend/commit/c01a9a2ed91aba2a7ba40f931892d60d1a4fcb9c))
+* **visual:** integrate search for waypoints ([bda44bd](https://github.com/devshred/gps-tools-frontend/commit/bda44bdc1ae952c42c0058706393bc479646391b))
+
 # [0.10.0](https://github.com/devshred/gps-tools-frontend/compare/v0.9.1...v0.10.0) (2024-04-12)
 
 
