@@ -5,7 +5,7 @@ import { UploadProvider } from '../context/UploadContext'
 
 const Merge = () => (
   <div>
-    <h1 className='text-6xl'>GPS-Tool</h1>
+    <h1 className='text-6xl'>GPS-Tools</h1>
     <UploadProvider>
       <Intro />
       <UploadForm />
