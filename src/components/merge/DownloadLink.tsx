@@ -28,7 +28,7 @@ const DownloadLink: React.FC<DownloadLinkProps> = ({
         '?mode=dl&type=' +
         type +
         (optimizeWaypoints ? '&mode=opt' : '') +
-        (trackname.length > 0 ? `&name=${trackname}` : '') +
+        (trackname.length > 0 ? `&name=${encodeToBase64(trackname)}` : '') +
         (geoJson != null
           ? `&wp=${encodeToBase64(JSON.stringify(geoJson))}`
           : '')

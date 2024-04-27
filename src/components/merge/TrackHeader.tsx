@@ -1,7 +1,7 @@
 import DownloadLink from './DownloadLink.tsx'
 import { FaCircleInfo, FaPenToSquare } from 'react-icons/fa6'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import { WayPoint } from '../../@types/gps.ts'
 import { generateGeoJson, sanitizeFilename } from '../common/tools.ts'
 import ResetButton from './ResetButton.tsx'
@@ -27,7 +27,7 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
     [markerPositions]
   )
 
-  useEffect(() => {
+  useMemo(() => {
     tracknameRef.current = trackname
   }, [])
 
