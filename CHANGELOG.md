@@ -1,3 +1,10 @@
+## [0.11.1](https://github.com/devshred/gps-tools-frontend/compare/v0.11.0...v0.11.1) (2024-04-29)
+
+
+### Bug Fixes
+
+* **download:** fix editable trackname ([51148e0](https://github.com/devshred/gps-tools-frontend/commit/51148e0c9acfafac74c0635caa11f1d5bfe441d9))
+
 # [0.11.0](https://github.com/devshred/gps-tools-frontend/compare/v0.10.0...v0.11.0) (2024-04-21)
 
 
