@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { FeedbackProvider } from './components/services/context/FeedbackContext.tsx'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
-import NotFound from './pages/NotFound'
-import About from './pages/About'
-import Merge from './pages/Merge'
-import Track from './pages/Track'
-import { FeedbackProvider } from './context/FeedbackContext'
 import Feedback from './components/layout/Feedback'
+import NotFoundScreen from './pages/NotFoundScreen.tsx'
+import AboutScreen from './pages/AboutScreen.tsx'
+import MergeScreen from './pages/MergeScreen.tsx'
+import TrackScreen from './pages/TrackScreen.tsx'
 
 const App = () => (
   <FeedbackProvider>
@@ -16,11 +16,11 @@ const App = () => (
         <main className='container mx-auto px-3 pb-12'>
           <Feedback />
           <Routes>
-            <Route path='/' element={<Merge />} />
-            <Route path='/merge' element={<Merge />} />
-            <Route path='/track/:id' element={<Track />} />
-            <Route path='/about' element={<About />} />
-            <Route path='/*' element={<NotFound />} />
+            <Route path='/' element={<MergeScreen />} />
+            <Route path='/merge' element={<MergeScreen />} />
+            <Route path='/track/:id' element={<TrackScreen />} />
+            <Route path='/about' element={<AboutScreen />} />
+            <Route path='/*' element={<NotFoundScreen />} />
           </Routes>
         </main>
         <Footer />

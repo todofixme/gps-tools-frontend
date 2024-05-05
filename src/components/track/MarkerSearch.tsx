@@ -1,11 +1,17 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import axios from 'axios'
 import { useDebounce } from '@uidotdev/usehooks'
 import { Feature, FeatureCollection, Point } from 'geojson'
 import { WayPoint } from '../../@types/gps'
 import { v4 as uuidv4 } from 'uuid'
-import { convertOsmToPoiType } from '../common/tools.ts'
 import { useMap } from 'react-leaflet'
+import { convertOsmToPoiType } from '../../utils/tools.ts'
 
 type MarkerSearchProps = {
   setMarkerPositions: Dispatch<SetStateAction<WayPoint[]>>

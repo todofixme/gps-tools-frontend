@@ -6,7 +6,7 @@ import {
   generateGeoJson,
   sanitizeFilename,
 } from './tools'
-import { WayPoint } from '../../@types/gps'
+import { WayPoint } from '../@types/gps'
 import { v4 as uuidv4 } from 'uuid'
 
 describe('sanitizeFilename', () => {

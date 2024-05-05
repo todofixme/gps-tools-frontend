@@ -1,4 +1,4 @@
-import { useUploadContext } from '../../context/UploadContext'
+import { useUploadContext } from '../../hooks/useUploadContext.ts'
 
 const Intro = () => {
   const { mergedFile } = useUploadContext()

@@ -1,12 +1,12 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import About from './About'
+import AboutScreen from './AboutScreen.tsx'
 
 const mocks = vi.hoisted(() => ({ get: vi.fn() }))
 
 vi.mock('axios', async (importActual) => {
   const actual = await importActual<typeof import('axios')>()
-  const mockAxios = {
+  return {
     default: {
       ...actual.default,
       create: vi.fn(() => ({
@@ -15,12 +15,11 @@ vi.mock('axios', async (importActual) => {
       })),
     },
   }
-  return mockAxios
 })
 
 describe('About Page', () => {
   it('load page', () => {
-    render(<About />)
+    render(<AboutScreen />)
     expect(
       screen.getByText('An app dealing with GPS files.')
     ).toBeInTheDocument()
@@ -32,7 +31,7 @@ describe('About Page', () => {
       data: { app: version, git: 'githash' },
     })
 
-    render(<About />)
+    render(<AboutScreen />)
 
     expect(await screen.findByText(version)).toBeInTheDocument()
     expect(mocks.get).toHaveBeenCalled()

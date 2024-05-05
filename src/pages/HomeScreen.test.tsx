@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import Home from './Home'
+import HomeScreen from './HomeScreen.tsx'
 
 describe('Home Page', () => {
   it('load page', () => {
-    render(<Home />)
+    render(<HomeScreen />)
     expect(screen.getByText('GPS-Tools')).toBeInTheDocument()
   })
 })

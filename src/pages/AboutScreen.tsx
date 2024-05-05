@@ -1,26 +1,26 @@
 import { useEffect, useState } from 'react'
 import { BackendVersion } from '../@types/common'
 import { AxiosResponse } from 'axios'
-import API from '../components/common/gps-backend-api'
+import API from '../components/services/backend/gps-backend-api'
 
 const NO_VERSION = { app: 'N/A', git: 'N/A' }
 
-const About = () => {
+const AboutScreen = () => {
   const [backendVersion, setBackendVersion] =
     useState<BackendVersion>(NO_VERSION)
 
-  const getBackendVersion = async () => {
+  const fetchBackendVersion = async () => {
     try {
       const response: AxiosResponse<BackendVersion> = await API.get('/version')
       setBackendVersion(response.data)
-    } catch (error) {
+    } catch (fetchError) {
       setBackendVersion(NO_VERSION)
-      console.error('Error fetching version: ', error)
+      console.error('Error fetching version: ', fetchError)
     }
   }
 
   useEffect(() => {
-    getBackendVersion()
+    (async () => { await fetchBackendVersion() })()
   }, [])
 
   return (
@@ -132,4 +132,4 @@ const About = () => {
   )
 }
 
-export default About
+export default AboutScreen

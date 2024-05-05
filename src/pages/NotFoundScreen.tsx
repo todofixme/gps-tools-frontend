@@ -1,7 +1,7 @@
 import { FaAngleRight } from 'react-icons/fa6'
 import { BsEmojiDizzy } from 'react-icons/bs'
 
-const NotFound = () => (
+const NotFoundScreen = () => (
   <div>
     <h1 className='text-6xl mb-4 flex'>
       Not Found
@@ -13,7 +13,7 @@ const NotFound = () => (
         this already:
         <a href='/merge'>
           <FaAngleRight className='inline' />
-          <div className='inline font-bold'>GPX-Merge</div>
+          <div className='inline font-bold'>GPS-Tools</div>
         </a>{' '}
         ?
       </p>
@@ -21,4 +21,4 @@ const NotFound = () => (
   </div>
 )
 
-export default NotFound
+export default NotFoundScreen

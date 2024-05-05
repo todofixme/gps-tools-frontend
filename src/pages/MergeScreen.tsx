@@ -1,9 +1,9 @@
 import UploadForm from '../components/merge/UploadForm'
 import MergeFiles from '../components/merge/MergeFiles'
 import Intro from '../components/merge/Intro'
-import { UploadProvider } from '../context/UploadContext'
+import { UploadProvider } from '../components/services/context/UploadContext.tsx'
 
-const Merge = () => (
+const MergeScreen = () => (
   <div>
     <h1 className='text-6xl'>GPS-Tools</h1>
     <UploadProvider>
@@ -14,4 +14,4 @@ const Merge = () => (
   </div>
 )
 
-export default Merge
+export default MergeScreen

@@ -1,8 +1,8 @@
-import { createContext, useContext, useState } from 'react'
+import React, { createContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { UploadContextType, UploadedFile } from '../@types/upload'
-import API from '../components/common/gps-backend-api'
-import { useFeedbackContext } from './FeedbackContext'
+import { UploadContextType, UploadedFile } from '../../../@types/upload'
+import API from '../backend/gps-backend-api'
+import { useFeedbackContext } from '../../../hooks/useFeedbackContext.ts'
 
 export const UploadContext = createContext<UploadContextType | null>(null)
 
@@ -117,17 +117,6 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
       {children}
     </UploadContext.Provider>
   )
-}
-
-export const useUploadContext = () => {
-  const context = useContext(UploadContext)
-  if (!context) {
-    throw new Error(
-      'useUploadContext has to be within <UploadContext.Provider>'
-    )
-  }
-
-  return context
 }
 
 export default UploadContext

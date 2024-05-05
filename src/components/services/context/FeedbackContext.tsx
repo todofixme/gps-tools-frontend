@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react'
+import React, { createContext, useReducer } from 'react'
 import feedbackReducer, {
   FeedbackState,
   REMOVE_FEEDBACK,
@@ -42,17 +42,6 @@ export const FeedbackProvider: React.FC<FeedbackProviderType> = ({
       {children}
     </FeedbackContext.Provider>
   )
-}
-
-export const useFeedbackContext = () => {
-  const context = useContext(FeedbackContext)
-  if (!context) {
-    throw new Error(
-      'useFeedbackContext has to be within <FeedbackContext.Provider>'
-    )
-  }
-
-  return context
 }
 
 export default FeedbackContext

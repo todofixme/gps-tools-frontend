@@ -5,7 +5,7 @@ import {
   DropResult,
 } from '@hello-pangea/dnd'
 import { FaEllipsisVertical, FaTrashCan } from 'react-icons/fa6'
-import { useUploadContext } from '../../context/UploadContext'
+import { useUploadContext } from '../../hooks/useUploadContext.ts'
 import { UploadedFile } from '../../@types/upload'
 
 const MergeFiles = () => {

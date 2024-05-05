@@ -1,8 +1,8 @@
-import { useCallback, useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { DropzoneRootProps, useDropzone } from 'react-dropzone'
 import { FiUpload } from 'react-icons/fi'
-import { useUploadContext } from '../../context/UploadContext'
 import { Loading } from 'react-daisyui'
+import { useUploadContext } from '../../hooks/useUploadContext.ts'
 
 const baseStyle = {
   flex: 1,

@@ -7,7 +7,9 @@ type Props = {
   title?: string
 }
 
-const Navbar: React.FC<Props> = ({ title }) => (
+const DEFAULT_TITLE: string = 'GPS-Tools'
+
+const Navbar: React.FC<Props> = ({ title = DEFAULT_TITLE }) => (
   <nav className='navbar mb-12 shadow-lg base-300 text-base-content'>
     <div className='container mx-auto'>
       <div className='flex-none px-2 mx-2'>
@@ -31,7 +33,5 @@ const Navbar: React.FC<Props> = ({ title }) => (
     </div>
   </nav>
 )
-
-Navbar.defaultProps = { title: 'GPS-Tools' }
 
 export default Navbar

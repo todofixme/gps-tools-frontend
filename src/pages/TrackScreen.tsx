@@ -1,17 +1,17 @@
 import { useParams } from 'react-router-dom'
-import VisualizeTrack from '../components/merge/VisualizeTrack.tsx'
 import { useEffect, useState } from 'react'
-import API from '../components/common/gps-backend-api.ts'
+import API from '../components/services/backend/gps-backend-api'
 import { FeatureCollection, LineString, Point } from 'geojson'
 import { PoiType, WayPoint } from '../@types/gps.ts'
 import { v4 as uuidv4 } from 'uuid'
 import { LatLngBoundsExpression, LatLngExpression, LatLngTuple } from 'leaflet'
-import { sanitizeFilename } from '../components/common/tools.ts'
-import TrackHeader from '../components/merge/TrackHeader.tsx'
-import ResetButton from '../components/merge/ResetButton.tsx'
-import { useFeedbackContext } from '../context/FeedbackContext.tsx'
+import { sanitizeFilename } from '../utils/tools.ts'
+import VisualizeTrack from '../components/track/VisualizeTrack.tsx'
+import TrackHeader from '../components/track/TrackHeader.tsx'
+import ResetButton from '../components/track/ResetButton.tsx'
+import { useFeedbackContext } from '../hooks/useFeedbackContext.ts'
 
-const Track = () => {
+const TrackScreen = () => {
   const { id: trackId } = useParams()
 
   const { setError } = useFeedbackContext()
@@ -128,4 +128,4 @@ const Track = () => {
   )
 }
 
-export default Track
+export default TrackScreen

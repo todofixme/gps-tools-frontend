@@ -1,7 +1,7 @@
 import React from 'react'
 import { FiDownload } from 'react-icons/fi'
 import { GeoJsonObject } from 'geojson'
-import { encodeToBase64 } from '../common/tools.ts'
+import { encodeToBase64 } from '../../utils/tools.ts'
 
 type DownloadLinkProps = {
   fileId: string

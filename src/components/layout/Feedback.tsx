@@ -1,5 +1,5 @@
-import { useFeedbackContext } from '../../context/FeedbackContext'
 import { Alert, Button } from 'react-daisyui'
+import { useFeedbackContext } from '../../hooks/useFeedbackContext.ts'
 
 function Feedback() {
   const { state, removeFeedback } = useFeedbackContext()

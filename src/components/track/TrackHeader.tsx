@@ -3,7 +3,7 @@ import { FaCircleInfo, FaPenToSquare } from 'react-icons/fa6'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
 import React, { useMemo, useRef, useState } from 'react'
 import { WayPoint } from '../../@types/gps.ts'
-import { generateGeoJson, sanitizeFilename } from '../common/tools.ts'
+import { generateGeoJson, sanitizeFilename } from '../../utils/tools.ts'
 import ResetButton from './ResetButton.tsx'
 
 type TrackHeaderProps = {
