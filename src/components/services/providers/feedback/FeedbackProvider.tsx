@@ -1,17 +1,9 @@
-import React, { createContext, useReducer } from 'react'
+import React, { useReducer } from 'react'
 import feedbackReducer, {
-  FeedbackState,
   REMOVE_FEEDBACK,
   SET_FEEDBACK,
 } from './FeedbackReducer'
-
-type FeedbackContextType = {
-  state: FeedbackState
-  setError: (message: string) => void
-  removeFeedback: () => void
-}
-
-const FeedbackContext = createContext<FeedbackContextType | null>(null)
+import FeedbackContext from './FeedbackContext'
 
 export type FeedbackProviderType = {
   children: React.ReactNode
@@ -21,13 +13,12 @@ export const FeedbackProvider: React.FC<FeedbackProviderType> = ({
   children,
 }) => {
   const initialState = null
-
   const [state, dispatchFeedback] = useReducer(feedbackReducer, initialState)
 
-  const setError = (message: string) => {
+  const setError = (messageKey: string) => {
     dispatchFeedback({
       type: SET_FEEDBACK,
-      payload: { type: 'error', message },
+      payload: { type: 'error', messageKey },
     })
 
     setTimeout(() => dispatchFeedback({ type: REMOVE_FEEDBACK }), 5000)
@@ -43,5 +34,3 @@ export const FeedbackProvider: React.FC<FeedbackProviderType> = ({
     </FeedbackContext.Provider>
   )
 }
-
-export default FeedbackContext

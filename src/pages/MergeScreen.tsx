@@ -1,7 +1,7 @@
 import UploadForm from '../components/merge/UploadForm'
 import MergeFiles from '../components/merge/MergeFiles'
 import Intro from '../components/merge/Intro'
-import { UploadProvider } from '../components/services/context/UploadContext.tsx'
+import { UploadProvider } from '../components/services/providers/upload/UploadProvider'
 
 const MergeScreen = () => (
   <div>

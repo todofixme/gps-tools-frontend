@@ -1,6 +1,9 @@
 import { describe, expect, it, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import AboutScreen from './AboutScreen.tsx'
+import AboutScreen from './AboutScreen'
+import React from 'react'
+import { LanguageProvider } from '../components/services/providers/language/LanguageProvider'
+import { Language } from '../@types/language'
 
 const mocks = vi.hoisted(() => ({ get: vi.fn() }))
 
@@ -18,10 +21,24 @@ vi.mock('axios', async (importActual) => {
 })
 
 describe('About Page', () => {
+  const renderWithLanguage = (
+    children: React.ReactNode,
+    language: Language = 'en'
+  ) => {
+    render(<LanguageProvider language={language}>{children}</LanguageProvider>)
+  }
+
   it('load page', () => {
-    render(<AboutScreen />)
+    renderWithLanguage(<AboutScreen />)
     expect(
       screen.getByText('An app dealing with GPS files.')
+    ).toBeInTheDocument()
+  })
+
+  it('load page german page', () => {
+    renderWithLanguage(<AboutScreen />, 'de')
+    expect(
+      screen.getByText('Eine Anwendung zum Bearbeiten von GPS-Dateien.')
     ).toBeInTheDocument()
   })
 
@@ -31,7 +48,7 @@ describe('About Page', () => {
       data: { app: version, git: 'githash' },
     })
 
-    render(<AboutScreen />)
+    renderWithLanguage(<AboutScreen />)
 
     expect(await screen.findByText(version)).toBeInTheDocument()
     expect(mocks.get).toHaveBeenCalled()

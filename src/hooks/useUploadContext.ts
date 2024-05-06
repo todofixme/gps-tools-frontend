@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import UploadContext from '../components/services/context/UploadContext.tsx'
+import UploadContext from '../components/services/providers/upload/UploadContext'
 
 export const useUploadContext = () => {
   const context = useContext(UploadContext)

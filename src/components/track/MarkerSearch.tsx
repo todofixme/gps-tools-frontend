@@ -11,7 +11,8 @@ import { Feature, FeatureCollection, Point } from 'geojson'
 import { WayPoint } from '../../@types/gps'
 import { v4 as uuidv4 } from 'uuid'
 import { useMap } from 'react-leaflet'
-import { convertOsmToPoiType } from '../../utils/tools.ts'
+import { convertOsmToPoiType } from '../../utils/tools'
+import useLanguage from '../../hooks/useLanguage'
 
 type MarkerSearchProps = {
   setMarkerPositions: Dispatch<SetStateAction<WayPoint[]>>
@@ -24,6 +25,7 @@ const MarkerSearch: React.FC<MarkerSearchProps> = ({ setMarkerPositions }) => {
   const dropdownDivRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const map = useMap()
+  const { getMessage } = useLanguage()
 
   useEffect(() => {
     if (debouncedSearchTerm === undefined || debouncedSearchTerm.length == 0) {
@@ -92,7 +94,7 @@ const MarkerSearch: React.FC<MarkerSearchProps> = ({ setMarkerPositions }) => {
           className='input input-bordered w-full'
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder='Search for waypoints…'
+          placeholder={getMessage('search_for_waypoints') as string}
           tabIndex={0}
         />
         <div className='dropdown-content bg-base-200 top-14 max-h-96 overflow-auto flex-col rounded-md'>

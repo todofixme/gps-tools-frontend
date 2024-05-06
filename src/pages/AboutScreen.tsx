@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react'
 import { BackendVersion } from '../@types/common'
 import { AxiosResponse } from 'axios'
 import API from '../components/services/backend/gps-backend-api'
+import useLanguage from '../hooks/useLanguage'
 
 const NO_VERSION = { app: 'N/A', git: 'N/A' }
 
 const AboutScreen = () => {
+  const { getMessage } = useLanguage()
+
   const [backendVersion, setBackendVersion] =
     useState<BackendVersion>(NO_VERSION)
 
@@ -20,13 +23,17 @@ const AboutScreen = () => {
   }
 
   useEffect(() => {
-    (async () => { await fetchBackendVersion() })()
+    ;(async () => {
+      await fetchBackendVersion()
+    })()
   }, [])
 
   return (
     <>
       <h1 className='text-6xl mb-4'>GPS-Tools</h1>
-      <p className='mb-4 text-2xl font-light'>An app dealing with GPS files.</p>
+      <p className='mb-4 text-2xl font-light'>
+        {getMessage('app_description')}
+      </p>
       <p className='text-lg'>
         <a
           href='https://github.com/devshred/gps-tools-frontend'
@@ -61,9 +68,7 @@ const AboutScreen = () => {
           {backendVersion.app}
         </a>
       </p>
-      <p className='text-lg mt-4'>
-        This app was created to test some technologies. These are:
-      </p>
+      <p className='text-lg mt-4'>{getMessage('technologies_header')}</p>
       <ul className='text-lg mt-4'>
         <li>
           <a
@@ -126,7 +131,7 @@ const AboutScreen = () => {
         </li>
       </ul>
       <p className='text-lg mt-4'>
-        Contact: gps minus tools ät devshred dot org
+        {getMessage('contact')}: gps minus tools ät tigerflanke dot de
       </p>
     </>
   )

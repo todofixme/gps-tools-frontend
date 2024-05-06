@@ -1,19 +1,21 @@
-import { useUploadContext } from '../../hooks/useUploadContext.ts'
+import useLanguage from '../../hooks/useLanguage'
+import { useUploadContext } from '../../hooks/useUploadContext'
 
 const Intro = () => {
   const { mergedFile } = useUploadContext()
+  const { getMessage } = useLanguage()
 
   return (
     <>
       {mergedFile === null && (
         <div>
-          This app allows you to:
+          {getMessage('intro_header')}
           <ul className='list-disc pl-5'>
-            <li>Upload a single or multiple files in GPX- or FIT-format.</li>
-            <li>Merge them into a single file.</li>
-            <li>Visualize the merged file.</li>
-            <li>Add, change and remove waypoints.</li>
-            <li>Download the merged file as GPX or TCX.</li>
+            {(getMessage('intro_description_list') as Array<string>).map(
+              (item, index) => (
+                <li key={index}>{item}</li>
+              )
+            )}
           </ul>
         </div>
       )}

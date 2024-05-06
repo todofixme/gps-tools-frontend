@@ -5,12 +5,14 @@ import {
   DropResult,
 } from '@hello-pangea/dnd'
 import { FaEllipsisVertical, FaTrashCan } from 'react-icons/fa6'
-import { useUploadContext } from '../../hooks/useUploadContext.ts'
+import { useUploadContext } from '../../hooks/useUploadContext'
 import { UploadedFile } from '../../@types/upload'
+import useLanguage from '../../hooks/useLanguage'
 
 const MergeFiles = () => {
   const { uploadedFiles, setUploadedFiles, removeUploadedFile, mergeFiles } =
     useUploadContext()
+  const { getMessage } = useLanguage()
 
   const reorder = (
     list: Array<UploadedFile>,
@@ -73,8 +75,8 @@ const MergeFiles = () => {
       <div className='mt-7'>
         {uploadedFiles.length > 0 && (
           <button className='btn btn-active' onClick={mergeFiles}>
-            {uploadedFiles.length == 1 && 'Visualize'}
-            {uploadedFiles.length > 1 && 'Merge & Visualize'}
+            {uploadedFiles.length == 1 && getMessage('visualize_file')}
+            {uploadedFiles.length > 1 && getMessage('visualize_files')}
           </button>
         )}
       </div>

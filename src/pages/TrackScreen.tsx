@@ -2,19 +2,21 @@ import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import API from '../components/services/backend/gps-backend-api'
 import { FeatureCollection, LineString, Point } from 'geojson'
-import { PoiType, WayPoint } from '../@types/gps.ts'
+import { PoiType, WayPoint } from '../@types/gps'
 import { v4 as uuidv4 } from 'uuid'
 import { LatLngBoundsExpression, LatLngExpression, LatLngTuple } from 'leaflet'
-import { sanitizeFilename } from '../utils/tools.ts'
-import VisualizeTrack from '../components/track/VisualizeTrack.tsx'
-import TrackHeader from '../components/track/TrackHeader.tsx'
-import ResetButton from '../components/track/ResetButton.tsx'
-import { useFeedbackContext } from '../hooks/useFeedbackContext.ts'
+import { sanitizeFilename } from '../utils/tools'
+import VisualizeTrack from '../components/track/VisualizeTrack'
+import TrackHeader from '../components/track/TrackHeader'
+import ResetButton from '../components/track/ResetButton'
+import { useFeedbackContext } from '../hooks/useFeedbackContext'
+import useLanguage from '../hooks/useLanguage'
 
 const TrackScreen = () => {
   const { id: trackId } = useParams()
 
   const { setError } = useFeedbackContext()
+  const { getMessage } = useLanguage()
 
   const [isLoading, setIsLoading] = useState(true)
   const [trackname, setTrackname] = useState<string>('')
@@ -90,9 +92,9 @@ const TrackScreen = () => {
       })
       .catch((error) => {
         if (error.response?.status === 404) {
-          setError('Track not found.')
+          setError('error_track_not_found')
         } else {
-          setError('Failed to load track. Sorry!')
+          setError('error_loading_track')
         }
         setIsLoading(false)
       })
@@ -102,7 +104,7 @@ const TrackScreen = () => {
     <>
       <h1 className='text-6xl'>GPS-Tool</h1>
       {isLoading ? (
-        <p>Loading...</p>
+        <p>{getMessage('loading')}</p>
       ) : positions.length > 0 && trackId !== undefined ? (
         <>
           <TrackHeader
@@ -120,7 +122,7 @@ const TrackScreen = () => {
         </>
       ) : (
         <>
-          <p>Track not found.</p>
+          <p>{getMessage('error_track_not_found')}</p>
           <ResetButton />
         </>
       )}

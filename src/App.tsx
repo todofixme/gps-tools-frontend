@@ -1,15 +1,15 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { FeedbackProvider } from './components/services/context/FeedbackContext.tsx'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import Feedback from './components/layout/Feedback'
-import NotFoundScreen from './pages/NotFoundScreen.tsx'
-import AboutScreen from './pages/AboutScreen.tsx'
-import MergeScreen from './pages/MergeScreen.tsx'
-import TrackScreen from './pages/TrackScreen.tsx'
+import NotFoundScreen from './pages/NotFoundScreen'
+import AboutScreen from './pages/AboutScreen'
+import MergeScreen from './pages/MergeScreen'
+import TrackScreen from './pages/TrackScreen'
+import Providers from './components/services/providers'
 
 const App = () => (
-  <FeedbackProvider>
+  <Providers>
     <Router>
       <div className='flex flex-col justify-between h-screen'>
         <Navbar />
@@ -26,7 +26,7 @@ const App = () => (
         <Footer />
       </div>
     </Router>
-  </FeedbackProvider>
+  </Providers>
 )
 
 export default App

@@ -1,5 +1,5 @@
 import DOMPurify from 'dompurify'
-import { PoiType, WayPoint } from '../@types/gps.ts'
+import { PoiType, WayPoint } from '../@types/gps'
 import { Feature, FeatureCollection } from 'geojson'
 
 export const sanitizeFilename = (input: string) => {

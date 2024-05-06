@@ -1,10 +1,9 @@
-import React, { createContext, useState } from 'react'
+import React, { useState } from 'react'
+import { UploadedFile } from '../../../../@types/upload'
+import { useFeedbackContext } from '../../../../hooks/useFeedbackContext'
 import { useNavigate } from 'react-router-dom'
-import { UploadContextType, UploadedFile } from '../../../@types/upload'
-import API from '../backend/gps-backend-api'
-import { useFeedbackContext } from '../../../hooks/useFeedbackContext.ts'
-
-export const UploadContext = createContext<UploadContextType | null>(null)
+import API from '../../backend/gps-backend-api'
+import UploadContext from './UploadContext'
 
 export type UploadProviderType = {
   children: React.ReactNode
@@ -33,11 +32,11 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
       )
       .catch((error) => {
         if (error.code === 'ERR_NETWORK') {
-          setError('The backend server is not available at the moment. Sorry!')
+          setError('error_backend_server_na')
         } else if (error.code === 'ERR_BAD_REQUEST') {
-          setError("Couldn't process some files. Was it really GPS data?")
+          setError('error_not_gps_data')
         } else {
-          setError('Failed to upload files. Sorry!')
+          setError('error_upload_failure')
         }
       })
       .finally(() => setLoading(false))
@@ -47,11 +46,11 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
     API.delete('/files/' + file.id)
       .catch((error) => {
         if (error.code === 'ERR_NETWORK') {
-          setError('The backend server is not available at the moment. Sorry!')
+          setError('error_backend_server_na')
         } else if (error.code === 'ERR_BAD_REQUEST') {
-          setError('Something went wrong. Sorry!')
+          setError('error_generic')
         } else {
-          setError('Failed to delete file. Sorry!')
+          setError('error_delete')
         }
       })
       .finally(() => {
@@ -84,15 +83,11 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
         })
         .catch((error) => {
           if (error.code === 'ERR_NETWORK') {
-            setError(
-              'The backend server is not available at the moment. Sorry!'
-            )
+            setError('error_backend_server_na')
           } else if (error.code === 'ERR_BAD_REQUEST') {
-            const grammaticalNumber =
-              uploadedFiles.length == 1 ? 'file' : 'files'
-            setError(
-              `The ${grammaticalNumber} could not be found on the server. Please upload again!`
-            )
+            uploadedFiles.length == 1
+              ? setError('error_download_failure_sn')
+              : setError('error_download_failure_pl')
             uploadedFiles.map((file) => removeUploadedFile(file))
           } else {
             setError('Failed to merge files. Sorry!')
@@ -118,5 +113,3 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
     </UploadContext.Provider>
   )
 }
-
-export default UploadContext

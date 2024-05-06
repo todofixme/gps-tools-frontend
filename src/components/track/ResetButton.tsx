@@ -1,10 +1,13 @@
 import { useNavigate } from 'react-router-dom'
+import useLanguage from '../../hooks/useLanguage'
 
 const ResetButton = () => {
   const navigateTo = useNavigate()
+  const { getMessage } = useLanguage()
+
   return (
     <button className='btn btn-active m-7' onClick={() => navigateTo('/merge')}>
-      Start working on a new file.
+      {getMessage('button_new_process')}
     </button>
   )
 }

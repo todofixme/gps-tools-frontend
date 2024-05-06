@@ -1,5 +1,5 @@
 type FeedbackType = 'info' | 'success' | 'warning' | 'error' | undefined
-export type FeedbackState = { type: FeedbackType; message: string } | null
+export type FeedbackState = { type: FeedbackType; messageKey: string } | null
 
 export const SET_FEEDBACK = 'SET_FEEDBACK'
 export const REMOVE_FEEDBACK = 'REMOVE_FEEDBACK'

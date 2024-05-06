@@ -16,10 +16,11 @@ import 'leaflet/dist/leaflet.css'
 import Control from 'react-leaflet-custom-control'
 import { FaEye, FaEyeSlash } from 'react-icons/fa6'
 import { PoiType, WayPoint } from '../../@types/gps'
-import DraggableMarker from './DraggableMarker.tsx'
-import FitBoundsButton from './FitBoundsButton.tsx'
-import NewMarkerButton from './NewMarkerButton.tsx'
-import MarkerSearch from './MarkerSearch.tsx'
+import DraggableMarker from './DraggableMarker'
+import FitBoundsButton from './FitBoundsButton'
+import NewMarkerButton from './NewMarkerButton'
+import MarkerSearch from './MarkerSearch'
+import useLanguage from '../../hooks/useLanguage'
 
 type VisualizeTrackProps = {
   bounds: LatLngBoundsExpression
@@ -36,6 +37,7 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
 }) => {
   const [showPolyline, setShowPolyline] = useState(true)
   const polylineRef = createRef<LeafletPolyline>()
+  const { getMessage } = useLanguage()
 
   const changeMarkerPosition = useCallback(
     (markerId: string, newPosition: LatLng) => {
@@ -120,7 +122,10 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
   return (
     <>
       <div>
-        <div className='mb-2 tooltip' data-tip='Mute track on map (M)'>
+        <div
+          className='mb-2 tooltip'
+          data-tip={getMessage('mute_tooltip') as string}
+        >
           {showPolyline ? (
             <FaEye
               className='top-1 text-2xl'

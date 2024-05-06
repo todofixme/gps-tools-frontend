@@ -2,7 +2,8 @@ import React, { useCallback, useMemo } from 'react'
 import { DropzoneRootProps, useDropzone } from 'react-dropzone'
 import { FiUpload } from 'react-icons/fi'
 import { Loading } from 'react-daisyui'
-import { useUploadContext } from '../../hooks/useUploadContext.ts'
+import { useUploadContext } from '../../hooks/useUploadContext'
+import useLanguage from '../../hooks/useLanguage'
 
 const baseStyle = {
   flex: 1,
@@ -34,6 +35,7 @@ const rejectStyle = {
 
 const UploadForm: React.FC = () => {
   const { uploadFile, mergedFile, isLoading } = useUploadContext()
+  const { getMessage } = useLanguage()
 
   const onDrop = useCallback((acceptedFiles: Array<File>) => {
     acceptedFiles.map((file) => uploadFile(file))
@@ -73,13 +75,13 @@ const UploadForm: React.FC = () => {
               <input {...getInputProps()} />
               {isDragActive ? (
                 <p>
-                  <FiUpload className='inline relative bottom-0.5' /> Drop the
-                  files here ...
+                  <FiUpload className='inline relative bottom-0.5' />{' '}
+                  {getMessage('uploader_drop')}
                 </p>
               ) : (
                 <p>
-                  <FiUpload className='inline relative bottom-0.5' /> Drag 'n'
-                  drop GPX- or FIT-files, or click to select files.
+                  <FiUpload className='inline relative bottom-0.5' />{' '}
+                  {getMessage('uploader_description')}
                 </p>
               )}
             </div>

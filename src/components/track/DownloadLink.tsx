@@ -1,7 +1,8 @@
 import React from 'react'
 import { FiDownload } from 'react-icons/fi'
 import { GeoJsonObject } from 'geojson'
-import { encodeToBase64 } from '../../utils/tools.ts'
+import { encodeToBase64 } from '../../utils/tools'
+import useLanguage from '../../hooks/useLanguage'
 
 type DownloadLinkProps = {
   fileId: string
@@ -18,6 +19,7 @@ const DownloadLink: React.FC<DownloadLinkProps> = ({
   optimizeWaypoints,
   geoJson,
 }) => {
+  const { getMessage } = useLanguage()
   const baseUrl = import.meta.env.VITE_BACKEND_BASE_URL
   return (
     <a
@@ -35,7 +37,7 @@ const DownloadLink: React.FC<DownloadLinkProps> = ({
       }
     >
       <FiDownload className='inline mr-1 relative bottom-0.5' />
-      Download as {type.toUpperCase()}
+      {getMessage('download_as')} {type.toUpperCase()}
     </a>
   )
 }

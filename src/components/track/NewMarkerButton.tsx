@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { useMap } from 'react-leaflet'
-import { WayPoint } from '../../@types/gps.ts'
+import { WayPoint } from '../../@types/gps'
 import { v4 as uuidv4 } from 'uuid'
 import { MdAddLocation } from 'react-icons/md'
 

@@ -1,10 +1,11 @@
-import DownloadLink from './DownloadLink.tsx'
+import DownloadLink from './DownloadLink'
 import { FaCircleInfo, FaPenToSquare } from 'react-icons/fa6'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
 import React, { useMemo, useRef, useState } from 'react'
-import { WayPoint } from '../../@types/gps.ts'
-import { generateGeoJson, sanitizeFilename } from '../../utils/tools.ts'
-import ResetButton from './ResetButton.tsx'
+import { WayPoint } from '../../@types/gps'
+import { generateGeoJson, sanitizeFilename } from '../../utils/tools'
+import ResetButton from './ResetButton'
+import useLanguage from '../../hooks/useLanguage'
 
 type TrackHeaderProps = {
   trackId: string
@@ -22,6 +23,7 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
   const [optimizeWaypoints, setOptimizeWaypoints] = useState<boolean>(false)
   const tracknameInputFieldRef: React.RefObject<HTMLElement> = useRef(null)
   const tracknameRef = useRef('')
+  const { getMessage } = useLanguage()
   const markerGeoJson = useMemo(
     () => generateGeoJson(markerPositions),
     [markerPositions]
@@ -72,12 +74,12 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
               className='w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600'
             />
             <label htmlFor='default-checkbox' className='ms-2'>
-              Optimize Waypoints
+              {getMessage('optimize_waypoints')}
             </label>
             &nbsp;
             <div
               className='tooltip'
-              data-tip='Waypoints that are closer than 500m to the track will be moved to a point on the track. This can improve readability on some GPS-devices, since these are having problems with points located not directly on the track.'
+              data-tip={getMessage('optimize_waypoints_tooltip')}
             >
               <FaCircleInfo className='' />
             </div>
