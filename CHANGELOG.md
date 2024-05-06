@@ -1,3 +1,15 @@
+# [0.12.0](https://github.com/devshred/gps-tools-frontend/compare/v0.11.1...v0.12.0) (2024-05-06)
+
+
+### Bug Fixes
+
+* **i18n:** fix type issue at LanguageProvider ([92406b1](https://github.com/devshred/gps-tools-frontend/commit/92406b15265ac181f130e01d099d947b20113a86))
+
+
+### Features
+
+* **i18n:** language support of German and English ([9f34d66](https://github.com/devshred/gps-tools-frontend/commit/9f34d66bd23eed9546cb0d0908493eda446d220a))
+
 ## [0.11.1](https://github.com/devshred/gps-tools-frontend/compare/v0.11.0...v0.11.1) (2024-04-29)
 
 
