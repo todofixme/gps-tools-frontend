@@ -9,6 +9,8 @@ export type LanguageProviderProps = {
   language: Language
   children: ReactNode
 }
+type Messages = { [messageKey: string]: string | string[] }
+type LanguageDictionary = { [languageKey: string]: Messages }
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   language,
@@ -17,9 +19,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   const [currentLanguage, setCurrentLanguage] = useState<Language>(language)
   const changeLanguage = (language: Language) => setCurrentLanguage(language)
 
-  const dictionary: {
-    [languageKey: string]: { [messageKey: string]: string }
-  } = { en, de }
+  const dictionary: LanguageDictionary = { en, de, }
 
   const getMessage = (messageKey: string) => {
     const message = dictionary[currentLanguage][messageKey]
