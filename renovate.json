@@ -1,17 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
+  "extends": ["config:recommended"],
   "timezone": "Europe/Berlin",
-  "schedule": [
-    "before 7am on Saturday"
-  ],
-  "matchUpdateTypes": [
-    "minor",
-    "patch",
-    "pin",
-    "digest"
+  "schedule": ["before 7am on Saturday"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
   ],
   "automerge": false,
   "reviewersFromCodeOwners": true
