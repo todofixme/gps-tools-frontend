@@ -41,14 +41,8 @@ const UploadForm: React.FC = () => {
     acceptedFiles.map((file) => uploadFile(file))
   }, [])
 
-  const {
-    getRootProps,
-    getInputProps,
-    isDragActive,
-    isFocused,
-    isDragAccept,
-    isDragReject,
-  } = useDropzone({ onDrop })
+  const { getRootProps, getInputProps, isDragActive, isFocused, isDragAccept, isDragReject } =
+    useDropzone({ onDrop })
 
   const style: DropzoneRootProps = useMemo(
     () => ({
@@ -57,30 +51,29 @@ const UploadForm: React.FC = () => {
       ...(isDragAccept ? acceptStyle : {}),
       ...(isDragReject ? rejectStyle : {}),
     }),
-    [isFocused, isDragAccept, isDragReject]
+    [isFocused, isDragAccept, isDragReject],
   )
 
   return (
     <>
       {isLoading && (
-        <div className='mt-8'>
-          <Loading size='md' />
+        <div className="mt-8">
+          <Loading size="md" />
         </div>
       )}
 
       {mergedFile === null && (
-        <div className='my-7'>
-          <section className='container'>
+        <div className="my-7">
+          <section className="container">
             <div {...getRootProps({ style })}>
               <input {...getInputProps()} />
               {isDragActive ? (
                 <p>
-                  <FiUpload className='inline relative bottom-0.5' />{' '}
-                  {getMessage('uploader_drop')}
+                  <FiUpload className="inline relative bottom-0.5" /> {getMessage('uploader_drop')}
                 </p>
               ) : (
                 <p>
-                  <FiUpload className='inline relative bottom-0.5' />{' '}
+                  <FiUpload className="inline relative bottom-0.5" />{' '}
                   {getMessage('uploader_description')}
                 </p>
               )}

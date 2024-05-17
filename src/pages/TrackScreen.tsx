@@ -38,7 +38,7 @@ const TrackScreen = () => {
       .then((file) => {
         const feat: FeatureCollection = file.data as FeatureCollection
 
-        let _markerPositions: WayPoint[] = feat.features
+        const _markerPositions: WayPoint[] = feat.features
           .filter((f) => f.geometry.type == 'Point')
           .map((feat) => {
             const point: Point = feat.geometry as Point
@@ -77,9 +77,7 @@ const TrackScreen = () => {
         ] as LatLngBoundsExpression
         setBounds(_bounds)
 
-        const lines = feat.features.filter(
-          (f) => f.geometry.type == 'LineString'
-        )
+        const lines = feat.features.filter((f) => f.geometry.type == 'LineString')
         let trackName: string
         if (lines?.[0]?.properties?.['name']) {
           trackName = lines[0].properties['name']
@@ -102,7 +100,7 @@ const TrackScreen = () => {
 
   return (
     <>
-      <h1 className='text-6xl'>GPS-Tool</h1>
+      <h1 className="text-6xl">GPS-Tools</h1>
       {isLoading ? (
         <p>{getMessage('loading')}</p>
       ) : positions.length > 0 && trackId !== undefined ? (

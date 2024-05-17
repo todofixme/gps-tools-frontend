@@ -4,18 +4,18 @@ import { Marker, Popup } from 'react-leaflet'
 import { FaTrashCan } from 'react-icons/fa6'
 import { PoiType, WayPoint } from '../../@types/gps'
 import iconShadow from 'leaflet/dist/images/marker-shadow.png'
-import iconGeneric from '/icons/Generic.svg'
-import iconSummit from '/icons/Summit.svg'
-import iconValley from '/icons/Valley.svg'
-import iconWater from '/icons/Water.svg'
-import iconFood from '/icons/Food.svg'
-import iconDanger from '/icons/Danger.svg'
-import iconLeft from '/icons/Left.svg'
-import iconRight from '/icons/Right.svg'
-import iconStraight from '/icons/Straight.svg'
-import iconFirstAid from '/icons/FirstAid.svg'
-import iconResidence from '/icons/Residence.svg'
-import iconSprint from '/icons/Sprint.svg'
+import iconGeneric from '../../icons/Generic.svg'
+import iconSummit from '../../icons/Summit.svg'
+import iconValley from '../../icons/Valley.svg'
+import iconWater from '../../icons/Water.svg'
+import iconFood from '../../icons/Food.svg'
+import iconDanger from '../../icons/Danger.svg'
+import iconLeft from '../../icons/Left.svg'
+import iconRight from '../../icons/Right.svg'
+import iconStraight from '../../icons/Straight.svg'
+import iconFirstAid from '../../icons/FirstAid.svg'
+import iconResidence from '../../icons/Residence.svg'
+import iconSprint from '../../icons/Sprint.svg'
 
 const GenericIcon = L.icon({
   iconUrl: iconGeneric,
@@ -140,10 +140,7 @@ const DraggableMarker: React.FC<DraggableMarkerProps> = ({
   const [selectedType, setSelectedType] = useState<PoiType>(waypoint.type)
   const myInputRef = useRef<HTMLDivElement>(null)
 
-  const icon = useMemo(
-    () => iconMap[selectedType] ?? GenericIcon,
-    [selectedType]
-  )
+  const icon = useMemo(() => iconMap[selectedType] ?? GenericIcon, [selectedType])
 
   const changePosition = (event: L.DragEndEvent) => {
     const newPosition = event.target.getLatLng()
@@ -174,42 +171,38 @@ const DraggableMarker: React.FC<DraggableMarkerProps> = ({
       icon={icon}
     >
       <Popup>
-        <div className='flex flex-col'>
-          <div className='flex'>
+        <div className="flex flex-col">
+          <div className="flex">
             <div
               ref={myInputRef}
-              className='text-lg'
+              className="text-lg"
               contentEditable
               onBlur={changeName}
               dangerouslySetInnerHTML={{ __html: waypoint.name }}
             />
           </div>
 
-          <div className='text-l bg-white'>
+          <div className="text-l bg-white">
             Type:
-            <select
-              className='bg-white'
-              onChange={changeType}
-              value={selectedType}
-            >
-              <option value='GENERIC'>Generic</option>
-              <option value='SUMMIT'>Summit</option>
-              <option value='VALLEY'>Valley</option>
-              <option value='WATER'>Water</option>
-              <option value='FOOD'>Food</option>
-              <option value='DANGER'>Danger</option>
-              <option value='LEFT'>Left</option>
-              <option value='RIGHT'>Right</option>
-              <option value='STRAIGHT'>Straight</option>
-              <option value='FIRST_AID'>First Aid</option>
-              <option value='RESIDENCE'>Residence</option>
-              <option value='SPRINT'>Sprint</option>
+            <select className="bg-white" onChange={changeType} value={selectedType}>
+              <option value="GENERIC">Generic</option>
+              <option value="SUMMIT">Summit</option>
+              <option value="VALLEY">Valley</option>
+              <option value="WATER">Water</option>
+              <option value="FOOD">Food</option>
+              <option value="DANGER">Danger</option>
+              <option value="LEFT">Left</option>
+              <option value="RIGHT">Right</option>
+              <option value="STRAIGHT">Straight</option>
+              <option value="FIRST_AID">First Aid</option>
+              <option value="RESIDENCE">Residence</option>
+              <option value="SPRINT">Sprint</option>
             </select>
           </div>
 
-          <div className='flex justify-between'>
+          <div className="flex justify-between">
             <div>
-              <FaTrashCan className='mt-1 relative self-end' onClick={remove} />
+              <FaTrashCan className="mt-1 relative self-end" onClick={remove} />
             </div>
           </div>
         </div>

@@ -21,25 +21,18 @@ vi.mock('axios', async (importActual) => {
 })
 
 describe('About Page', () => {
-  const renderWithLanguage = (
-    children: React.ReactNode,
-    language: Language = 'en'
-  ) => {
+  const renderWithLanguage = (children: React.ReactNode, language: Language = 'en') => {
     render(<LanguageProvider language={language}>{children}</LanguageProvider>)
   }
 
   it('load page', () => {
     renderWithLanguage(<AboutScreen />)
-    expect(
-      screen.getByText('An app dealing with GPS files.')
-    ).toBeInTheDocument()
+    expect(screen.getByText('An app dealing with GPS files.')).toBeInTheDocument()
   })
 
   it('load page german page', () => {
     renderWithLanguage(<AboutScreen />, 'de')
-    expect(
-      screen.getByText('Eine Anwendung zum Bearbeiten von GPS-Dateien.')
-    ).toBeInTheDocument()
+    expect(screen.getByText('Eine Anwendung zum Bearbeiten von GPS-Dateien.')).toBeInTheDocument()
   })
 
   it('show version of backend', async () => {

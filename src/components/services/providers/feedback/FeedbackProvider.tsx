@@ -1,17 +1,12 @@
 import React, { useReducer } from 'react'
-import feedbackReducer, {
-  REMOVE_FEEDBACK,
-  SET_FEEDBACK,
-} from './FeedbackReducer'
+import feedbackReducer, { REMOVE_FEEDBACK, SET_FEEDBACK } from './FeedbackReducer'
 import FeedbackContext from './FeedbackContext'
 
 export type FeedbackProviderType = {
   children: React.ReactNode
 }
 
-export const FeedbackProvider: React.FC<FeedbackProviderType> = ({
-  children,
-}) => {
+export const FeedbackProvider: React.FC<FeedbackProviderType> = ({ children }) => {
   const initialState = null
   const [state, dispatchFeedback] = useReducer(feedbackReducer, initialState)
 

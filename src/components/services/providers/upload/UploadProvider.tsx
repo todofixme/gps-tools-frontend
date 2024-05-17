@@ -3,7 +3,7 @@ import { UploadedFile } from '../../../../@types/upload'
 import { useFeedbackContext } from '../../../../hooks/useFeedbackContext'
 import { useNavigate } from 'react-router-dom'
 import API from '../../backend/gps-backend-api'
-import UploadContext from './UploadContext'
+import { UploadContext } from './UploadContext'
 
 export type UploadProviderType = {
   children: React.ReactNode
@@ -12,7 +12,7 @@ export type UploadProviderType = {
 export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
   const [uploadedFiles, setUploadedFiles] = useState<Array<UploadedFile>>([])
   const [mergedFile, setMergedFile] = useState<UploadedFile | null>(null)
-  const [isLoading, setLoading] = useState<Boolean>(false)
+  const [isLoading, setLoading] = useState<boolean>(false)
   const { setError } = useFeedbackContext()
   const navigate = useNavigate()
 
@@ -27,9 +27,7 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
         'Content-Type': 'multipart/form-data',
       },
     })
-      .then((response) =>
-        setUploadedFiles((prevState) => [...prevState, response.data[0]])
-      )
+      .then((response) => setUploadedFiles((prevState) => [...prevState, response.data[0]]))
       .catch((error) => {
         if (error.code === 'ERR_NETWORK') {
           setError('error_backend_server_na')

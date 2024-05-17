@@ -7,8 +7,6 @@ type LanguageContextType = {
   getMessage: (labelId: string) => string | Array<string>
 }
 
-const LanguageContext = createContext<LanguageContextType>(
-  {} as LanguageContextType
-)
+const LanguageContext = createContext<LanguageContextType>({} as LanguageContextType)
 
 export default LanguageContext

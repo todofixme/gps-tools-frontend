@@ -35,9 +35,7 @@ export const encodeToBase64 = (input: string) => {
   return btoa(binString)
 }
 
-export const generateGeoJson = (
-  markerPositions: WayPoint[]
-): FeatureCollection => {
+export const generateGeoJson = (markerPositions: WayPoint[]): FeatureCollection => {
   return {
     type: 'FeatureCollection',
     features: markerPositions.map(
@@ -52,15 +50,12 @@ export const generateGeoJson = (
             type: 'Point',
             coordinates: [waypoint.position[1], waypoint.position[0]],
           },
-        } as Feature)
+        }) as Feature,
     ),
   }
 }
 
-export const convertOsmToPoiType = (
-  osm_key: string,
-  osm_value: string
-): PoiType => {
+export const convertOsmToPoiType = (osm_key: string, osm_value: string): PoiType => {
   if (osm_key === 'amenity') {
     switch (osm_value) {
       case 'bar':

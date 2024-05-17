@@ -4,9 +4,7 @@ import FeedbackContext from '../components/services/providers/feedback/FeedbackC
 export const useFeedbackContext = () => {
   const context = useContext(FeedbackContext)
   if (!context) {
-    throw new Error(
-      'useFeedbackContext has to be within <FeedbackContext.Provider>'
-    )
+    throw new Error('useFeedbackContext has to be within <FeedbackContext.Provider>')
   }
 
   return context

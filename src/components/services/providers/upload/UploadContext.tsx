@@ -9,7 +9,7 @@ export type UploadContextType = {
   uploadFile: (fileToUpload: File) => void
   removeUploadedFile: (fileToRemove: UploadedFile) => void
   mergeFiles: () => void
-  isLoading: Boolean
+  isLoading: boolean
 }
 
 export const UploadContext = createContext<UploadContextType | null>(null)

@@ -7,9 +7,7 @@ describe('Root/App Page', () => {
     render(<App />)
 
     expect(
-      screen.getByText(
-        "Drag 'n' drop GPX- or FIT-files, or click to select files."
-      )
+      screen.getByText("Drag 'n' drop GPX- or FIT-files, or click to select files."),
     ).toBeInTheDocument()
   })
 })

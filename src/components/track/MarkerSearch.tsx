@@ -1,10 +1,4 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react'
 import axios from 'axios'
 import { useDebounce } from '@uidotdev/usehooks'
 import { Feature, FeatureCollection, Point } from 'geojson'
@@ -50,8 +44,7 @@ const MarkerSearch: React.FC<MarkerSearchProps> = ({ setMarkerPositions }) => {
         },
       })
       .then((response) => {
-        const featureCollection: FeatureCollection =
-          response.data as FeatureCollection
+        const featureCollection: FeatureCollection = response.data as FeatureCollection
         setResults(featureCollection.features)
       })
       .catch((error) => {
@@ -61,10 +54,7 @@ const MarkerSearch: React.FC<MarkerSearchProps> = ({ setMarkerPositions }) => {
 
   const createMarker = (marker: Feature) => {
     const point = marker.geometry as Point
-    const poiType = convertOsmToPoiType(
-      marker.properties?.osm_key,
-      marker.properties?.osm_value
-    )
+    const poiType = convertOsmToPoiType(marker.properties?.osm_key, marker.properties?.osm_value)
     const newWayPoint: WayPoint = {
       id: uuidv4(),
       name: marker.properties?.name ?? 'unnamed',
@@ -85,22 +75,22 @@ const MarkerSearch: React.FC<MarkerSearchProps> = ({ setMarkerPositions }) => {
   }
 
   return (
-    <div className='container mx-auto px-3 pt-2'>
-      <div className='dropdown w-full' ref={dropdownDivRef}>
+    <div className="container mx-auto px-3 pt-2">
+      <div className="dropdown w-full" ref={dropdownDivRef}>
         <input
-          id='markerSearchInput'
-          type='text'
+          id="markerSearchInput"
+          type="text"
           ref={inputRef}
-          className='input input-bordered w-full'
+          className="input input-bordered w-full"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder={getMessage('search_for_waypoints') as string}
           tabIndex={0}
         />
-        <div className='dropdown-content bg-base-200 top-14 max-h-96 overflow-auto flex-col rounded-md'>
+        <div className="dropdown-content bg-base-200 top-14 max-h-96 overflow-auto flex-col rounded-md">
           {results.length > 0 && (
             <ul
-              className='menu menu-compact'
+              className="menu menu-compact"
               // calculate the width of the dropdown
               style={{ width: dropdownDivRef.current?.clientWidth }}
             >
@@ -109,12 +99,15 @@ const MarkerSearch: React.FC<MarkerSearchProps> = ({ setMarkerPositions }) => {
                   <li
                     key={index}
                     tabIndex={index + 1}
-                    onClick={() => {
-                      createMarker(item)
-                    }}
-                    className='border-b border-b-base-content/10 w-full'
+                    className="border-b border-b-base-content/10 w-full"
                   >
-                    <button>{item.properties!.name}</button>
+                    <button
+                      onClick={() => {
+                        createMarker(item)
+                      }}
+                    >
+                      {item.properties!.name}
+                    </button>
                   </li>
                 )
               })}

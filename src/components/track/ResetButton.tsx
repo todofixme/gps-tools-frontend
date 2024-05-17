@@ -6,7 +6,7 @@ const ResetButton = () => {
   const { getMessage } = useLanguage()
 
   return (
-    <button className='btn btn-active m-7' onClick={() => navigateTo('/merge')}>
+    <button className="btn btn-active m-7" onClick={() => navigateTo('/merge')}>
       {getMessage('button_new_process')}
     </button>
   )

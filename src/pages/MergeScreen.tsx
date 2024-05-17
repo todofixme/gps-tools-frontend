@@ -5,7 +5,7 @@ import { UploadProvider } from '../components/services/providers/upload/UploadPr
 
 const MergeScreen = () => (
   <div>
-    <h1 className='text-6xl'>GPS-Tools</h1>
+    <h1 className="text-6xl">GPS-Tools</h1>
     <UploadProvider>
       <Intro />
       <UploadForm />

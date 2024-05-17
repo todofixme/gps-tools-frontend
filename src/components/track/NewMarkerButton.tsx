@@ -25,9 +25,9 @@ const NewMarkerButton: React.FC<NewMarkerButtonProps> = ({
   }
 
   return (
-    <div id='controlButton' onClick={handleNewMarker}>
-      <MdAddLocation className='text-5xl text-black' />
-    </div>
+    <button id="controlButton" onClick={handleNewMarker}>
+      <MdAddLocation className="text-5xl text-black" />
+    </button>
   )
 }
 

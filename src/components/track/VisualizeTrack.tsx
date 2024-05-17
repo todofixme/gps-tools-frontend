@@ -1,11 +1,5 @@
 import React, { createRef, useCallback, useEffect, useState } from 'react'
-import {
-  LayersControl,
-  MapContainer,
-  Polyline,
-  TileLayer,
-  ZoomControl,
-} from 'react-leaflet'
+import { LayersControl, MapContainer, Polyline, TileLayer, ZoomControl } from 'react-leaflet'
 import {
   LatLng,
   LatLngBoundsExpression,
@@ -39,21 +33,18 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
   const polylineRef = createRef<LeafletPolyline>()
   const { getMessage } = useLanguage()
 
-  const changeMarkerPosition = useCallback(
-    (markerId: string, newPosition: LatLng) => {
-      setMarkerPositions((prevState) =>
-        prevState.map((wp) =>
-          wp.id === markerId
-            ? {
-                ...wp,
-                position: [newPosition.lat, newPosition.lng],
-              }
-            : wp
-        )
-      )
-    },
-    []
-  )
+  const changeMarkerPosition = useCallback((markerId: string, newPosition: LatLng) => {
+    setMarkerPositions((prevState) =>
+      prevState.map((wp) =>
+        wp.id === markerId
+          ? {
+              ...wp,
+              position: [newPosition.lat, newPosition.lng],
+            }
+          : wp,
+      ),
+    )
+  }, [])
 
   const changeMarkerName = useCallback((markerId: string, newName: string) => {
     setMarkerPositions((prevState) =>
@@ -63,8 +54,8 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
               ...wp,
               name: newName ?? '',
             }
-          : wp
-      )
+          : wp,
+      ),
     )
   }, [])
 
@@ -76,8 +67,8 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
               ...wp,
               type: newType ?? 'GENERIC',
             }
-          : wp
-      )
+          : wp,
+      ),
     )
   }, [])
 
@@ -122,20 +113,11 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
   return (
     <>
       <div>
-        <div
-          className='mb-2 tooltip'
-          data-tip={getMessage('mute_tooltip') as string}
-        >
+        <div className="mb-2 tooltip" data-tip={getMessage('mute_tooltip') as string}>
           {showPolyline ? (
-            <FaEye
-              className='top-1 text-2xl'
-              onClick={() => setShowPolyline(false)}
-            />
+            <FaEye className="top-1 text-2xl" onClick={() => setShowPolyline(false)} />
           ) : (
-            <FaEyeSlash
-              className='top-1 text-2xl'
-              onClick={() => setShowPolyline(true)}
-            />
+            <FaEyeSlash className="top-1 text-2xl" onClick={() => setShowPolyline(true)} />
           )}
         </div>
       </div>
@@ -143,28 +125,28 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
       <MapContainer bounds={bounds} zoomControl={false}>
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <Control position='topleft'>
+        <Control position="topleft">
           <MarkerSearch setMarkerPositions={setMarkerPositions} />
         </Control>
-        <LayersControl position='topright'>
-          <LayersControl.BaseLayer name='Streets' checked={true}>
+        <LayersControl position="topright">
+          <LayersControl.BaseLayer name="Streets" checked={true}>
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
           </LayersControl.BaseLayer>
-          <LayersControl.BaseLayer name='Topo'>
+          <LayersControl.BaseLayer name="Topo">
             <TileLayer
               attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-              url='https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png'
+              url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
             />
           </LayersControl.BaseLayer>
-          <LayersControl.BaseLayer name='Satellite'>
+          <LayersControl.BaseLayer name="Satellite">
             <TileLayer
-              attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-              url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+              attribution="Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
+              url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
             />
           </LayersControl.BaseLayer>
         </LayersControl>
@@ -185,9 +167,9 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
             removeMarker={removeMarker}
           />
         ))}
-        <ZoomControl position='topright' />
-        <Control prepend position='topright'>
-          <div className='flex flex-col'>
+        <ZoomControl position="topright" />
+        <Control prepend position="topright">
+          <div className="flex flex-col">
             <FitBoundsButton polylineRef={polylineRef} />
             <NewMarkerButton setMarkerPositions={setMarkerPositions} />
           </div>

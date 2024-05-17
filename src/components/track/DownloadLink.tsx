@@ -31,12 +31,10 @@ const DownloadLink: React.FC<DownloadLinkProps> = ({
         type +
         (optimizeWaypoints ? '&mode=opt' : '') +
         (trackname.length > 0 ? `&name=${encodeToBase64(trackname)}` : '') +
-        (geoJson != null
-          ? `&wp=${encodeToBase64(JSON.stringify(geoJson))}`
-          : '')
+        (geoJson != null ? `&wp=${encodeToBase64(JSON.stringify(geoJson))}` : '')
       }
     >
-      <FiDownload className='inline mr-1 relative bottom-0.5' />
+      <FiDownload className="inline mr-1 relative bottom-0.5" />
       {getMessage('download_as')} {type.toUpperCase()}
     </a>
   )

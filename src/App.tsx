@@ -11,16 +11,16 @@ import Providers from './components/services/providers'
 const App = () => (
   <Providers>
     <Router>
-      <div className='flex flex-col justify-between h-screen'>
+      <div className="flex flex-col justify-between h-screen">
         <Navbar />
-        <main className='container mx-auto px-3 pb-12'>
+        <main className="container mx-auto px-3 pb-12">
           <Feedback />
           <Routes>
-            <Route path='/' element={<MergeScreen />} />
-            <Route path='/merge' element={<MergeScreen />} />
-            <Route path='/track/:id' element={<TrackScreen />} />
-            <Route path='/about' element={<AboutScreen />} />
-            <Route path='/*' element={<NotFoundScreen />} />
+            <Route path="/" element={<MergeScreen />} />
+            <Route path="/merge" element={<MergeScreen />} />
+            <Route path="/track/:id" element={<TrackScreen />} />
+            <Route path="/about" element={<AboutScreen />} />
+            <Route path="/*" element={<NotFoundScreen />} />
           </Routes>
         </main>
         <Footer />

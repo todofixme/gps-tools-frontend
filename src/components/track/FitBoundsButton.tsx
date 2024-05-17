@@ -15,9 +15,9 @@ const FitBoundsButton: React.FC<FitBoundsButtonProps> = ({ polylineRef }) => {
   }
 
   return (
-    <div id='controlButton' onClick={handleFitBounds}>
-      <MdCenterFocusStrong className='text-5xl text-black' />
-    </div>
+    <button id="controlButton" onClick={handleFitBounds}>
+      <MdCenterFocusStrong className="text-5xl text-black" />
+    </button>
   )
 }
 

@@ -10,12 +10,10 @@ const Intro = () => {
       {mergedFile === null && (
         <div>
           {getMessage('intro_header')}
-          <ul className='list-disc pl-5'>
-            {(getMessage('intro_description_list') as Array<string>).map(
-              (item, index) => (
-                <li key={index}>{item}</li>
-              )
-            )}
+          <ul className="list-disc pl-5">
+            {(getMessage('intro_description_list') as Array<string>).map((item, index) => (
+              <li key={index}>{item}</li>
+            ))}
           </ul>
         </div>
       )}

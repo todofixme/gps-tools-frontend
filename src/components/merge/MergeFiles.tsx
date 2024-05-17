@@ -1,24 +1,14 @@
-import {
-  DragDropContext,
-  Draggable,
-  Droppable,
-  DropResult,
-} from '@hello-pangea/dnd'
+import { DragDropContext, Draggable, Droppable, DropResult } from '@hello-pangea/dnd'
 import { FaEllipsisVertical, FaTrashCan } from 'react-icons/fa6'
 import { useUploadContext } from '../../hooks/useUploadContext'
 import { UploadedFile } from '../../@types/upload'
 import useLanguage from '../../hooks/useLanguage'
 
 const MergeFiles = () => {
-  const { uploadedFiles, setUploadedFiles, removeUploadedFile, mergeFiles } =
-    useUploadContext()
+  const { uploadedFiles, setUploadedFiles, removeUploadedFile, mergeFiles } = useUploadContext()
   const { getMessage } = useLanguage()
 
-  const reorder = (
-    list: Array<UploadedFile>,
-    startIndex: number,
-    endIndex: number
-  ) => {
+  const reorder = (list: Array<UploadedFile>, startIndex: number, endIndex: number) => {
     const result = Array.from(list)
     const [removed] = result.splice(startIndex, 1)
     result.splice(endIndex, 0, removed)
@@ -42,7 +32,7 @@ const MergeFiles = () => {
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
-        <Droppable droppableId='droppable'>
+        <Droppable droppableId="droppable">
           {(provided) => (
             <div ref={provided.innerRef} {...provided.droppableProps}>
               {uploadedFiles.map((file, index) => (
@@ -52,16 +42,11 @@ const MergeFiles = () => {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      className='flex mb-1 mt-1 bg-base-content text-base-200/80 p-1 rounded-md'
+                      className="flex mb-1 mt-1 bg-base-content text-base-200/80 p-1 rounded-md"
                     >
-                      <FaEllipsisVertical className='relative top-1' />
-                      {file.filename} -{' '}
-                      {addThousandsSeparator(Math.round(file.size / 1024), '.')}
-                      kB{' '}
-                      <FaTrashCan
-                        className='ml-1 relative top-1'
-                        onClick={removeFile(file)}
-                      />
+                      <FaEllipsisVertical className="relative top-1" />
+                      {file.filename} - {addThousandsSeparator(Math.round(file.size / 1024), '.')}
+                      kB <FaTrashCan className="ml-1 relative top-1" onClick={removeFile(file)} />
                     </div>
                   )}
                 </Draggable>
@@ -72,9 +57,9 @@ const MergeFiles = () => {
         </Droppable>
       </DragDropContext>
 
-      <div className='mt-7'>
+      <div className="mt-7">
         {uploadedFiles.length > 0 && (
-          <button className='btn btn-active' onClick={mergeFiles}>
+          <button className="btn btn-active" onClick={mergeFiles}>
             {uploadedFiles.length == 1 && getMessage('visualize_file')}
             {uploadedFiles.length > 1 && getMessage('visualize_files')}
           </button>

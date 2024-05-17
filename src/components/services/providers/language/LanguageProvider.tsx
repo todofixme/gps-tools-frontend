@@ -12,28 +12,20 @@ export type LanguageProviderProps = {
 type Messages = { [messageKey: string]: string | string[] }
 type LanguageDictionary = { [languageKey: string]: Messages }
 
-export const LanguageProvider: React.FC<LanguageProviderProps> = ({
-  language,
-  children,
-}) => {
+export const LanguageProvider: React.FC<LanguageProviderProps> = ({ language, children }) => {
   const [currentLanguage, setCurrentLanguage] = useState<Language>(language)
   const changeLanguage = (language: Language) => setCurrentLanguage(language)
 
-  const dictionary: LanguageDictionary = { en, de, }
+  const dictionary: LanguageDictionary = { en, de }
 
   const getMessage = (messageKey: string) => {
     const message = dictionary[currentLanguage][messageKey]
-    if (!message)
-      throw new Error(
-        `MessageKey ${messageKey} not found in ${currentLanguage}.json`
-      )
+    if (!message) throw new Error(`MessageKey ${messageKey} not found in ${currentLanguage}.json`)
     return message
   }
 
   return (
-    <LanguageContext.Provider
-      value={{ currentLanguage, changeLanguage, getMessage }}
-    >
+    <LanguageContext.Provider value={{ currentLanguage, changeLanguage, getMessage }}>
       {children}
     </LanguageContext.Provider>
   )
