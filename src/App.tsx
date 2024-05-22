@@ -11,9 +11,9 @@ import Providers from './components/services/providers'
 const App = () => (
   <Providers>
     <Router>
-      <div className="flex flex-col justify-between h-screen">
+      <div className="flex flex-col min-h-screen">
         <Navbar />
-        <main className="container mx-auto px-3 pb-12">
+        <main className="flex-grow h-0">
           <Feedback />
           <Routes>
             <Route path="/" element={<MergeScreen />} />

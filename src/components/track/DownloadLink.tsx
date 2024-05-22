@@ -22,21 +22,23 @@ const DownloadLink: React.FC<DownloadLinkProps> = ({
   const { getMessage } = useLanguage()
   const baseUrl = import.meta.env.VITE_BACKEND_BASE_URL
   return (
-    <a
-      href={
-        baseUrl +
-        '/files/' +
-        fileId +
-        '?mode=dl&type=' +
-        type +
-        (optimizeWaypoints ? '&mode=opt' : '') +
-        (trackname.length > 0 ? `&name=${encodeToBase64(trackname)}` : '') +
-        (geoJson != null ? `&wp=${encodeToBase64(JSON.stringify(geoJson))}` : '')
-      }
-    >
-      <FiDownload className="inline mr-1 relative bottom-0.5" />
-      {getMessage('download_as')} {type.toUpperCase()}
-    </a>
+    <button className="btn btn-active mx-1">
+      <a
+        href={
+          baseUrl +
+          '/files/' +
+          fileId +
+          '?mode=dl&type=' +
+          type +
+          (optimizeWaypoints ? '&mode=opt' : '') +
+          (trackname.length > 0 ? `&name=${encodeToBase64(trackname)}` : '') +
+          (geoJson != null ? `&wp=${encodeToBase64(JSON.stringify(geoJson))}` : '')
+        }
+      >
+        <FiDownload className="inline mr-1 relative bottom-0.5" />
+        {getMessage('download_as')} {type.toUpperCase()}
+      </a>
+    </button>
   )
 }
 

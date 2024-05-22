@@ -20,12 +20,47 @@ const TrackScreen = () => {
 
   const [isLoading, setIsLoading] = useState(true)
   const [trackname, setTrackname] = useState<string>('')
+  const [showPolyline, setShowPolyline] = useState(true)
   const [positions, setPositions] = useState<LatLngExpression[]>([])
   const [markerPositions, setMarkerPositions] = useState<WayPoint[]>([])
   const [bounds, setBounds] = useState<LatLngBoundsExpression>([
     [0, 0],
     [0, 0],
   ])
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (
+        document.activeElement?.id === 'editTrackname' ||
+        document.activeElement?.id === 'markerSearchInput'
+      ) {
+        return null
+      }
+      if (event.key === 'm') {
+        setShowPolyline(false)
+      }
+    }
+
+    const handleKeyUp = (event: KeyboardEvent) => {
+      if (
+        document.activeElement?.id === 'editTrackname' ||
+        document.activeElement?.id === 'markerSearchInput'
+      ) {
+        return null
+      }
+      if (event.key === 'm') {
+        setShowPolyline(true)
+      }
+    }
+
+    document.addEventListener('keypress', handleKeyPress)
+    document.addEventListener('keyup', handleKeyUp)
+
+    return () => {
+      document.removeEventListener('keypress', handleKeyPress)
+      document.removeEventListener('keyup', handleKeyPress)
+    }
+  }, [])
 
   useEffect(() => {
     setIsLoading(true)
@@ -100,24 +135,28 @@ const TrackScreen = () => {
 
   return (
     <>
-      <h1 className="text-6xl">GPS-Tools</h1>
       {isLoading ? (
         <p>{getMessage('loading')}</p>
       ) : positions.length > 0 && trackId !== undefined ? (
-        <>
+        <div className="flex flex-col" style={{ height: '100%' }}>
           <TrackHeader
             trackId={trackId}
             markerPositions={markerPositions}
             trackname={trackname}
             setTrackname={setTrackname}
+            showPolyline={showPolyline}
+            setShowPolyline={setShowPolyline}
           />
-          <VisualizeTrack
-            bounds={bounds}
-            positions={positions}
-            markerPositions={markerPositions}
-            setMarkerPositions={setMarkerPositions}
-          />
-        </>
+          <div className="flex flex-grow">
+            <VisualizeTrack
+              bounds={bounds}
+              positions={positions}
+              markerPositions={markerPositions}
+              setMarkerPositions={setMarkerPositions}
+              showPolyline={showPolyline}
+            />
+          </div>
+        </div>
       ) : (
         <>
           <p>{getMessage('error_track_not_found')}</p>
