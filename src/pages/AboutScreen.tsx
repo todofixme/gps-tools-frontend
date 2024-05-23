@@ -28,7 +28,7 @@ const AboutScreen = () => {
   }, [])
 
   return (
-    <>
+    <div className="mx-5">
       <h1 className="text-6xl mb-4">GPS-Tools</h1>
       <p className="mb-4 text-2xl font-light">{getMessage('app_description')}</p>
       <p className="text-lg">
@@ -129,7 +129,7 @@ const AboutScreen = () => {
         </li>
       </ul>
       <p className="text-lg mt-4">{getMessage('contact')}: gps minus tools ät tigerflanke dot de</p>
-    </>
+    </div>
   )
 }
 
