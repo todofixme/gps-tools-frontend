@@ -22,7 +22,7 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
     const formData = new FormData()
     formData.append('file', file)
 
-    API.post('/files', formData, {
+    API.post('/tracks', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
@@ -41,7 +41,7 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
   }
 
   const removeUploadedFile = async (file: UploadedFile) => {
-    API.delete('/files/' + file.id)
+    API.delete('/tracks/' + file.id)
       .catch((error) => {
         if (error.code === 'ERR_NETWORK') {
           setError('error_backend_server_na')
@@ -69,13 +69,13 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
       setUploadedFiles([])
       navigate('/track/' + uploadedFiles[0].id)
     } else {
-      const params = uploadedFiles.map((file) => 'fileId=' + file.id)
+      const params = uploadedFiles.map((file) => 'trackIds=' + file.id)
       const joinedParams = params.join('&')
 
       API.post('/merge?' + joinedParams)
         .then((response) => {
           setMergedFile(response.data)
-          uploadedFiles.forEach((file) => API.delete('/files/' + file.id))
+          uploadedFiles.forEach((file) => API.delete('/tracks/' + file.id))
           setUploadedFiles([])
           navigate('/track/' + response.data.id)
         })

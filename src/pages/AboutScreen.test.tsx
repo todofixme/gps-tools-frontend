@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import AboutScreen from './AboutScreen'
 import React from 'react'
 import { LanguageProvider } from '../components/services/providers/language/LanguageProvider'
@@ -25,25 +25,33 @@ describe('About Page', () => {
     render(<LanguageProvider language={language}>{children}</LanguageProvider>)
   }
 
+  const version = 'v1.2.3'
+  beforeEach(() => {
+    mocks.get.mockResolvedValueOnce({
+      data: { app: version, git: 'githash' },
+    })
+  })
+
   it('load page', () => {
     renderWithLanguage(<AboutScreen />)
-    expect(screen.getByText('An app dealing with GPS files.')).toBeInTheDocument()
+    waitFor(() => {
+      expect(screen.getByText('An app dealing with GPS files.')).toBeInTheDocument()
+    })
   })
 
   it('load page german page', () => {
     renderWithLanguage(<AboutScreen />, 'de')
-    expect(screen.getByText('Eine Anwendung zum Bearbeiten von GPS-Dateien.')).toBeInTheDocument()
+    waitFor(() => {
+      expect(screen.getByText('Eine Anwendung zum Bearbeiten von GPS-Dateien.')).toBeInTheDocument()
+    })
   })
 
-  it('show version of backend', async () => {
-    const version = 'v1.2.3'
-    mocks.get.mockResolvedValueOnce({
-      data: { app: version, git: 'githash' },
-    })
-
+  it('show version of backend', () => {
     renderWithLanguage(<AboutScreen />)
 
-    expect(await screen.findByText(version)).toBeInTheDocument()
-    expect(mocks.get).toHaveBeenCalled()
+    waitFor(async () => {
+      expect(await screen.findByText(version)).toBeInTheDocument()
+      expect(mocks.get).toHaveBeenCalled()
+    })
   })
 })

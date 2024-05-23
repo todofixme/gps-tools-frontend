@@ -47,7 +47,7 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
         <div className="flex flex-row">
           <div>
             <DownloadLink
-              fileId={trackId}
+              trackId={trackId}
               type="gpx"
               trackname={trackname}
               optimizeWaypoints={optimizeWaypoints}
@@ -55,7 +55,7 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
             />
             <br />
             <DownloadLink
-              fileId={trackId}
+              trackId={trackId}
               type="tcx"
               trackname={trackname}
               optimizeWaypoints={optimizeWaypoints}
