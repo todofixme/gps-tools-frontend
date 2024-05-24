@@ -5,7 +5,7 @@ import { encodeToBase64 } from '../../utils/tools'
 import useLanguage from '../../hooks/useLanguage'
 
 type DownloadLinkProps = {
-  fileId: string
+  trackId: string
   type: string
   trackname: string
   optimizeWaypoints: boolean
@@ -13,7 +13,7 @@ type DownloadLinkProps = {
 }
 
 const DownloadLink: React.FC<DownloadLinkProps> = ({
-  fileId,
+  trackId,
   type,
   trackname,
   optimizeWaypoints,
@@ -26,8 +26,8 @@ const DownloadLink: React.FC<DownloadLinkProps> = ({
       <a
         href={
           baseUrl +
-          '/files/' +
-          fileId +
+          '/tracks/' +
+          trackId +
           '?mode=dl&type=' +
           type +
           (optimizeWaypoints ? '&mode=opt' : '') +

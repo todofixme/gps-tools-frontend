@@ -69,7 +69,7 @@ const TrackScreen = () => {
         accept: 'application/geo+json',
       },
     }
-    API.get('/files/' + trackId, config)
+    API.get('/tracks/' + trackId, config)
       .then((file) => {
         const feat: FeatureCollection = file.data as FeatureCollection
 

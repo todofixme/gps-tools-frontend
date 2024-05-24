@@ -77,14 +77,14 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
       <div className="flex-1 flex justify-end items-center mb-4">
         <div>
           <DownloadLink
-            fileId={trackId}
+            trackId={trackId}
             type="gpx"
             trackname={trackname}
             optimizeWaypoints={optimizeWaypoints}
             geoJson={markerGeoJson}
           />
           <DownloadLink
-            fileId={trackId}
+            trackId={trackId}
             type="tcx"
             trackname={trackname}
             optimizeWaypoints={optimizeWaypoints}
