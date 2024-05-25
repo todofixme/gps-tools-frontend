@@ -1,8 +1,10 @@
+@import '@fontsource/Roboto';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* @layer base {
   @font-face {
     font-family: 'Roboto';
     font-style: normal;
@@ -12,7 +14,16 @@
       url(/fonts/Roboto-Regular.woff) format('woff'),
       url(/fonts/Roboto-Regular.woff2) format('woff2');
   }
-}
+  @font-face {
+    font-family: 'Roboto-Bold';
+    font-style: bold;
+    font-weight: 700;
+    font-display: swap;
+    src:
+      url(/fonts/Roboto-Bold.woff) format('woff'),
+      url(/fonts/Roboto-Bold.woff2) format('woff2');
+  }
+} */
 
 #controlButton {
   display: flex;
@@ -45,4 +56,35 @@
   height: 48px;
   font-size: 28px;
   padding: 5px;
+}
+
+[data-theme='light'] .logo {
+  fill: white;
+}
+
+[data-theme='dark'] .logo {
+  fill: #202936;
+}
+
+.text-nav {
+  font-size: 12pt;
+  font-family: 'Roboto';
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.btn-nav {
+  background-color: transparent;
+  border: none;
+  color: white;
+  padding: 5px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 20px;
+}
+
+.btn-nav:hover {
+  outline: 1px solid white;
 }

@@ -6,7 +6,7 @@ const LanguageSelector = () => {
 
   return (
     <select
-      className="select select-bordered select-sm w-min"
+      className="select bg-transparent text-white rounded-full outline-none hover:outline-1 hover:outline-white select-sm mx-1"
       defaultValue={currentLanguage}
       onChange={(e) => changeLanguage(e.target.value as Language)}
     >

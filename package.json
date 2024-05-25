@@ -19,6 +19,7 @@
     "upgrade:minor": "ncu -u --target minor"
   },
   "dependencies": {
+    "@fontsource/roboto": "^5.0.13",
     "@hello-pangea/dnd": "^16.6.0",
     "@types/geojson": "^7946.0.14",
     "@types/leaflet": "^1.9.12",
