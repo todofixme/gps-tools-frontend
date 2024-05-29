@@ -8,7 +8,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Roboto', 'sans-serif'],
+        sans: ['Roboto-Regular', 'sans-serif'],
         serif: ['Cooper', 'serif'],
       },
     },
@@ -23,6 +23,13 @@ export default {
             'background-color': '#06D26A' /* For browsers that do not support gradients */,
             'background-image': 'linear-gradient(to right, #06D26A , #00918C)',
           },
+          '.text-base-content': {
+            color: '#EAEAEA',
+          },
+          '.highlight-color': {
+            color: '#06D26A',
+          },
+          'background-color': '#202936',
         },
       },
       {
@@ -32,6 +39,13 @@ export default {
             'background-color': '#FF3E3E' /* For browsers that do not support gradients */,
             'background-image': 'linear-gradient(to right, #FF3E3E , #FFA400)',
           },
+          '.text-base-content': {
+            color: '#474F5A',
+          },
+          '.highlight-color': {
+            color: '#FF3E3E',
+          },
+          'background-color': 'white',
         },
       },
     ],

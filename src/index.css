@@ -1,29 +1,44 @@
-@import '@fontsource/Roboto';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* @layer base {
+@layer base {
   @font-face {
-    font-family: 'Roboto';
+    font-family: 'Roboto-Thin';
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    src: url(/fonts/Roboto-Thin.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Roboto-Light';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(/fonts/Roboto-Light.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Roboto-Regular';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src:
-      url(/fonts/Roboto-Regular.woff) format('woff'),
-      url(/fonts/Roboto-Regular.woff2) format('woff2');
+    src: url(/fonts/Roboto-Regular.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Roboto-Medium';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(/fonts/Roboto-Medium.ttf) format('truetype');
   }
   @font-face {
     font-family: 'Roboto-Bold';
     font-style: bold;
     font-weight: 700;
     font-display: swap;
-    src:
-      url(/fonts/Roboto-Bold.woff) format('woff'),
-      url(/fonts/Roboto-Bold.woff2) format('woff2');
+    src: url(/fonts/Roboto-Bold.ttf) format('truetype');
   }
-} */
+}
 
 #controlButton {
   display: flex;
@@ -66,17 +81,12 @@
   fill: #202936;
 }
 
-.text-nav {
-  font-size: 12pt;
-  font-family: 'Roboto';
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .btn-nav {
+  font-family: 'Roboto-Medium';
   background-color: transparent;
   border: none;
-  color: white;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
   padding: 5px 14px;
   text-align: center;
   text-decoration: none;
@@ -87,4 +97,29 @@
 
 .btn-nav:hover {
   outline: 1px solid white;
+}
+
+.font-thin {
+  font-weight: 100;
+  font-family: Roboto-Thin;
+}
+
+.font-light {
+  font-weight: 300;
+  font-family: Roboto-Light;
+}
+
+.font-normal {
+  font-weight: 400;
+  font-family: Roboto-Regular;
+}
+
+.font-medium {
+  font-weight: 500;
+  font-family: Roboto-Medium;
+}
+
+.font-bold {
+  font-weight: 700;
+  font-family: Roboto-Bold;
 }

@@ -4,8 +4,8 @@ import Intro from '../components/merge/Intro'
 import { UploadProvider } from '../components/services/providers/upload/UploadProvider'
 
 const MergeScreen = () => (
-  <div className="mx-5">
-    <h1 className="text-6xl">GPS-Tools</h1>
+  <div className="mx-10 mt-8">
+    <h1 className="text-6xl text-base-content font-medium tracking-wide">GPS-Tools</h1>
     <UploadProvider>
       <Intro />
       <UploadForm />

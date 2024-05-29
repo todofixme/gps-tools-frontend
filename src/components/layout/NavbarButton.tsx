@@ -10,7 +10,7 @@ type NavbarButtonProps = {
 const NavbarButton: React.FC<NavbarButtonProps> = ({ label, linkTo }) => {
   const { getMessage } = useLanguage()
   return (
-    <Link to={linkTo} className="btn-nav text-nav mx-1 text-nav-theme">
+    <Link to={linkTo} className="btn-nav mx-1 text-nav-theme">
       {getMessage(label)}
     </Link>
   )
