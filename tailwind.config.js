@@ -23,6 +23,22 @@ export default {
             'background-color': '#06D26A' /* For browsers that do not support gradients */,
             'background-image': 'linear-gradient(to right, #06D26A , #00918C)',
           },
+          '.dropzone': {
+            'background-color': '#263241',
+            'border-color': '#06D26A',
+          },
+          '.inline-button': {
+            'border-color': '#06D26A',
+            'border-width': '1.5px',
+            'border-radius': '9999px',
+            color: '#06D26A',
+          },
+          '.outline-button': {
+            'border-width': '0px',
+            'border-radius': '9999px',
+            'background-color': '#06D26A',
+            color: '#263241',
+          },
           '.text-base-content': {
             color: '#EAEAEA',
           },
@@ -38,6 +54,22 @@ export default {
           '.bg-navbar': {
             'background-color': '#FF3E3E' /* For browsers that do not support gradients */,
             'background-image': 'linear-gradient(to right, #FF3E3E , #FFA400)',
+          },
+          '.dropzone': {
+            'background-color': '#FFF8F9',
+            'border-color': '#FF3E3E',
+          },
+          '.inline-button': {
+            'border-color': '#FF3E3E',
+            'border-width': '1.5px',
+            'border-radius': '9999px',
+            color: '#474F5A',
+          },
+          '.outline-button': {
+            'border-width': '0px',
+            'border-radius': '9999px',
+            'background-color': '#FF3E3E',
+            color: 'white',
           },
           '.text-base-content': {
             color: '#474F5A',
