@@ -23,6 +23,10 @@ export default {
             'background-color': '#06D26A' /* For browsers that do not support gradients */,
             'background-image': 'linear-gradient(to right, #06D26A , #00918C)',
           },
+          '.bg-footer': {
+            'background-color': '#263241',
+            'box-shadow': '0px 0px 0.5px 0.5px #000000',
+          },
           '.dropzone': {
             'background-color': '#263241',
             'border-color': '#06D26A',
@@ -54,6 +58,10 @@ export default {
           '.bg-navbar': {
             'background-color': '#FF3E3E' /* For browsers that do not support gradients */,
             'background-image': 'linear-gradient(to right, #FF3E3E , #FFA400)',
+          },
+          '.bg-footer': {
+            'background-color': '#FFF8F9',
+            'box-shadow': '0px 0px 0.5px 0.5px #474F5A',
           },
           '.dropzone': {
             'background-color': '#FFF8F9',
