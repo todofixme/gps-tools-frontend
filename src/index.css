@@ -123,3 +123,15 @@
   font-weight: 700;
   font-family: Roboto-Bold;
 }
+
+.svg-stroke {
+  fill: none;
+  stroke: #06d26a;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 0 0 3 3;
+}
+
+.svg-fill {
+  stroke-width: 0px;
+}

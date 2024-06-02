@@ -50,6 +50,8 @@ export default {
             color: '#06D26A',
           },
           'background-color': '#202936',
+          '.svg-symbol': { fill: '#06d26a' },
+          '.svg-line': { stroke: '#06d26a' },
         },
       },
       {
@@ -86,6 +88,8 @@ export default {
             color: '#FF3E3E',
           },
           'background-color': 'white',
+          '.svg-symbol': { fill: '#ff7917' },
+          '.svg-line': { stroke: '#ff3e3e' },
         },
       },
     ],

@@ -5,7 +5,7 @@
   "loading": "Loading...",
   "close": "Close",
   "visualize_file": "Visualize the file.",
-  "visualize_files": "Visualize the merged files.",
+  "visualize_files": "Merged and visualize the files.",
   "button_new_process": "Start working on a new file.",
   "app_description": "An app dealing with GPS files.",
   "technologies_header": "This app was created to test some technologies. These are:",

@@ -13,7 +13,7 @@
   "uploader_drop": "Dateien hierher ziehen ...",
   "intro_header": "Diese Anwendung bietet folgende Funktionalitäten:",
   "intro_description_list": [
-    "Upload einer oder mehrerer Dateien im GPX- oder FIT-format.",
+    "Upload von Dateien im GPX- oder FIT-format.",
     "Zusammenfassen/Mergen dieser Dateien in eine Datei.",
     "Kartendarstellung der zusammengefassten Datei.",
     "Hinzufügen, Ändern und Löschen von Wegpunkten.",
