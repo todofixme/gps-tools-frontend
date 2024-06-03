@@ -81,7 +81,7 @@ const MarkerSearch: React.FC<MarkerSearchProps> = ({ setMarkerPositions }) => {
           id="markerSearchInput"
           type="text"
           ref={inputRef}
-          className="input input-bordered w-full"
+          className="input input-bordered w-full rounded-full"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder={getMessage('search_for_waypoints') as string}

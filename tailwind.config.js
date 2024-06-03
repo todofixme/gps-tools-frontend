@@ -35,7 +35,14 @@ export default {
             'border-color': '#06D26A',
             'border-width': '1.5px',
             'border-radius': '9999px',
-            color: '#06D26A',
+            color: '#EAEAEA',
+          },
+          '.inline-button:hover': {
+            'border-color': '#06D26A',
+            'border-width': '1.5px',
+            'border-radius': '9999px',
+            color: '#202936',
+            'background-color': '#06D26A',
           },
           '.outline-button': {
             'border-width': '0px',
@@ -74,6 +81,13 @@ export default {
             'border-width': '1.5px',
             'border-radius': '9999px',
             color: '#474F5A',
+          },
+          '.inline-button:hover': {
+            'border-color': '#FF3E3E',
+            'border-width': '1.5px',
+            'border-radius': '9999px',
+            color: 'white',
+            'background-color': '#FF3E3E',
           },
           '.outline-button': {
             'border-width': '0px',

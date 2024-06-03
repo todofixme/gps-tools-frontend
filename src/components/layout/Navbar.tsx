@@ -12,7 +12,7 @@ const DEFAULT_TITLE: string = 'GPS-Tools'
 
 const Navbar: React.FC<NavbarProps> = ({ title = DEFAULT_TITLE }) => {
   return (
-    <nav className="navbar bg-navbar flex flex-row h-16 mb-8 shadow-lg">
+    <nav className="navbar bg-navbar flex flex-row h-16 mb-5 shadow-lg">
       <div className="flex-none px-2 ml-6 mr-2">
         <Link to="/" className="align-middle" aria-label="GPS-Tools Homepage">
           <svg

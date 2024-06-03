@@ -44,10 +44,10 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
   }
 
   return (
-    <div className="flex flex-row ml-5">
+    <div className="flex flex-row ml-5 text-base-content">
       <div className="mb-4">
         <div className="text-">Trackname</div>
-        <div className="flex underline">
+        <div className="flex text-2xl">
           <ContentEditable
             id="editTrackname"
             html={tracknameRef.current}
@@ -57,21 +57,18 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
           />
           &nbsp;
           <FaPenToSquare
-            className="mx-0 relative top-1"
+            className="mx-0 relative top-[2px] highlight-color"
             onClick={() => {
               tracknameInputFieldRef?.current?.focus()
             }}
           />
         </div>
       </div>
-      <div
-        className="mx-5 mb-2 tooltip flex items-center"
-        data-tip={getMessage('mute_tooltip') as string}
-      >
+      <div className="mx-5 mb-2 tooltip flex top-6" data-tip={getMessage('mute_tooltip') as string}>
         {showPolyline ? (
-          <FaEye className="top-1 text-2xl" onClick={() => setShowPolyline(false)} />
+          <FaEye className="text-3xl" onClick={() => setShowPolyline(false)} />
         ) : (
-          <FaEyeSlash className="top-1 text-2xl" onClick={() => setShowPolyline(true)} />
+          <FaEyeSlash className="text-3xl" onClick={() => setShowPolyline(true)} />
         )}
       </div>
       <div className="flex-1 flex justify-end items-center mb-4">
@@ -97,13 +94,13 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
             type="checkbox"
             onChange={(e) => setOptimizeWaypoints(e.target.checked)}
             value=""
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            className="w-4 h-4"
           />
           <label htmlFor="default-checkbox" className="ms-2">
             {getMessage('optimize_waypoints')}
           </label>
           &nbsp;
-          <div className="tooltip" data-tip={getMessage('optimize_waypoints_tooltip')}>
+          <div className="tooltip tooltip-left" data-tip={getMessage('optimize_waypoints_tooltip')}>
             <FaCircleInfo className="" />
           </div>
         </div>
