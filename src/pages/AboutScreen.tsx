@@ -61,6 +61,7 @@ const AboutScreen = () => {
         </a>
         :{' '}
         <a
+          id="backendVersion"
           href="https://github.com/devshred/gps-tools-backend/releases"
           className="hover:underline"
           target="_blank"

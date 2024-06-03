@@ -14,7 +14,7 @@ const Navbar: React.FC<NavbarProps> = ({ title = DEFAULT_TITLE }) => {
   return (
     <nav className="navbar bg-navbar flex flex-row h-16 mb-8 shadow-lg">
       <div className="flex-none px-2 ml-6 mr-2">
-        <Link to="/" className="align-middle">
+        <Link to="/" className="align-middle" aria-label="GPS-Tools Homepage">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="logo w-40 h-16"
