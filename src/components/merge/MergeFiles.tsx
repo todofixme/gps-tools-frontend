@@ -48,7 +48,7 @@ const MergeFiles = () => {
                         <div className="flex-none">
                           <FaEllipsisVertical className="relative top-1" />
                         </div>
-                        <div className="flex-grow overflow-hidden text-ellipsis whitespace-nowrap text-base-content">
+                        <div className="flex-grow overflow-hidden text-ellipsis whitespace-nowrap">
                           {file.filename} -{' '}
                           {addThousandsSeparator(Math.round(file.size / 1024), '.')}
                           kB
