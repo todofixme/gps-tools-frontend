@@ -59,6 +59,8 @@ export default {
           'background-color': '#202936',
           '.svg-symbol': { fill: '#06d26a' },
           '.svg-line': { stroke: '#06d26a' },
+          '.svg-icon': { fill: '#EAEAEA' },
+          '.svg-icon:hover': { fill: '#06d26a' },
         },
       },
       {
@@ -104,6 +106,8 @@ export default {
           'background-color': 'white',
           '.svg-symbol': { fill: '#ff7917' },
           '.svg-line': { stroke: '#ff3e3e' },
+          '.svg-icon': { fill: '#474F5A' },
+          '.svg-icon:hover': { fill: '#FF3E3E' },
         },
       },
     ],
