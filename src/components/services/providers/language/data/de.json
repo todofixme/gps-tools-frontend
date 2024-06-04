@@ -33,5 +33,8 @@
   "error_download_failure_pl": "Die Dateien konnten nicht gefunden werden. Bitte wiederhole den Upload!",
   "error_delete": "Die Datei konnte leider nicht gelöscht werden.",
   "error_loading_track": "Der Track konnte leider nicht geladen werden.",
-  "error_track_not_found": "Der Track wurde nicht gefunden."
+  "error_track_not_found": "Der Track wurde nicht gefunden.",
+  "not_found_headline": "Not Found",
+  "not_found_text": "Die gesuchte Seite konnte leider nicht gefunden werden.",
+  "not_found_back": "Zurück zur Startseite"
 }
