@@ -1,3 +1,28 @@
+# [0.14.0](https://github.com/devshred/gps-tools-frontend/compare/v0.13.0...v0.14.0) (2024-06-04)
+
+
+### Bug Fixes
+
+* **i18n:** change 'about' ([7b15524](https://github.com/devshred/gps-tools-frontend/commit/7b155249d5b999e20c21ef6d587290d4119a81b8))
+* **layout:** add icons to About screen ([2a00bcf](https://github.com/devshred/gps-tools-frontend/commit/2a00bcfcab0b4a3e1d9412b1c4ee07d362a3e89c))
+* **layout:** add missing margins ([62b29be](https://github.com/devshred/gps-tools-frontend/commit/62b29be8f40cd4f4da5acfce0a76531536ab117e))
+* **layout:** don't use container and viewport ([420536d](https://github.com/devshred/gps-tools-frontend/commit/420536dc971ef57e949c4f94c7cc3ac298467314))
+* **layout:** fix hover-color of draggables ([85f5b7f](https://github.com/devshred/gps-tools-frontend/commit/85f5b7f4969a4b6c2dc5e9046790466a22a94c9a))
+
+
+### Features
+
+* **layout:** add new home screen graphic ([72cb494](https://github.com/devshred/gps-tools-frontend/commit/72cb494f499cbc461fec43e8e53822911571822a))
+* **layout:** add not-found screen ([d4dd0e7](https://github.com/devshred/gps-tools-frontend/commit/d4dd0e7d9d4800022ce9383b09cf73233212d0b0))
+* **layout:** adjust flex-layout to optimize display of map ([cbe9c8a](https://github.com/devshred/gps-tools-frontend/commit/cbe9c8a5e3c2f1df42044cdf20f49011fcba555e))
+* **layout:** new About screen ([f0dfddc](https://github.com/devshred/gps-tools-frontend/commit/f0dfddcfc4a5f6c3a393f3d11fa7ba2459c9c631))
+* **layout:** new favicon ([994f411](https://github.com/devshred/gps-tools-frontend/commit/994f411fa4a5134b2a258b5ad2a79317b5f58a66))
+* **layout:** new footer ([bd1dbf6](https://github.com/devshred/gps-tools-frontend/commit/bd1dbf66b455b43fab511dd8c66d039b4ff8a334))
+* **layout:** new header ([7a78bc0](https://github.com/devshred/gps-tools-frontend/commit/7a78bc00853f9ebbd7b7ccc5dd1a7904c3e85ac7))
+* **layout:** new intro ([cd9d29b](https://github.com/devshred/gps-tools-frontend/commit/cd9d29b3ffef70a9cfcb6ddbb7bb127094780a4f))
+* **layout:** new TrackHeader ([5eebbf8](https://github.com/devshred/gps-tools-frontend/commit/5eebbf88003c91391ce584a804b6ac79a7a20ba8))
+* **layout:** new upload form ([17483fa](https://github.com/devshred/gps-tools-frontend/commit/17483fad04a3359fb52969461006e5d45770060c))
+
 # [0.13.0](https://github.com/devshred/gps-tools-frontend/compare/v0.12.0...v0.13.0) (2024-05-23)
 
 
