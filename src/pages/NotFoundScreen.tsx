@@ -1,23 +1,27 @@
 import { FaAngleRight } from 'react-icons/fa6'
 import { BsEmojiDizzy } from 'react-icons/bs'
+import useLanguage from '../hooks/useLanguage'
 
-const NotFoundScreen = () => (
-  <div>
-    <h1 className="text-6xl mb-4 flex">
-      Not Found
-      <BsEmojiDizzy className="ml-3" />
-    </h1>
-    <div className="">
-      <p className="mb-4 text-2xl font-light">
-        Whatever you were looking for, I couldn&apos;t find it. But have you seen this already:
+const NotFoundScreen = () => {
+  const { getMessage } = useLanguage()
+
+  return (
+    <div className="mx-10 mt-8 text-base-content">
+      <h1 className="text-6xl font-medium tracking-wide flex items-center">
+        {getMessage('not_found_headline')}
+        <BsEmojiDizzy className="ml-3" />
+      </h1>
+      <p className="mb-4 text-2xl font-light mt-8">
+        {getMessage('not_found_text')}
+        <br />
+        {getMessage('not_found_back')}:
         <a href="/merge">
           <FaAngleRight className="inline" />
           <div className="inline font-bold">GPS-Tools</div>
-        </a>{' '}
-        ?
+        </a>
       </p>
     </div>
-  </div>
-)
+  )
+}
 
 export default NotFoundScreen

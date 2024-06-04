@@ -12,29 +12,32 @@ const baseStyle = {
   alignItems: 'center',
   padding: '20px',
   borderWidth: 2,
-  borderRadius: 2,
-  borderColor: '#eeeeee',
+  borderRadius: 16,
   borderStyle: 'dashed',
-  backgroundColor: 'secondary-content',
-  color: '#bdbdbd',
-  outline: 'none',
   transition: 'border .24s ease-in-out',
+  width: '480px',
 }
 
 const focusedStyle = {
-  borderColor: '#2196f3',
+  borderColor: '#06D26A',
+  borderWidth: 3,
+  borderStyle: 'solid',
 }
 
 const acceptStyle = {
-  borderColor: '#00e676',
+  borderColor: '#06D26A',
+  borderWidth: 3,
+  borderStyle: 'solid',
 }
 
 const rejectStyle = {
-  borderColor: '#ff1744',
+  borderColor: '#06D26A',
+  borderWidth: 3,
+  borderStyle: 'solid',
 }
 
 const UploadForm: React.FC = () => {
-  const { uploadFile, mergedFile, isLoading } = useUploadContext()
+  const { uploadFile, uploadedFiles, mergedFile, isLoading } = useUploadContext()
   const { getMessage } = useLanguage()
 
   const onDrop = useCallback((acceptedFiles: Array<File>) => {
@@ -42,7 +45,7 @@ const UploadForm: React.FC = () => {
   }, [])
 
   const { getRootProps, getInputProps, isDragActive, isFocused, isDragAccept, isDragReject } =
-    useDropzone({ onDrop })
+    useDropzone({ onDrop, accept: { '*/*': ['.gpx', '.fit'] } })
 
   const style: DropzoneRootProps = useMemo(
     () => ({
@@ -65,17 +68,30 @@ const UploadForm: React.FC = () => {
       {mergedFile === null && (
         <div className="my-7">
           <section className="container">
-            <div {...getRootProps({ style })}>
+            <div {...getRootProps({ style })} className="text-base-content dropzone">
               <input {...getInputProps()} />
               {isDragActive ? (
-                <p>
-                  <FiUpload className="inline relative bottom-0.5" /> {getMessage('uploader_drop')}
-                </p>
+                <>
+                  <FiUpload
+                    className={
+                      uploadedFiles.length > 0
+                        ? 'highlight-color inline relative bottom-0.5 text-5xl mt-1 mb-2'
+                        : 'highlight-color inline relative bottom-0.5 text-6xl mt-8 mb-8'
+                    }
+                  />
+                  {getMessage('uploader_drop')}
+                </>
               ) : (
-                <p>
-                  <FiUpload className="inline relative bottom-0.5" />{' '}
+                <>
+                  <FiUpload
+                    className={
+                      uploadedFiles.length > 0
+                        ? 'highlight-color inline relative bottom-0.5 text-5xl mt-1 mb-2'
+                        : 'highlight-color inline relative bottom-0.5 text-6xl mt-8 mb-8'
+                    }
+                  />
                   {getMessage('uploader_description')}
-                </p>
+                </>
               )}
             </div>
           </section>

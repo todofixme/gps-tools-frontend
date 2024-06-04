@@ -1,5 +1,5 @@
 import { DragDropContext, Draggable, Droppable, DropResult } from '@hello-pangea/dnd'
-import { FaEllipsisVertical, FaTrashCan } from 'react-icons/fa6'
+import { FaEllipsisVertical, FaEye, FaTrashCan } from 'react-icons/fa6'
 import { useUploadContext } from '../../hooks/useUploadContext'
 import { UploadedFile } from '../../@types/upload'
 import useLanguage from '../../hooks/useLanguage'
@@ -42,11 +42,24 @@ const MergeFiles = () => {
                       ref={provided.innerRef}
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
-                      className="flex mb-1 mt-1 bg-base-content text-base-200/80 p-1 rounded-md"
+                      className="flex px-2 p-2 my-3 inline-button max-w-[480px]"
                     >
-                      <FaEllipsisVertical className="relative top-1" />
-                      {file.filename} - {addThousandsSeparator(Math.round(file.size / 1024), '.')}
-                      kB <FaTrashCan className="ml-1 relative top-1" onClick={removeFile(file)} />
+                      <div className="flex flex-row" style={{ width: '100%' }}>
+                        <div className="flex-none">
+                          <FaEllipsisVertical className="relative top-1" />
+                        </div>
+                        <div className="flex-grow overflow-hidden text-ellipsis whitespace-nowrap">
+                          {file.filename} -{' '}
+                          {addThousandsSeparator(Math.round(file.size / 1024), '.')}
+                          kB
+                        </div>
+                        <div className="flex-shrink justify-end">
+                          <FaTrashCan
+                            className="ml-1 relative top-1 mr-1"
+                            onClick={removeFile(file)}
+                          />
+                        </div>
+                      </div>
                     </div>
                   )}
                 </Draggable>
@@ -57,9 +70,14 @@ const MergeFiles = () => {
         </Droppable>
       </DragDropContext>
 
-      <div className="mt-7">
+      <div>
         {uploadedFiles.length > 0 && (
-          <button className="btn btn-active" onClick={mergeFiles}>
+          <button
+            onClick={mergeFiles}
+            className="pl-4 p-2 my-3 max-w-[480px] outline-button text-left"
+            style={{ width: '100%' }}
+          >
+            <FaEye className="top-1 text-2xl inline-block mr-2" />
             {uploadedFiles.length == 1 && getMessage('visualize_file')}
             {uploadedFiles.length > 1 && getMessage('visualize_files')}
           </button>

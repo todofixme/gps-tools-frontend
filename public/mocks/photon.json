@@ -1,0 +1,36 @@
+{
+    "features": [
+      {
+        "geometry": {
+          "coordinates": [
+            10.057208565806175,
+            53.544986949999995
+          ],
+          "type": "Point"
+        },
+        "type": "Feature",
+        "properties": {
+          "osm_id": 570703988,
+          "extent": [
+            10.0565135,
+            53.5452074,
+            10.0578027,
+            53.5447181
+          ],
+          "country": "Deutschland",
+          "city": "Hamburg",
+          "countrycode": "DE",
+          "postcode": "20539",
+          "locality": "Gartenkolonie Billerhude",
+          "type": "house",
+          "osm_type": "W",
+          "osm_key": "amenity",
+          "street": "Strandweg-West",
+          "district": "Rothenburgsort",
+          "osm_value": "drinking_water",
+          "name": "Segler-Vereinigung Bille"
+        }
+      }
+    ],
+    "type": "FeatureCollection"
+  }

@@ -4,19 +4,40 @@
 
 @layer base {
   @font-face {
-    font-family: 'Roboto';
+    font-family: 'Roboto-Thin';
+    font-style: normal;
+    font-weight: 100;
+    font-display: swap;
+    src: url(/fonts/Roboto-Thin.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Roboto-Light';
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url(/fonts/Roboto-Light.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Roboto-Regular';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src:
-      url(/fonts/Roboto-Regular.woff) format('woff'),
-      url(/fonts/Roboto-Regular.woff2) format('woff2');
+    src: url(/fonts/Roboto-Regular.ttf) format('truetype');
   }
-}
-
-.leaflet-container {
-  height: 100vh;
-  width: 90vw;
+  @font-face {
+    font-family: 'Roboto-Medium';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url(/fonts/Roboto-Medium.ttf) format('truetype');
+  }
+  @font-face {
+    font-family: 'Roboto-Bold';
+    font-style: bold;
+    font-weight: 700;
+    font-display: swap;
+    src: url(/fonts/Roboto-Bold.ttf) format('truetype');
+  }
 }
 
 #controlButton {
@@ -50,4 +71,67 @@
   height: 48px;
   font-size: 28px;
   padding: 5px;
+}
+
+[data-theme='light'] .logo {
+  fill: white;
+}
+
+[data-theme='dark'] .logo {
+  fill: #202936;
+}
+
+.btn-nav {
+  font-family: 'Roboto-Medium';
+  background-color: transparent;
+  border: none;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  padding: 5px 14px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 20px;
+}
+
+.btn-nav:hover {
+  outline: 1px solid white;
+}
+
+.font-thin {
+  font-weight: 100;
+  font-family: Roboto-Thin;
+}
+
+.font-light {
+  font-weight: 300;
+  font-family: Roboto-Light;
+}
+
+.font-normal {
+  font-weight: 400;
+  font-family: Roboto-Regular;
+}
+
+.font-medium {
+  font-weight: 500;
+  font-family: Roboto-Medium;
+}
+
+.font-bold {
+  font-weight: 700;
+  font-family: Roboto-Bold;
+}
+
+.svg-stroke {
+  fill: none;
+  stroke: #06d26a;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 0 0 3 3;
+}
+
+.svg-fill {
+  stroke-width: 0px;
 }

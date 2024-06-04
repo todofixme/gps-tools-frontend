@@ -3,6 +3,9 @@ import { BackendVersion } from '../@types/common'
 import { AxiosResponse } from 'axios'
 import API from '../components/services/backend/gps-backend-api'
 import useLanguage from '../hooks/useLanguage'
+import { FaArrowRight, FaGithub, FaStrava } from 'react-icons/fa6'
+import { SiKomoot } from 'react-icons/si'
+import ErtIcon from '../components/common/ErtIcon'
 
 const NO_VERSION = { app: 'N/A', git: 'N/A' }
 
@@ -28,17 +31,18 @@ const AboutScreen = () => {
   }, [])
 
   return (
-    <>
-      <h1 className="text-6xl mb-4">GPS-Tools</h1>
+    <div className="mx-10 mt-8 text-base-content">
+      <h1 className="text-6xl font-medium tracking-wide">GPS-Tools</h1>
       <p className="mb-4 text-2xl font-light">{getMessage('app_description')}</p>
-      <p className="text-lg">
+      <p className="text-lg flex items-center space-x-2">
         <a
           href="https://github.com/devshred/gps-tools-frontend"
-          className="hover:underline"
+          className="hover:underline flex items-center"
           target="_blank"
           rel="noreferrer"
         >
-          Frontend Version
+          <FaGithub className="hover:highlight-color" />
+          &nbsp;Frontend Version
         </a>
         :{' '}
         <a
@@ -50,17 +54,19 @@ const AboutScreen = () => {
           {import.meta.env.PACKAGE_VERSION}
         </a>
       </p>
-      <p className="text-lg">
+      <p className="text-lg flex items-center space-x-2">
         <a
           href="https://github.com/devshred/gps-tools-backend"
-          className="hover:underline"
+          className="hover:underline flex items-center"
           target="_blank"
           rel="noreferrer"
         >
-          Backend Version
+          <FaGithub className="hover:highlight-color" />
+          &nbsp;Backend Version
         </a>
         :{' '}
         <a
+          id="backendVersion"
           href="https://github.com/devshred/gps-tools-backend/releases"
           className="hover:underline"
           target="_blank"
@@ -70,8 +76,12 @@ const AboutScreen = () => {
         </a>
       </p>
       <p className="text-lg mt-4">{getMessage('technologies_header')}</p>
-      <ul className="text-lg mt-4">
+      <ul className="text-lg mt-4 list-none list-inside">
         <li>
+          <FaArrowRight
+            className="highlight-color inline text- mr-1"
+            style={{ verticalAlign: '-2px' }}
+          />{' '}
           <a href="https://react.dev/" className="hover:underline" target="_blank" rel="noreferrer">
             React
           </a>
@@ -95,6 +105,10 @@ const AboutScreen = () => {
           </a>
         </li>
         <li>
+          <FaArrowRight
+            className="highlight-color inline text- mr-1"
+            style={{ verticalAlign: '-2px' }}
+          />{' '}
           <a
             href="https://kotlinlang.org/"
             className="hover:underline"
@@ -109,6 +123,10 @@ const AboutScreen = () => {
           </a>
         </li>
         <li>
+          <FaArrowRight
+            className="highlight-color inline text- mr-1"
+            style={{ verticalAlign: '-2px' }}
+          />{' '}
           <a
             href="https://leafletjs.com/"
             className="hover:underline"
@@ -127,9 +145,62 @@ const AboutScreen = () => {
             photon
           </a>
         </li>
+        <li>
+          <FaArrowRight
+            className="highlight-color inline text- mr-1"
+            style={{ verticalAlign: '-2px' }}
+          />{' '}
+          <a
+            href="https://swagger.io/specification/"
+            className="hover:underline"
+            target="_blank"
+            rel="noreferrer"
+          >
+            OpenAPI
+          </a>
+          ,{' '}
+          <a
+            href="https://geojson.org/"
+            className="hover:underline"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GeoJSON
+          </a>
+        </li>
       </ul>
       <p className="text-lg mt-4">{getMessage('contact')}: gps minus tools ät tigerflanke dot de</p>
-    </>
+      <p className="text-lg mt-4 flex items-center space-x-2">
+        <div>{getMessage('prefix_social_icons')}</div>
+        <a
+          href="https://www.strava.com/athletes/2768818"
+          className="hover:highlight-color"
+          style={{ width: '100%', maxWidth: '25px' }}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Link to Strava Provile"
+        >
+          <FaStrava className="text-2xl hover:highlight-color" />
+        </a>
+        <a
+          href="https://www.komoot.com/de-de/user/53317617542"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Link to Komoot Profile"
+        >
+          <SiKomoot title="Komoot Logo" className="text-2xl hover:highlight-color mr-1" />
+        </a>
+        <a
+          href="https://www.europaradtour.de/"
+          target="_blank"
+          rel="noreferrer"
+          style={{ width: '100%', maxWidth: '25px' }}
+          aria-label="Link to website of WfF EuropaRadtour"
+        >
+          <ErtIcon />
+        </a>
+      </p>
+    </div>
   )
 }
 

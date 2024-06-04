@@ -13,7 +13,7 @@ const ThemeSwitcher = () => {
   }, [theme])
 
   return (
-    <label className="swap swap-rotate mx-3">
+    <label className="swap swap-rotate mx-3 text-white" aria-label="Theme Switcher">
       {/* this hidden checkbox controls the state */}
       <input type="checkbox" className="theme-controller" value="synthwave" onClick={toggleTheme} />
 
@@ -28,7 +28,7 @@ const ThemeSwitcher = () => {
 
       {/* moon icon */}
       <svg
-        className="swap-off fill-current w-6 h-6"
+        className="swap-off fill-current w-5 h-5"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >

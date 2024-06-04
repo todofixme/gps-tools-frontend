@@ -5,7 +5,7 @@ import { FeedbackProvider } from './feedback/FeedbackProvider'
 const Providers = ({ children }: PropsWithChildren) => {
   return (
     <LanguageProvider language="en">
-      <FeedbackProvider>{children} </FeedbackProvider>
+      <FeedbackProvider>{children}</FeedbackProvider>
     </LanguageProvider>
   )
 }
