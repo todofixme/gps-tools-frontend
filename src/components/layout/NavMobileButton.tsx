@@ -11,13 +11,13 @@ type NavMobileButtonProps = {
 const NavMobileButton: React.FC<NavMobileButtonProps> = ({ label, linkTo, icon, setOpen }) => {
   const { getMessage } = useLanguage()
   return (
-    <div className="w-full p-[0.08rem] rounded-xl bg-gradient-to-tr from-neutral-800 via-neutral-950 to-neutral-700">
+    <div className="text-base-content text-xl">
       <a
         onClick={() => setOpen((prev) => !prev)}
-        className={'flex items-center justify-between w-full p-5 rounded-xl bg-neutral-950'}
+        className={'flex items-center justify-between w-full p-5'}
         href={linkTo}
       >
-        <span className="flex gap-1 text-lg">{getMessage(label)}</span>
+        <span className="flex gap-1">{getMessage(label)}</span>
         {icon}
       </a>
     </div>

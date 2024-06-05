@@ -30,11 +30,14 @@ const Navbar: React.FC<NavbarProps> = ({ title = DEFAULT_TITLE }) => {
         </Link>
       </div>
 
-      <NavMobile />
-      <NavDesktop />
+      <div className="flex flex-1 justify-end">
+        <NavDesktop />
 
-      <LanguageSelector />
-      <ThemeSwitcher />
+        <LanguageSelector />
+        <ThemeSwitcher />
+
+        <NavMobile />
+      </div>
     </nav>
   )
 }
