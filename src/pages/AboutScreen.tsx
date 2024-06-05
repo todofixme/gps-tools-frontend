@@ -200,6 +200,7 @@ const AboutScreen = () => {
           <ErtIcon />
         </a>
       </p>
+      <p className="mt-10">&nbsp;</p>
     </div>
   )
 }

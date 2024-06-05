@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react'
 
-type Theme = 'light' | 'dark'
+export type Theme = 'light' | 'dark'
 
 const ThemeSwitcher = () => {
   const [theme, setTheme] = useState<Theme>('dark')
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
-  }
 
   useEffect(() => {
     document.querySelector('html')?.setAttribute('data-theme', theme)
   }, [theme])
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
 
   return (
     <label className="swap swap-rotate mx-3 text-white" aria-label="Theme Switcher">
