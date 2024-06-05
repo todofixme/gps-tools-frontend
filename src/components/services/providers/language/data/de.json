@@ -3,6 +3,7 @@
   "prefix_social_icons": "Ihr findet mich am ehesten auf dem Rad: ",
   "about": "Über",
   "home": "Track neu erstellen",
+  "faq": "FAQ",
   "loading": "Wird geladen...",
   "close": "Schließen",
   "visualize_file": "Die Datei anzeigen.",
@@ -36,5 +37,13 @@
   "error_track_not_found": "Der Track wurde nicht gefunden.",
   "not_found_headline": "Not Found",
   "not_found_text": "Die gesuchte Seite konnte leider nicht gefunden werden.",
-  "not_found_back": "Zurück zur Startseite"
+  "not_found_back": "Zurück zur Startseite",
+  "faq_subtitle": "Warum das alles?!",
+  "faq_1_question": "Warum sollte man zusätzliche Punkte in eine Karte einzeichnen?",
+  "faq_1_answer": "Tracks, die man bei Komoot oder anderen Diensten erstellt und downloadet, bestehen in der Regel nur aus vielen Wegpunkten, die am Ende eine Linie ergeben und als Track auf Deinem Navigationsgerät angezeigt werden. Sollen Dir bestimmte Punkte (Verpflegung, Anstiege, Bahnhöfe, Navigantionshinweise, etc.) im Gerät angezeigt werden, musst Du sie separat - z.B. mit dieser App - einzeichnen. Garmin-Geräte zeigen dann auf einem separaten Screen alle verbleibenden Wegpunkte mit aktueller Entfernung und (basierend auf den Angaben im Track) der ungefähren Dauer bis zum Erreichen des Punktes an. Damit dies funktioniert, ist es wichtig, die Tracks als TCX zu exportieren und die 'Optimierungs'-Funktion zu aktivieren.",
+  "faq_1_image_subtitle": "Streckenpunkteliste Garmin Edge",
+  "faq_2_question": "Warum sollte ich TCX-Dateien exportieren?",
+  "faq_2_answer": "Falls Du einen Garmin Edge besitzt, bietet sich die Verwendung von TCX-Dateien an, da diese Geräte dann vor allem separate Wegpunkte zuverlässiger anzeigen. Wenn Du beim Download die 'Optimierungs'-Option aktivierst, werden die Wegpunkte zusätzlich optimiert, insbesondere werden die Wegpunkte auf einen Punkt des Track gelegt und korrekt sortiert.",
+  "faq_3_question": "Warum sollte man Strecken mergen wollen?",
+  "faq_3_answer": "Für das Mergen/Zusammenführen von Strecken gibt es unterschiedliche Gründe. Im einfachsten Fall natürlich, weil Du aus mehreren Teilstrecken eine Gesamtstrecke erstellen möchtest. Z.B. weil Du unterwegs aus Versehen die Aufzeichnung einer Aktivität beendet und eine weitere Aufzeichnung gestartet hast und vor dem Upload z.B. nach Strava die Aktivitäten wieder zusammenführen möchtest. Diese App übernimmt beim Zusammenführen auch alle Werte für Geschwindigkeit, Tritt- und Herzfrequenz, sowie die Leistungsdaten. Und wenn Dein Garmin unterwegs mal wieder abgestürzt ist und der automatische Upload nicht funktioniert kannst Du in dieser Anwendung auch direkt die FIT-Dateien hochladen und ggfls. zusammenführen lassen."
 }

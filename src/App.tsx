@@ -7,6 +7,7 @@ import AboutScreen from './pages/AboutScreen'
 import MergeScreen from './pages/MergeScreen'
 import TrackScreen from './pages/TrackScreen'
 import Providers from './components/services/providers'
+import FaqScreen from './pages/FaqScreen'
 
 const App = () => (
   <Providers>
@@ -20,6 +21,7 @@ const App = () => (
             <Route path="/merge" element={<MergeScreen />} />
             <Route path="/track/:id" element={<TrackScreen />} />
             <Route path="/about" element={<AboutScreen />} />
+            <Route path="/faq" element={<FaqScreen />} />
             <Route path="/*" element={<NotFoundScreen />} />
           </Routes>
         </main>
