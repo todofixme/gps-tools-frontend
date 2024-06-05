@@ -59,6 +59,7 @@ const FaqScreen = () => {
         <h1 className="text-2xl highlight-color">{getMessage('faq_merge_question')}</h1>
         <div className="text-lg">{getMessage('faq_merge_answer')}</div>
       </p>
+      <p className="mt-10">&nbsp;</p>
     </div>
   )
 }

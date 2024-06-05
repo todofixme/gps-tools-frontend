@@ -2,12 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import useLanguage from '../../hooks/useLanguage'
 
-type NavbarButtonProps = {
+type NavDesktopButtonProps = {
   label: string
   linkTo: string
 }
 
-const NavbarButton: React.FC<NavbarButtonProps> = ({ label, linkTo }) => {
+const NavDesktopButton: React.FC<NavDesktopButtonProps> = ({ label, linkTo }) => {
   const { getMessage } = useLanguage()
   return (
     <Link to={linkTo} className="btn-nav mx-1 text-nav-theme">
@@ -16,4 +16,4 @@ const NavbarButton: React.FC<NavbarButtonProps> = ({ label, linkTo }) => {
   )
 }
 
-export default NavbarButton
+export default NavDesktopButton

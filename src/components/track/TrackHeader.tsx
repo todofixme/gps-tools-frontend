@@ -71,8 +71,8 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
           <FaEyeSlash className="text-3xl" onClick={() => setShowPolyline(true)} />
         )}
       </div>
-      <div className="flex-1 flex justify-end items-center mb-4">
-        <div>
+      <div className="flex-1 flex mb-4 justify-end items-center">
+        <div className="flex flex-row flex-1 justify-end items-center">
           <DownloadLink
             trackId={trackId}
             type="gpx"

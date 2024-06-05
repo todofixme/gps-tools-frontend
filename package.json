@@ -31,7 +31,9 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
+    "framer-motion": "^11.2.10",
     "gpxparser": "^3.0.8",
+    "hamburger-react": "^2.5.1",
     "leaflet": "^1.9.4",
     "prettier": "^3.2.5",
     "react": "^18.3.1",
@@ -43,6 +45,7 @@
     "react-leaflet": "^4.2.1",
     "react-leaflet-custom-control": "^1.4.0",
     "react-router-dom": "^6.23.1",
+    "react-use": "^17.5.0",
     "sanitize-html": "^2.13.0",
     "uuid": "^9.0.1",
     "vite-plugin-package-version": "^1.1.0"

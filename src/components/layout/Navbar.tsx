@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import ThemeSwitcher from './ThemeSwitcher'
+import NavDesktop from './NavDesktop'
+import NavMobile from './NavMobile'
 import LanguageSelector from './LanguageSelector'
-import NavbarButton from './NavbarButton'
+import ThemeSwitcher from './ThemeSwitcher'
 
 type NavbarProps = {
   title?: string
@@ -13,7 +14,7 @@ const DEFAULT_TITLE: string = 'GPS-Tools'
 const Navbar: React.FC<NavbarProps> = ({ title = DEFAULT_TITLE }) => {
   return (
     <nav className="navbar bg-navbar flex flex-row h-16 mb-5 shadow-lg">
-      <div className="flex-none px-2 ml-6 mr-2">
+      <div className="flex-none px-2 ml-0 md:ml-3 lg:ml-6 mr-2">
         <Link to="/" className="align-middle" aria-label="GPS-Tools Homepage">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -29,13 +30,11 @@ const Navbar: React.FC<NavbarProps> = ({ title = DEFAULT_TITLE }) => {
         </Link>
       </div>
 
-      <div className="flex-1 justify-end mr-6">
-        <NavbarButton label="home" linkTo="/" />
-        <NavbarButton label="faq" linkTo="/faq" />
-        <NavbarButton label="about" linkTo="/about" />
-        <LanguageSelector />
-        <ThemeSwitcher />
-      </div>
+      <NavMobile />
+      <NavDesktop />
+
+      <LanguageSelector />
+      <ThemeSwitcher />
     </nav>
   )
 }
