@@ -1,6 +1,7 @@
 {
   "contact": "Contact",
   "prefix_social_icons": "You'll find me on my bike: ",
+  "faq": "FAQ",
   "about": "About",
   "home": "Create new track",
   "loading": "Loading...",
@@ -36,5 +37,13 @@
   "error_track_not_found": "Track not found.",
   "not_found_headline": "Not Found",
   "not_found_text": "Whatever you were looking for, I couldn't find it.",
-  "not_found_back": "Back to homepage"
+  "not_found_back": "Back to homepage",
+  "faq_subtitle": "What is the app useful for?!",
+  "faq_1_question": "Why should you add additional points of interest to a map?",
+  "faq_1_answer": "Tracks that you create and download from Komoot or other services usually only contain many waypoints that form a line at the end and are displayed as a track on your navigation device. If you want to display certain points (food, climbs, train stations, navigation instructions, etc.) on your device, you have to mark them separately - e.g. with this app. Garmin devices then display all remaining waypoints on a separate screen with the current distance and (based on the information in the track) the approximate time required to reach the point. For this to work, it is important to export the tracks as TCX and activate the 'Optimize' function.",
+  "faq_1_image_subtitle": "Route points list Garmin Edge",
+  "faq_2_question": "Why should I download TCX files?",
+  "faq_2_answer": "If you have a Garmin Edge, it is recommended that you use TCX files, as these devices display separate waypoints more reliably. If you activate the 'Optimize' option during the download, the waypoints are additionally optimized, in particular the waypoints are placed on a point on the track and sorted correctly.",
+  "faq_3_question": "Why would you want to merge tracks?",
+  "faq_3_answer": "There are various reasons for merging tracks. In the simplest case, of course, because you want to create a combined route from several partial routes. For example, because you have accidentally stopped recording an activity on the way and started another recording and want to merge the activities again before uploading them to Strava, for example. This app also transfers all the values for speed, cadence and heart rate as well as the power data when merging. And if your Garmin crashes on the way and the automatic upload does not work, you can also upload the FIT files directly in this application and merge them if necessary."
 }

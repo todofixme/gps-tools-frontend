@@ -31,6 +31,7 @@ const Navbar: React.FC<NavbarProps> = ({ title = DEFAULT_TITLE }) => {
 
       <div className="flex-1 justify-end mr-6">
         <NavbarButton label="home" linkTo="/" />
+        <NavbarButton label="faq" linkTo="/faq" />
         <NavbarButton label="about" linkTo="/about" />
         <LanguageSelector />
         <ThemeSwitcher />
