@@ -1,3 +1,20 @@
+# [0.15.0](https://github.com/devshred/gps-tools-frontend/compare/v0.14.0...v0.15.0) (2024-06-06)
+
+
+### Bug Fixes
+
+* **info:** improve texts and readability ([2ce5118](https://github.com/devshred/gps-tools-frontend/commit/2ce5118d398f8ec172c8ce2b58d09721c7ed8cab))
+* **info:** more FAQ texts ([11e2b87](https://github.com/devshred/gps-tools-frontend/commit/11e2b879d62efca400bfa9d731c8917b6d82f306))
+* **layout:** make footer sticky ([181da2f](https://github.com/devshred/gps-tools-frontend/commit/181da2fed182292ee975d3deaf5fd79d5f2b62ae))
+* **layout:** prevent site from reloading ([5991c99](https://github.com/devshred/gps-tools-frontend/commit/5991c990621e54b8431ffe2120eaefdbaab3efd1))
+
+
+### Features
+
+* **info:** new FAQ page ([a8a65cb](https://github.com/devshred/gps-tools-frontend/commit/a8a65cb6778cedf41e2d1c41ba945ca2d1f899fb))
+* **layout:** improve visibility on mobile devices ([59aec36](https://github.com/devshred/gps-tools-frontend/commit/59aec36fd11c8108f86213badb0383144dc9b42f))
+* **layout:** improve visibility on mobile devices ([9ce78c2](https://github.com/devshred/gps-tools-frontend/commit/9ce78c2bb091b102b32750f9bcef972fc1ed4d20))
+
 # [0.14.0](https://github.com/devshred/gps-tools-frontend/compare/v0.13.0...v0.14.0) (2024-06-04)
 
 
