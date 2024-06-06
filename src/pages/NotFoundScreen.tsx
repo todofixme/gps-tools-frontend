@@ -6,7 +6,7 @@ const NotFoundScreen = () => {
   const { getMessage } = useLanguage()
 
   return (
-    <div className="mx-10 mt-8 text-base-content">
+    <div className="ml-2 md:ml-6 lg:ml-10 mt-8 text-base-content">
       <h1 className="text-6xl font-medium tracking-wide flex items-center">
         {getMessage('not_found_headline')}
         <BsEmojiDizzy className="ml-3" />

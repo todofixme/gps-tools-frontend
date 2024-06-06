@@ -5,7 +5,7 @@ import { UploadProvider } from '../components/services/providers/upload/UploadPr
 import GpsToolsGraphic from '../components/merge/GpsToolsGraphic'
 
 const MergeScreen = () => (
-  <div className="mx-10 mt-8 flex flex-row">
+  <div className="ml-2 md:ml-6 lg:ml-10 mt-8 flex flex-row">
     <div className="flex-1">
       <h1 className="text-6xl text-base-content font-medium tracking-wide">GPS-Tools</h1>
       <UploadProvider>

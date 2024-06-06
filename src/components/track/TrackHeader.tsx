@@ -64,7 +64,7 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
           />
         </div>
       </div>
-      <div className="mx-5 mb-2 tooltip flex top-6" data-tip={getMessage('mute_tooltip') as string}>
+      <div className="mx-5 mb-2 tooltip flex top-6" data-tip={getMessage('tooltip_mute') as string}>
         {showPolyline ? (
           <FaEye className="text-3xl" onClick={() => setShowPolyline(false)} />
         ) : (

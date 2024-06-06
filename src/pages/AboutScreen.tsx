@@ -31,7 +31,7 @@ const AboutScreen = () => {
   }, [])
 
   return (
-    <div className="mx-10 mt-8 text-base-content">
+    <div className="ml-2 md:ml-6 lg:ml-10 mt-8 text-base-content">
       <h1 className="text-6xl font-medium tracking-wide">GPS-Tools</h1>
       <p className="mb-4 text-2xl font-light">{getMessage('app_description')}</p>
       <p className="text-lg flex items-center space-x-2">
@@ -171,10 +171,10 @@ const AboutScreen = () => {
       </ul>
       <p className="text-lg mt-4">{getMessage('contact')}: gps minus tools ät tigerflanke dot de</p>
       <p className="text-lg mt-4 flex items-center space-x-2">
-        <div>{getMessage('prefix_social_icons')}</div>
+        {getMessage('prefix_social_icons')}
         <a
           href="https://www.strava.com/athletes/2768818"
-          className="hover:highlight-color"
+          className="hover:highlight-color ml-1"
           style={{ width: '100%', maxWidth: '25px' }}
           target="_blank"
           rel="noreferrer"
