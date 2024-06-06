@@ -4,7 +4,7 @@ const FaqScreen = () => {
   const { getMessage } = useLanguage()
 
   return (
-    <div className="mx-10 mt-8 text-base-content w-[360px] md:w-[480px] lg:w-[720px]">
+    <div className="ml-2 md:ml-6 lg:ml-10 mt-8 text-base-content w-[360px] md:w-[480px] lg:w-[720px]">
       <h1 className="text-6xl font-medium tracking-wide">GPS-Tools</h1>
       <p className="text-2xl font-light">{getMessage('faq_subtitle')}</p>
       <p className="mt-5">
@@ -19,7 +19,6 @@ const FaqScreen = () => {
         <h1 className="text-2xl highlight-color">{getMessage('faq_tcx_question')}</h1>
         <div className="text-lg">{getMessage('faq_tcx_answer')}</div>
       </p>
-      m
       <p className="mt-5">
         <h1 className="text-2xl highlight-color">{getMessage('faq_devices_question')}</h1>
         <div className="text-lg">{getMessage('faq_devices_answer')}</div>
