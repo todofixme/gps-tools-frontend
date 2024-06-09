@@ -15,7 +15,7 @@ const MergeScreen = () => (
       </UploadProvider>
     </div>
     <div
-      className="ml-10 mt-10 invisible 2xl:visible xl:visible relative"
+      className="mx-10 mt-10 invisible 2xl:visible xl:visible relative"
       style={{ width: '100%', maxWidth: '1024px' }}
     >
       <GpsToolsGraphic />

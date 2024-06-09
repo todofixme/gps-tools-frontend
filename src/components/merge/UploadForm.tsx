@@ -15,7 +15,6 @@ const baseStyle = {
   borderRadius: 16,
   borderStyle: 'dashed',
   transition: 'border .24s ease-in-out',
-  width: '480px',
 }
 
 const focusedStyle = {
@@ -68,7 +67,7 @@ const UploadForm: React.FC = () => {
       {mergedFile === null && (
         <div className="my-7">
           <section className="container">
-            <div {...getRootProps({ style })} className="text-base-content dropzone">
+            <div {...getRootProps({ style })} className="text-base-content dropzone w-80 sm:w-[480px]">
               <input {...getInputProps()} />
               {isDragActive ? (
                 <>
