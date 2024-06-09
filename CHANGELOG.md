@@ -1,3 +1,10 @@
+## [0.15.1](https://github.com/devshred/gps-tools-frontend/compare/v0.15.0...v0.15.1) (2024-06-09)
+
+
+### Bug Fixes
+
+* **layout:** improve responsiveness ([cd78766](https://github.com/devshred/gps-tools-frontend/commit/cd78766add9d07dcde672a506013807f2d5fa63b))
+
 # [0.15.0](https://github.com/devshred/gps-tools-frontend/compare/v0.14.0...v0.15.0) (2024-06-06)
 
 
