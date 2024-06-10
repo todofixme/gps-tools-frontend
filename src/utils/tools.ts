@@ -35,23 +35,25 @@ export const encodeToBase64 = (input: string) => {
   return btoa(binString)
 }
 
-export const generateGeoJson = (markerPositions: WayPoint[]): FeatureCollection => {
+export const generateFeature = (waypoint: WayPoint): Feature => {
+  return {
+    type: 'Feature',
+    properties: {
+      name: waypoint.name,
+      type: waypoint.type,
+      uuid: waypoint.id,
+    },
+    geometry: {
+      type: 'Point',
+      coordinates: [waypoint.position[1], waypoint.position[0]],
+    },
+  } as Feature
+}
+
+export const generateFeatureCollection = (markerPositions: WayPoint[]): FeatureCollection => {
   return {
     type: 'FeatureCollection',
-    features: markerPositions.map(
-      (waypoint) =>
-        ({
-          type: 'Feature',
-          properties: {
-            name: waypoint.name,
-            type: waypoint.type,
-          },
-          geometry: {
-            type: 'Point',
-            coordinates: [waypoint.position[1], waypoint.position[0]],
-          },
-        }) as Feature,
-    ),
+    features: markerPositions.map((waypoint) => generateFeature(waypoint)),
   }
 }
 
