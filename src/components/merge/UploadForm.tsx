@@ -67,7 +67,10 @@ const UploadForm: React.FC = () => {
       {mergedFile === null && (
         <div className="my-7">
           <section className="container">
-            <div {...getRootProps({ style })} className="text-base-content dropzone w-80 sm:w-[480px]">
+            <div
+              {...getRootProps({ style })}
+              className="text-base-content dropzone w-80 sm:w-[480px]"
+            >
               <input {...getInputProps()} />
               {isDragActive ? (
                 <>
