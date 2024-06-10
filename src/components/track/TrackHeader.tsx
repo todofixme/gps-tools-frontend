@@ -3,7 +3,7 @@ import { FaCircleInfo, FaEye, FaEyeSlash, FaPenToSquare } from 'react-icons/fa6'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
 import React, { useMemo, useRef, useState } from 'react'
 import { WayPoint } from '../../@types/gps'
-import { generateGeoJson, sanitizeFilename } from '../../utils/tools'
+import { generateFeatureCollection, sanitizeFilename } from '../../utils/tools'
 import useLanguage from '../../hooks/useLanguage'
 
 type TrackHeaderProps = {
@@ -27,7 +27,7 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
   const tracknameInputFieldRef: React.RefObject<HTMLElement> = useRef(null)
   const tracknameRef = useRef('')
   const { getMessage } = useLanguage()
-  const markerGeoJson = useMemo(() => generateGeoJson(markerPositions), [markerPositions])
+  const markerGeoJson = useMemo(() => generateFeatureCollection(markerPositions), [markerPositions])
 
   useMemo(() => {
     tracknameRef.current = trackname

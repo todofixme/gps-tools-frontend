@@ -5,12 +5,13 @@ import { FeatureCollection, LineString, Point } from 'geojson'
 import { PoiType, WayPoint } from '../@types/gps'
 import { v4 as uuidv4 } from 'uuid'
 import { LatLngBoundsExpression, LatLngExpression, LatLngTuple } from 'leaflet'
-import { sanitizeFilename } from '../utils/tools'
+import { generateFeatureCollection, sanitizeFilename } from '../utils/tools'
 import VisualizeTrack from '../components/track/VisualizeTrack'
 import TrackHeader from '../components/track/TrackHeader'
 import ResetButton from '../components/track/ResetButton'
 import { useFeedbackContext } from '../hooks/useFeedbackContext'
 import useLanguage from '../hooks/useLanguage'
+import { useThrottle } from '@uidotdev/usehooks'
 
 const TrackScreen = () => {
   const { id: trackId } = useParams()
@@ -132,6 +133,20 @@ const TrackScreen = () => {
         setIsLoading(false)
       })
   }, [trackId])
+
+  const throttledMarkerPositions = useThrottle(markerPositions, 0)
+  useEffect(() => {
+    if (throttledMarkerPositions !== undefined && !isLoading) {
+      const featureCollection = generateFeatureCollection(markerPositions)
+      API.put(`/tracks/${trackId}/points`, featureCollection, {
+        headers: {
+          'Content-Type': 'application/geo+json',
+        },
+      }).catch((error) => {
+        console.error('Failed to update waypoint', error)
+      })
+    }
+  }, [throttledMarkerPositions])
 
   return (
     <>

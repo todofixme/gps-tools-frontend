@@ -3,7 +3,7 @@ import {
   convertOsmToPoiType,
   decodeFromBase64,
   encodeToBase64,
-  generateGeoJson,
+  generateFeatureCollection,
   sanitizeFilename,
 } from './tools'
 import { WayPoint } from '../@types/gps'
@@ -75,7 +75,7 @@ describe('generate GeoJSON', () => {
     const given: WayPoint[] = [
       {
         id: id1,
-        position: [11, 12],
+        position: [11, 21],
         name: 'way point 1',
         type: 'GENERIC',
       },
@@ -86,18 +86,19 @@ describe('generate GeoJSON', () => {
         type: 'FOOD',
       },
     ]
-    const actual = generateGeoJson(given)
+    const actual = generateFeatureCollection(given)
 
     expect(actual).toEqual({
       features: [
         {
           geometry: {
-            coordinates: [12, 11],
+            coordinates: [21, 11],
             type: 'Point',
           },
           properties: {
             name: 'way point 1',
             type: 'GENERIC',
+            uuid: id1,
           },
           type: 'Feature',
         },
@@ -109,6 +110,7 @@ describe('generate GeoJSON', () => {
           properties: {
             name: 'way point 2',
             type: 'FOOD',
+            uuid: id2,
           },
           type: 'Feature',
         },
