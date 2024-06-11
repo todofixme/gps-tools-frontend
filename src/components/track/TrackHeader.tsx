@@ -2,13 +2,11 @@ import DownloadLink from './DownloadLink'
 import { FaCircleInfo, FaEye, FaEyeSlash, FaPenToSquare } from 'react-icons/fa6'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
 import React, { useMemo, useRef, useState } from 'react'
-import { WayPoint } from '../../@types/gps'
-import { generateFeatureCollection, sanitizeFilename } from '../../utils/tools'
+import { sanitizeFilename } from '../../utils/tools'
 import useLanguage from '../../hooks/useLanguage'
 
 type TrackHeaderProps = {
   trackId: string
-  markerPositions: WayPoint[]
   trackname: string
   setTrackname: React.Dispatch<React.SetStateAction<string>>
   showPolyline: boolean
@@ -17,7 +15,6 @@ type TrackHeaderProps = {
 
 const TrackHeader: React.FC<TrackHeaderProps> = ({
   trackId,
-  markerPositions,
   trackname,
   setTrackname,
   showPolyline,
@@ -27,7 +24,6 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
   const tracknameInputFieldRef: React.RefObject<HTMLElement> = useRef(null)
   const tracknameRef = useRef('')
   const { getMessage } = useLanguage()
-  const markerGeoJson = useMemo(() => generateFeatureCollection(markerPositions), [markerPositions])
 
   useMemo(() => {
     tracknameRef.current = trackname
@@ -73,20 +69,8 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
       </div>
       <div className="flex-1 flex mb-4 justify-end items-center">
         <div className="flex flex-row flex-1 justify-end items-center">
-          <DownloadLink
-            trackId={trackId}
-            type="gpx"
-            trackname={trackname}
-            optimizeWaypoints={optimizeWaypoints}
-            geoJson={markerGeoJson}
-          />
-          <DownloadLink
-            trackId={trackId}
-            type="tcx"
-            trackname={trackname}
-            optimizeWaypoints={optimizeWaypoints}
-            geoJson={markerGeoJson}
-          />
+          <DownloadLink trackId={trackId} type="gpx" optimizeWaypoints={optimizeWaypoints} />
+          <DownloadLink trackId={trackId} type="tcx" optimizeWaypoints={optimizeWaypoints} />
         </div>
         <div className="ml-3 mr-5">
           <input

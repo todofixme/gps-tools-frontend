@@ -134,7 +134,7 @@ const TrackScreen = () => {
       })
   }, [trackId])
 
-  const throttledMarkerPositions = useThrottle(markerPositions, 0)
+  const throttledMarkerPositions = useThrottle(markerPositions, 500)
   useEffect(() => {
     if (throttledMarkerPositions !== undefined && !isLoading) {
       const featureCollection = generateFeatureCollection(markerPositions)
@@ -148,6 +148,29 @@ const TrackScreen = () => {
     }
   }, [throttledMarkerPositions])
 
+  const throttledTrackname = useThrottle(trackname, 500)
+  useEffect(() => {
+    if (throttledTrackname !== undefined && !isLoading) {
+      const feature = {
+        type: 'Feature',
+        properties: {
+          name: throttledTrackname,
+        },
+        geometry: {
+          type: 'LineString',
+          coordinates: [],
+        },
+      }
+      API.patch(`/tracks/${trackId}`, feature, {
+        headers: {
+          'Content-Type': 'application/geo+json',
+        },
+      }).catch((error) => {
+        console.error('Failed to update waypoint', error)
+      })
+    }
+  }, [throttledTrackname])
+
   return (
     <>
       {isLoading ? (
@@ -156,7 +179,6 @@ const TrackScreen = () => {
         <div className="flex flex-col" style={{ height: '100%' }}>
           <TrackHeader
             trackId={trackId}
-            markerPositions={markerPositions}
             trackname={trackname}
             setTrackname={setTrackname}
             showPolyline={showPolyline}
