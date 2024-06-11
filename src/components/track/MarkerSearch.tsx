@@ -14,7 +14,7 @@ type MarkerSearchProps = {
 
 const MarkerSearch: React.FC<MarkerSearchProps> = ({ setMarkerPositions }) => {
   const [searchTerm, setSearchTerm] = useState('')
-  const debouncedSearchTerm = useDebounce(searchTerm, 1000)
+  const debouncedSearchTerm = useDebounce(searchTerm, 500)
   const [results, setResults] = useState<Feature[]>([])
   const dropdownDivRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)

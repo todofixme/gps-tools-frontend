@@ -1,25 +1,15 @@
 import React from 'react'
 import { FiDownload } from 'react-icons/fi'
-import { GeoJsonObject } from 'geojson'
-import { encodeToBase64 } from '../../utils/tools'
 import useLanguage from '../../hooks/useLanguage'
 import { Link } from 'react-router-dom'
 
 type DownloadLinkProps = {
   trackId: string
   type: string
-  trackname: string
   optimizeWaypoints: boolean
-  geoJson?: GeoJsonObject | null
 }
 
-const DownloadLink: React.FC<DownloadLinkProps> = ({
-  trackId,
-  type,
-  trackname,
-  optimizeWaypoints,
-  geoJson,
-}) => {
+const DownloadLink: React.FC<DownloadLinkProps> = ({ trackId, type, optimizeWaypoints }) => {
   const { getMessage } = useLanguage()
   const baseUrl = import.meta.env.VITE_BACKEND_BASE_URL
   const linkTo: string =
@@ -28,9 +18,7 @@ const DownloadLink: React.FC<DownloadLinkProps> = ({
     trackId +
     '?mode=dl&type=' +
     type +
-    (optimizeWaypoints ? '&mode=opt' : '') +
-    (trackname.length > 0 ? `&name=${encodeToBase64(trackname)}` : '') +
-    (geoJson != null ? `&wp=${encodeToBase64(JSON.stringify(geoJson))}` : '')
+    (optimizeWaypoints ? '&mode=opt' : '')
 
   return (
     <>
