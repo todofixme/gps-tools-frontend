@@ -1,3 +1,11 @@
+# [0.16.0](https://github.com/devshred/gps-tools-frontend/compare/v0.15.1...v0.16.0) (2024-06-11)
+
+
+### Features
+
+* **backend:** persist trackname to the backend ([fe8ede7](https://github.com/devshred/gps-tools-frontend/commit/fe8ede7f16e4591d1d6e97e36abf844f269b8ec6))
+* **backend:** persist waypoints to the backend ([107cf60](https://github.com/devshred/gps-tools-frontend/commit/107cf607eb6102811d23566958f570058269f355))
+
 ## [0.15.1](https://github.com/devshred/gps-tools-frontend/compare/v0.15.0...v0.15.1) (2024-06-09)
 
 
