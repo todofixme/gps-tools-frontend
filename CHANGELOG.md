@@ -1,3 +1,10 @@
+## [0.16.1](https://github.com/devshred/gps-tools-frontend/compare/v0.16.0...v0.16.1) (2024-06-12)
+
+
+### Bug Fixes
+
+* **layout:** improve error screens ([01ac528](https://github.com/devshred/gps-tools-frontend/commit/01ac528e4323473e20535759e21d582557a3b1db))
+
 # [0.16.0](https://github.com/devshred/gps-tools-frontend/compare/v0.15.1...v0.16.0) (2024-06-11)
 
 
