@@ -15,7 +15,7 @@ const NotFoundScreen = () => {
         {getMessage('not_found_text')}
         <br />
         {getMessage('not_found_back')}:
-        <a href="/merge">
+        <a href="/">
           <FaAngleRight className="inline" />
           <div className="inline font-bold">GPS-Tools</div>
         </a>

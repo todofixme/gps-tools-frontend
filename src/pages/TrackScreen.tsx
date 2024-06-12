@@ -8,10 +8,11 @@ import { LatLngBoundsExpression, LatLngExpression, LatLngTuple } from 'leaflet'
 import { generateFeatureCollection, sanitizeFilename } from '../utils/tools'
 import VisualizeTrack from '../components/track/VisualizeTrack'
 import TrackHeader from '../components/track/TrackHeader'
-import ResetButton from '../components/track/ResetButton'
 import { useFeedbackContext } from '../hooks/useFeedbackContext'
 import useLanguage from '../hooks/useLanguage'
 import { useThrottle } from '@uidotdev/usehooks'
+import { BsEmojiDizzy } from 'react-icons/bs'
+import { FaAngleRight } from 'react-icons/fa6'
 
 const TrackScreen = () => {
   const { id: trackId } = useParams()
@@ -196,8 +197,21 @@ const TrackScreen = () => {
         </div>
       ) : (
         <>
-          <p>{getMessage('error_track_not_found')}</p>
-          <ResetButton />
+          <div className="ml-2 md:ml-6 lg:ml-10 mt-8 text-base-content">
+            <h1 className="text-6xl font-medium tracking-wide flex items-center">
+              {getMessage('track_not_found_headline')}
+              <BsEmojiDizzy className="ml-3" />
+            </h1>
+            <p className="mb-4 text-2xl font-light mt-8">
+              {getMessage('track_not_found_text')}
+              <br />
+              {getMessage('not_found_back')}:
+              <a href="/">
+                <FaAngleRight className="inline" />
+                <div className="inline font-bold">GPS-Tools</div>
+              </a>
+            </p>
+          </div>
         </>
       )}
     </>
