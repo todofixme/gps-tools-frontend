@@ -6,7 +6,9 @@ const FaqScreen = () => {
   return (
     <div className="ml-2 md:ml-6 lg:ml-10 mt-8 text-base-content w-[360px] md:w-[480px] lg:w-[720px]">
       <h1 className="text-6xl font-medium tracking-wide">GPS-Tools</h1>
-      <p className="text-2xl font-light">{getMessage('faq_subtitle')}</p>
+      <p className="text-2xl font-light" id="faqSubtitle">
+        {getMessage('faq_subtitle')}
+      </p>
       <p className="mt-5">
         <h1 className="text-2xl highlight-color">{getMessage('faq_poi_question')}</h1>
         <div className="float-none md:float-end px-3 mb-2 mt-1">

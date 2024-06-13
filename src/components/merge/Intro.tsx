@@ -10,7 +10,9 @@ const Intro = () => {
     <>
       {mergedFile === null && (
         <div className="text-base-content mt-4 font-normal text-lg">
-          <div className="font-medium">{getMessage('intro_header')}</div>
+          <div className="font-medium" id="introHeader">
+            {getMessage('intro_header')}
+          </div>
           <ul className="list-none list-inside">
             {(getMessage('intro_description_list') as Array<string>).map((item, index) => (
               <li key={index}>
