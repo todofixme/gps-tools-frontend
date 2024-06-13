@@ -1,6 +1,6 @@
 import React, { Dispatch, ReactElement, SetStateAction } from 'react'
 import useLanguage from '../../hooks/useLanguage'
-import { Link } from 'react-router-dom'
+import { Link } from '@tanstack/react-router'
 
 type NavMobileButtonProps = {
   label: string

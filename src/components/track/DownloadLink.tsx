@@ -1,7 +1,7 @@
 import React from 'react'
 import { FiDownload } from 'react-icons/fi'
 import useLanguage from '../../hooks/useLanguage'
-import { Link } from 'react-router-dom'
+import { Link } from '@tanstack/react-router'
 
 type DownloadLinkProps = {
   trackId: string
