@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { UploadedFile } from '../../../../@types/upload'
 import { useFeedbackContext } from '../../../../hooks/useFeedbackContext'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from '@tanstack/react-router'
 import API from '../../backend/gps-backend-api'
 import { UploadContext } from './UploadContext'
 
@@ -67,7 +67,7 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
       // no need to merge
       setMergedFile(uploadedFiles[0])
       setUploadedFiles([])
-      navigate('/track/' + uploadedFiles[0].id)
+      navigate({ to: '/track/' + uploadedFiles[0].id })
     } else {
       const params = uploadedFiles.map((file) => 'trackIds=' + file.id)
       const joinedParams = params.join('&')
@@ -77,7 +77,7 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
           setMergedFile(response.data)
           uploadedFiles.forEach((file) => API.delete('/tracks/' + file.id))
           setUploadedFiles([])
-          navigate('/track/' + response.data.id)
+          navigate({ to: '/track/' + response.data.id })
         })
         .catch((error) => {
           if (error.code === 'ERR_NETWORK') {

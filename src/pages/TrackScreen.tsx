@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom'
+import { useParams } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import API from '../components/services/backend/gps-backend-api'
 import { FeatureCollection, LineString, Point } from 'geojson'
@@ -15,7 +15,7 @@ import { BsEmojiDizzy } from 'react-icons/bs'
 import { FaAngleRight } from 'react-icons/fa6'
 
 const TrackScreen = () => {
-  const { id: trackId } = useParams()
+  const { trackId } = useParams({ from: '/track/$trackId' })
 
   const { setError } = useFeedbackContext()
   const { getMessage } = useLanguage()
