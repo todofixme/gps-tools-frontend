@@ -16,7 +16,7 @@ test.describe('Home page', () => {
 
     await expect(page).toHaveTitle(/GPS-Tools/)
 
-    await page.selectOption('[aria-label="Language Selector"]', 'DE')
+    await page.click('[aria-label="Language Switcher"]')
 
     const backendVersion = page.locator('#introHeader')
     await expect(backendVersion).toHaveText('Diese Anwendung bietet folgende Funktionalitäten:')

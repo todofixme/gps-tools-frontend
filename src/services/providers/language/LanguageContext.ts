@@ -2,8 +2,8 @@ import { createContext } from 'react'
 import { Language } from '../../../@types/language'
 
 type LanguageContextType = {
-  currentLanguage: Language
-  changeLanguage: (language: Language) => void
+  language: Language
+  toggleLanguage: () => void
   getMessage: (labelId: string) => string | Array<string>
 }
 

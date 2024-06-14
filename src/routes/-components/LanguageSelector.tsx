@@ -1,19 +1,22 @@
 import useLanguage from '../../hooks/useLanguage'
-import { Language } from '../../@types/language'
+import EnglishIcon from '../../icons/EnglishIcon'
+import GermanIcon from '../../icons/GermanIcon'
 
 const LanguageSelector = () => {
-  const { currentLanguage, changeLanguage } = useLanguage()
+  const { toggleLanguage } = useLanguage()
 
   return (
-    <select
-      className="select bg-transparent text-white rounded-full outline-none hover:outline-1 hover:outline-white select-sm mx-1"
-      defaultValue={currentLanguage}
-      onChange={(e) => changeLanguage(e.target.value as Language)}
-      aria-label="Language Selector"
-    >
-      <option value="en">EN</option>
-      <option value="de">DE</option>
-    </select>
+    <label className="swap mx-3 swap-flip" aria-label="Language Switcher">
+      <input
+        type="checkbox"
+        className="theme-controller"
+        value="synthwave"
+        onClick={toggleLanguage}
+      />
+
+      <GermanIcon className="swap-on w-6 h-6" />
+      <EnglishIcon className="swap-off w-6 h-6" />
+    </label>
   )
 }
 

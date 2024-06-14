@@ -22,7 +22,7 @@ vi.mock('axios', async (importActual) => {
 
 describe('About Page', () => {
   const renderWithLanguage = (children: React.ReactNode, language: Language = 'en') => {
-    render(<LanguageProvider language={language}>{children}</LanguageProvider>)
+    render(<LanguageProvider initialLanguage={language}>{children}</LanguageProvider>)
   }
 
   const version = 'v1.2.3'

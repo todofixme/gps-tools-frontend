@@ -16,7 +16,7 @@ test.describe('FAQ page', () => {
 
     await expect(page).toHaveTitle(/GPS-Tools/)
 
-    await page.selectOption('[aria-label="Language Selector"]', 'DE')
+    await page.click('[aria-label="Language Switcher"]')
 
     const backendVersion = page.locator('#faqSubtitle')
     await expect(backendVersion).toHaveText('Warum das alles?!')

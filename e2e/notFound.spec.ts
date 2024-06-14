@@ -14,7 +14,7 @@ test.describe('Not found page', () => {
     await page.goto('/foobar')
     await expect(page).toHaveTitle(/GPS-Tools/)
     
-    await page.selectOption('[aria-label="Language Selector"]', 'DE')
+    await page.click('[aria-label="Language Switcher"]')
 
     const heading = page.locator('h1')
     await expect(heading).toHaveText('Nicht gefunden')
