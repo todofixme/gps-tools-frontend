@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react'
 import { createRootRoute, Outlet } from '@tanstack/react-router'
-import Navbar from '../components/layout/Navbar'
-import Feedback from '../components/layout/Feedback'
-import Providers from '../components/services/providers'
+import Navbar from './-components/Navbar'
+import Feedback from './-components/Feedback'
+import Providers from '../services/providers'
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'development'
@@ -24,7 +24,7 @@ export const Route = createRootRoute({
         </main>
       </div>
       <Suspense>
-        <TanStackRouterDevtools />
+        <TanStackRouterDevtools position="bottom-right" />
       </Suspense>
     </Providers>
   ),
