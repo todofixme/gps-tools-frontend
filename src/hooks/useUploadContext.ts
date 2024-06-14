@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { UploadContext } from '../components/services/providers/upload/UploadContext'
+import { UploadContext } from '../services/providers/upload/UploadContext'
 
 export const useUploadContext = () => {
   const context = useContext(UploadContext)
