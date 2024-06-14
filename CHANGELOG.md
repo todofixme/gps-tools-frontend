@@ -1,3 +1,10 @@
+## [0.16.3](https://github.com/devshred/gps-tools-frontend/compare/v0.16.2...v0.16.3) (2024-06-14)
+
+
+### Bug Fixes
+
+* **layout:** improve language toggle ([76b24e9](https://github.com/devshred/gps-tools-frontend/commit/76b24e9d83415fc89819152d8188fe2b2e60fc9e))
+
 ## [0.16.2](https://github.com/devshred/gps-tools-frontend/compare/v0.16.1...v0.16.2) (2024-06-14)
 
 
