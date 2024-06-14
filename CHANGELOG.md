@@ -1,3 +1,16 @@
+## [0.16.2](https://github.com/devshred/gps-tools-frontend/compare/v0.16.1...v0.16.2) (2024-06-14)
+
+
+### Bug Fixes
+
+* **layout:** improve accessibility on mobile devices ([c84941b](https://github.com/devshred/gps-tools-frontend/commit/c84941b206a6e442b3c0e308a9df7c30905901fd))
+* **seo:** configure options for crawlers ([c9d6121](https://github.com/devshred/gps-tools-frontend/commit/c9d6121d994c1b353b6f6c9a4646d76ea0c7eff8))
+
+
+### Performance Improvements
+
+* **react:** use TSR codesplitting ([17d6855](https://github.com/devshred/gps-tools-frontend/commit/17d68559090943e5916a68f418de5a6bd609a39c))
+
 ## [0.16.1](https://github.com/devshred/gps-tools-frontend/compare/v0.16.0...v0.16.1) (2024-06-12)
 
 
