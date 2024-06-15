@@ -1,3 +1,11 @@
+## [0.16.4](https://github.com/devshred/gps-tools-frontend/compare/v0.16.3...v0.16.4) (2024-06-15)
+
+
+### Bug Fixes
+
+* **layout:** wrong size of ZoomControl ([9d18331](https://github.com/devshred/gps-tools-frontend/commit/9d18331a28aa344f048261baaf5bfb0fa630db76)), closes [#19](https://github.com/devshred/gps-tools-frontend/issues/19)
+* **react:** disable codesplitting ([e725235](https://github.com/devshred/gps-tools-frontend/commit/e725235372fa7d8d3708f2eb967430095e39ca65)), closes [#20](https://github.com/devshred/gps-tools-frontend/issues/20)
+
 ## [0.16.3](https://github.com/devshred/gps-tools-frontend/compare/v0.16.2...v0.16.3) (2024-06-14)
 
 
