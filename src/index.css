@@ -67,8 +67,8 @@
 }
 
 .leaflet-touch .leaflet-bar a {
-  width: 46px;
-  height: 48px;
+  width: 44px !important;
+  height: 44px !important;
   font-size: 28px;
   padding: 5px;
 }
