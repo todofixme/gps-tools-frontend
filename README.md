@@ -5,9 +5,9 @@
 
 # Frontend of GPS-Tools based on React and Leaflet
 This is the frontend of [GPS-Tools Backend](https://github.com/devshred/gps-tools-backend). It provides some useful features for dealing with GPS files:
-* Merging files
+* Merging GPS-files
 * Converting between formats (FIT, GPX, TCX, GeoJSON)
-* Visualizing GPS-files
+* Visualizing GPS-files on a map
 * Adding, changing and removing waypoints
 * Optimization of waypoints to improve performance on GPS-devices
 
@@ -23,7 +23,7 @@ npm run dev
 Open http://localhost:5173/
 
 ### … locally with all external APIs
-Start the GPT-Tool-backend
+Start the GPS-Tool-backend
 ```sh
 docker run -p 7001:7001 devshred/gps-tools-backend
 ```
