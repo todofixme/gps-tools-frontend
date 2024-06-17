@@ -1,3 +1,11 @@
+## [0.16.5](https://github.com/devshred/gps-tools-frontend/compare/v0.16.4...v0.16.5) (2024-06-17)
+
+
+### Bug Fixes
+
+* **faq:** typo ([d6e14b7](https://github.com/devshred/gps-tools-frontend/commit/d6e14b7dbd9b5ef629a1b47312f33cf6686610a2))
+* **layout:** add missing footer ([04ee46c](https://github.com/devshred/gps-tools-frontend/commit/04ee46c9b199e326aae4c6f46df286ab9237a35c))
+
 ## [0.16.4](https://github.com/devshred/gps-tools-frontend/compare/v0.16.3...v0.16.4) (2024-06-15)
 
 
