@@ -1,3 +1,10 @@
+## [0.16.6](https://github.com/devshred/gps-tools-frontend/compare/v0.16.5...v0.16.6) (2024-06-18)
+
+
+### Performance Improvements
+
+* **react:** introduce tanstack query ([538978f](https://github.com/devshred/gps-tools-frontend/commit/538978f1955ceeefb89803427ecf7cd5d3e7c2d8))
+
 ## [0.16.5](https://github.com/devshred/gps-tools-frontend/compare/v0.16.4...v0.16.5) (2024-06-17)
 
 
