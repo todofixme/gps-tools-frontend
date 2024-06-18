@@ -23,6 +23,8 @@
   "dependencies": {
     "@fontsource/roboto": "^5.0.13",
     "@hello-pangea/dnd": "^16.6.0",
+    "@tanstack/react-query": "^5.45.1",
+    "@tanstack/react-query-devtools": "^5.45.1",
     "@tanstack/react-router": "^1.36.3",
     "@types/geojson": "^7946.0.14",
     "@types/leaflet": "^1.9.12",
@@ -55,6 +57,7 @@
     "@playwright/test": "^1.44.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
+    "@tanstack/eslint-plugin-query": "^5.43.1",
     "@tanstack/router-devtools": "^1.36.3",
     "@tanstack/router-vite-plugin": "^1.37.0",
     "@testing-library/jest-dom": "^6.4.6",

@@ -6,6 +6,7 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:jsx-a11y/recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:@tanstack/eslint-plugin-query/recommended',
     'eslint-config-prettier',
   ],
   settings: {
@@ -24,4 +25,5 @@ module.exports = {
     'react/jsx-uses-react': 'off',
     'import/no-unresolved': ['error', { ignore: ['^geojson'] }],
   },
+  "plugins": ["@tanstack/query"]
 }

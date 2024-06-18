@@ -1,7 +1,4 @@
-import { useEffect, useState } from 'react'
-import { BackendVersion } from '../../../@types/common'
-import { AxiosResponse } from 'axios'
-import API from '../../../services/backend/gps-backend-api'
+import { useBackendVersion } from '../../../services/backend/gps-backend-api'
 import useLanguage from '../../../hooks/useLanguage'
 import { FaArrowRight, FaGithub, FaStrava } from 'react-icons/fa6'
 import { SiKomoot } from 'react-icons/si'
@@ -11,24 +8,7 @@ const NO_VERSION = { app: 'N/A', git: 'N/A' }
 
 const AboutScreen = () => {
   const { getMessage } = useLanguage()
-
-  const [backendVersion, setBackendVersion] = useState<BackendVersion>(NO_VERSION)
-
-  const fetchBackendVersion = async () => {
-    try {
-      const response: AxiosResponse<BackendVersion> = await API.get('/version')
-      setBackendVersion(response.data)
-    } catch (fetchError) {
-      setBackendVersion(NO_VERSION)
-      console.error('Error fetching version: ', fetchError)
-    }
-  }
-
-  useEffect(() => {
-    ;(async () => {
-      await fetchBackendVersion()
-    })()
-  }, [])
+  const { data: backendVersion, isLoading, isError } = useBackendVersion()
 
   return (
     <div className="ml-2 md:ml-6 lg:ml-10 mt-8 text-base-content">
@@ -72,7 +52,7 @@ const AboutScreen = () => {
           target="_blank"
           rel="noreferrer"
         >
-          {backendVersion.app}
+          {isLoading || isError ? NO_VERSION.app : backendVersion?.app}
         </a>
       </p>
       <p className="text-lg mt-4">{getMessage('technologies_header')}</p>
@@ -102,6 +82,32 @@ const AboutScreen = () => {
             rel="noreferrer"
           >
             daisyUI
+          </a>
+        </li>
+        <li>
+          <FaArrowRight
+            className="highlight-color inline text- mr-1"
+            style={{ verticalAlign: '-2px' }}
+          />{' '}
+          <a href="https://tanstack.com/" className="hover:underline" target="_blank" rel="noreferrer">
+            TanStack
+          </a>{' '}
+          <a
+            href="https://tanstack.com/router/"
+            className="hover:underline"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Router
+          </a>{' '}
+          /{' '}
+          <a
+            href="https://tanstack.com/query/"
+            className="hover:underline"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Query
           </a>
         </li>
         <li>
