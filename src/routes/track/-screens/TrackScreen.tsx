@@ -152,19 +152,14 @@ const TrackScreen = () => {
   const throttledTrackname = useThrottle(trackname, 500)
   useEffect(() => {
     if (throttledTrackname !== undefined && !isLoading) {
-      const feature = {
-        type: 'Feature',
+      const changeRequest = {
         properties: {
           name: throttledTrackname,
         },
-        geometry: {
-          type: 'LineString',
-          coordinates: [],
-        },
       }
-      API.patch(`/tracks/${trackId}`, feature, {
+      API.patch(`/tracks/${trackId}`, changeRequest, {
         headers: {
-          'Content-Type': 'application/geo+json',
+          'Content-Type': 'application/json',
         },
       }).catch((error) => {
         console.error('Failed to update waypoint', error)
