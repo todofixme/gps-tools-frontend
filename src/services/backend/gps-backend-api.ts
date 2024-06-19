@@ -14,7 +14,13 @@ function fetchBackendVersion(): Promise<BackendVersion> {
 }
 
 export function useBackendVersion() {
-  return useQuery({ queryKey: ['backendVersion'], queryFn: fetchBackendVersion })
+  return useQuery({
+    queryKey: ['backendVersion'],
+    queryFn: fetchBackendVersion,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    retry: 2,
+  })
 }
 
 export default backendApi

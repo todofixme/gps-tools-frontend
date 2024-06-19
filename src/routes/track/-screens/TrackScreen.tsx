@@ -1,26 +1,23 @@
 import { useParams } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
 import API from '../../../services/backend/gps-backend-api'
-import { FeatureCollection, LineString, Point } from 'geojson'
-import { PoiType, WayPoint } from '../../../@types/gps'
-import { v4 as uuidv4 } from 'uuid'
-import { LatLngBoundsExpression, LatLngExpression, LatLngTuple } from 'leaflet'
-import { generateFeatureCollection, sanitizeFilename } from '../../../utils/tools'
+import { WayPoint } from '../../../@types/gps'
+import { LatLngBoundsExpression, LatLngExpression } from 'leaflet'
+import { generateFeatureCollection } from '../../../utils/tools'
 import VisualizeTrack from '../-components/VisualizeTrack'
 import TrackHeader from '../-components/TrackHeader'
-import { useFeedbackContext } from '../../../hooks/useFeedbackContext'
 import useLanguage from '../../../hooks/useLanguage'
 import { useThrottle } from '@uidotdev/usehooks'
 import { BsEmojiDizzy } from 'react-icons/bs'
 import { FaAngleRight } from 'react-icons/fa6'
+import { useFetchTrack } from '../../../services/backend/trackService'
+import { Loading } from 'react-daisyui'
 
 const TrackScreen = () => {
   const { trackId } = useParams({ from: '/track/$trackId' })
 
-  const { setError } = useFeedbackContext()
   const { getMessage } = useLanguage()
 
-  const [isLoading, setIsLoading] = useState(true)
   const [trackname, setTrackname] = useState<string>('')
   const [showPolyline, setShowPolyline] = useState(true)
   const [positions, setPositions] = useState<LatLngExpression[]>([])
@@ -29,6 +26,16 @@ const TrackScreen = () => {
     [0, 0],
     [0, 0],
   ])
+
+  const { data: trackResult, isLoading, isError } = useFetchTrack(trackId)
+  useEffect(() => {
+    if (!isLoading && !isError && trackResult) {
+      setMarkerPositions(trackResult.markerPositions)
+      setPositions(trackResult.positions)
+      setBounds(trackResult.bounds)
+      setTrackname(trackResult.trackName)
+    }
+  }, [isLoading, isError, trackResult])
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -63,77 +70,6 @@ const TrackScreen = () => {
       document.removeEventListener('keyup', handleKeyPress)
     }
   }, [])
-
-  useEffect(() => {
-    setIsLoading(true)
-    const config = {
-      headers: {
-        accept: 'application/geo+json',
-      },
-    }
-    API.get('/tracks/' + trackId, config)
-      .then((file) => {
-        const feat: FeatureCollection = file.data as FeatureCollection
-
-        const _markerPositions: WayPoint[] = feat.features
-          .filter((f) => f.geometry.type == 'Point')
-          .map((feat) => {
-            const point: Point = feat.geometry as Point
-            const type: PoiType = feat.properties?.type ?? 'GENERIC'
-
-            return {
-              id: uuidv4(),
-              position: [point.coordinates[0], point.coordinates[1]],
-              name: feat.properties?.name ?? 'unnamed',
-              type: type,
-            }
-          }) as WayPoint[]
-        setMarkerPositions(_markerPositions)
-
-        const _positions: LatLngTuple[] = feat.features
-          .filter((f) => f.geometry.type == 'LineString')
-          .flatMap((line) => (line.geometry as LineString).coordinates)
-          .map((position) => [position[1], position[0]]) as LatLngTuple[]
-        setPositions(_positions)
-
-        const lats = []
-        const lngs = []
-        for (let i = 0; i < _positions.length; i++) {
-          lats.push(_positions[i][0])
-          lngs.push(_positions[i][1])
-        }
-
-        const minlat = Math.min.apply(null, lats)
-        const maxlat = Math.max.apply(null, lats)
-        const minlng = Math.min.apply(null, lngs)
-        const maxlng = Math.max.apply(null, lngs)
-
-        const _bounds = [
-          [minlat, minlng],
-          [maxlat, maxlng],
-        ] as LatLngBoundsExpression
-        setBounds(_bounds)
-
-        const lines = feat.features.filter((f) => f.geometry.type == 'LineString')
-        let trackName: string
-        if (lines?.[0]?.properties?.['name']) {
-          trackName = lines[0].properties['name']
-        } else {
-          trackName = 'unnamed'
-        }
-        setTrackname(sanitizeFilename(trackName))
-
-        setIsLoading(false)
-      })
-      .catch((error) => {
-        if (error.response?.status === 404) {
-          setError('error_track_not_found')
-        } else {
-          setError('error_loading_track')
-        }
-        setIsLoading(false)
-      })
-  }, [trackId])
 
   const throttledMarkerPositions = useThrottle(markerPositions, 500)
   useEffect(() => {
@@ -170,7 +106,9 @@ const TrackScreen = () => {
   return (
     <>
       {isLoading ? (
-        <p>{getMessage('loading')}</p>
+        <div className="ml-2 md:ml-6 lg:ml-10 mt-8 text-base-content">
+          <Loading size="lg" />
+        </div>
       ) : positions.length > 0 && trackId !== undefined ? (
         <div className="flex flex-col" style={{ height: '100%' }}>
           <TrackHeader
@@ -197,7 +135,7 @@ const TrackScreen = () => {
               {getMessage('track_not_found_headline')}
               <BsEmojiDizzy className="ml-3" />
             </h1>
-            <p className="mb-4 text-2xl font-light mt-8">
+            <div className="mb-4 text-2xl font-light mt-8">
               {getMessage('track_not_found_text')}
               <br />
               {getMessage('not_found_back')}:
@@ -205,7 +143,7 @@ const TrackScreen = () => {
                 <FaAngleRight className="inline" />
                 <div className="inline font-bold">GPS-Tools</div>
               </a>
-            </p>
+            </div>
           </div>
         </>
       )}
