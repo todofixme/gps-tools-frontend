@@ -89,7 +89,12 @@ const AboutScreen = () => {
             className="highlight-color inline text- mr-1"
             style={{ verticalAlign: '-2px' }}
           />{' '}
-          <a href="https://tanstack.com/" className="hover:underline" target="_blank" rel="noreferrer">
+          <a
+            href="https://tanstack.com/"
+            className="hover:underline"
+            target="_blank"
+            rel="noreferrer"
+          >
             TanStack
           </a>{' '}
           <a
