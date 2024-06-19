@@ -1,5 +1,5 @@
 import DownloadLink from './DownloadLink'
-import { FaCircleInfo, FaEye, FaEyeSlash, FaPenToSquare } from 'react-icons/fa6'
+import { FaCircleInfo, FaEllipsis, FaEye, FaEyeSlash, FaPenToSquare } from 'react-icons/fa6'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
 import React, { useMemo, useRef, useState } from 'react'
 import { sanitizeFilename } from '../../../utils/tools'
@@ -53,21 +53,27 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
           />
           &nbsp;
           <FaPenToSquare
-            className="mx-0 relative top-[2px] highlight-color"
+            className="hidden sm:flex mx-0 relative top-[2px] highlight-color"
             onClick={() => {
               tracknameInputFieldRef?.current?.focus()
             }}
           />
         </div>
       </div>
-      <div className="mx-5 mb-2 tooltip flex top-6" data-tip={getMessage('tooltip_mute') as string}>
+      <div
+        className="mx-5 mb-2 tooltip top-6 hidden md:flex"
+        data-tip={getMessage('tooltip_mute') as string}
+      >
         {showPolyline ? (
           <FaEye className="text-3xl" onClick={() => setShowPolyline(false)} />
         ) : (
           <FaEyeSlash className="text-3xl" onClick={() => setShowPolyline(true)} />
         )}
       </div>
-      <div className="flex-1 flex mb-4 justify-end items-center">
+      <div className="flex flex-1 justify-end md:hidden mr-8">
+        <FaEllipsis className="ms-2 relative top-[15px] text-xl" />
+      </div>
+      <div className="hidden md:flex flex-1 mb-4 justify-end items-center">
         <div className="flex flex-row flex-1 justify-end items-center">
           <DownloadLink trackId={trackId} type="gpx" optimizeWaypoints={optimizeWaypoints} />
           <DownloadLink trackId={trackId} type="tcx" optimizeWaypoints={optimizeWaypoints} />
