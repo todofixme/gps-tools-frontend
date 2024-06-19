@@ -1,3 +1,12 @@
+## [0.16.7](https://github.com/devshred/gps-tools-frontend/compare/v0.16.6...v0.16.7) (2024-06-19)
+
+
+### Bug Fixes
+
+* **api:** fix request object ([4e631a5](https://github.com/devshred/gps-tools-frontend/commit/4e631a59b40ffa56e14caeb1c6914d0f8a07fd21))
+* **backend:** improve loading of tracks ([d945a53](https://github.com/devshred/gps-tools-frontend/commit/d945a53e21e4d36854b74e004bdea7dca84d1548))
+* **layout:** improve mobile view ([94cdb7d](https://github.com/devshred/gps-tools-frontend/commit/94cdb7dcc11be78fcf708d0a02096cd2dc52aff9))
+
 ## [0.16.6](https://github.com/devshred/gps-tools-frontend/compare/v0.16.5...v0.16.6) (2024-06-18)
 
 
