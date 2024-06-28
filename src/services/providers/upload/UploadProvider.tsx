@@ -75,7 +75,6 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
       API.post('/merge?' + joinedParams)
         .then((response) => {
           setMergedFile(response.data)
-          uploadedFiles.forEach((file) => API.delete('/tracks/' + file.id))
           setUploadedFiles([])
           navigate({ to: '/track/' + response.data.id })
         })
