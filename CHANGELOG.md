@@ -1,3 +1,16 @@
+## [0.16.8](https://github.com/devshred/gps-tools-frontend/compare/v0.16.7...v0.16.8) (2024-06-28)
+
+
+### Bug Fixes
+
+* **api:** adjust to api changes ([baeddb6](https://github.com/devshred/gps-tools-frontend/commit/baeddb6a4400ca487b987a2d377a4e28b824f4d1))
+* **react:** store selected language locally ([8feabe0](https://github.com/devshred/gps-tools-frontend/commit/8feabe01925f715487aa78d6ea7b2e2e4cb458e8))
+
+
+### Performance Improvements
+
+* **api:** backend takes care of deleting merged files ([a718db2](https://github.com/devshred/gps-tools-frontend/commit/a718db2af6f4b2533ee8ed39a1315d290deaee13))
+
 ## [0.16.7](https://github.com/devshred/gps-tools-frontend/compare/v0.16.6...v0.16.7) (2024-06-19)
 
 
