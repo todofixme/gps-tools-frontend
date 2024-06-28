@@ -1,4 +1,5 @@
-import React, { ReactNode, useState } from 'react'
+import React, { ReactNode } from 'react'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 import LanguageContext from './LanguageContext'
 import en from './data/en.json'
@@ -16,7 +17,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   initialLanguage,
   children,
 }) => {
-  const [language, setLanguage] = useState<Language>(initialLanguage)
+  const [language, setLanguage] = useLocalStorage<Language>('gps-tools_language', initialLanguage)
   const toggleLanguage = () => setLanguage((currentState) => (currentState === 'en' ? 'de' : 'en'))
 
   const dictionary: LanguageDictionary = { en, de }
