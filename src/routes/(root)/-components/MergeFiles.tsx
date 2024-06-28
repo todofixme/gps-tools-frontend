@@ -26,9 +26,6 @@ const MergeFiles = () => {
     removeUploadedFile(file)
   }
 
-  const addThousandsSeparator = (x: number, separator: string) =>
-    x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator)
-
   return (
     <>
       <DragDropContext onDragEnd={onDragEnd}>
@@ -49,9 +46,7 @@ const MergeFiles = () => {
                           <FaEllipsisVertical className="relative top-1" />
                         </div>
                         <div className="flex-grow overflow-hidden text-ellipsis whitespace-nowrap">
-                          {file.filename} -{' '}
-                          {addThousandsSeparator(Math.round(file.size / 1024), '.')}
-                          kB
+                          {file.name}
                         </div>
                         <div className="flex-shrink justify-end">
                           <FaTrashCan
