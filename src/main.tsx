@@ -7,6 +7,7 @@ import { routeTree } from './routeTree.gen'
 const router = createRouter({
   routeTree,
   defaultNotFoundComponent: lazyRouteComponent(() => import('./routes/-screens/NotFoundScreen')),
+  defaultErrorComponent: lazyRouteComponent(() => import('./routes/-screens/ErrorScreen')),
   defaultPreload: 'intent',
 })
 

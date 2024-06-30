@@ -1,10 +1,10 @@
-import React, { ReactNode } from 'react'
-import { useLocalStorage } from '@uidotdev/usehooks'
+import React, { ReactNode, useState } from 'react'
 
 import LanguageContext from './LanguageContext'
 import en from './data/en.json'
 import de from './data/de.json'
 import { Language } from '../../../@types/language'
+import { notFound } from '@tanstack/react-router'
 
 export type LanguageProviderProps = {
   initialLanguage: Language
@@ -17,7 +17,7 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
   initialLanguage,
   children,
 }) => {
-  const [language, setLanguage] = useLocalStorage<Language>('gps-tools_language', initialLanguage)
+  const [language, setLanguage] = useState<Language>(initialLanguage)
   const toggleLanguage = () => setLanguage((currentState) => (currentState === 'en' ? 'de' : 'en'))
 
   const dictionary: LanguageDictionary = { en, de }
@@ -28,8 +28,15 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({
     return message
   }
 
+  const setKnownLanguage = (lang: Language) => {
+    if (lang === 'en' || lang === 'de') setLanguage(lang)
+    else {
+      throw notFound()
+    }
+  }
+
   return (
-    <LanguageContext.Provider value={{ language, toggleLanguage, getMessage }}>
+    <LanguageContext.Provider value={{ language, toggleLanguage, getMessage, setKnownLanguage }}>
       {children}
     </LanguageContext.Provider>
   )
