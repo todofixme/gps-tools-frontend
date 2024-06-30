@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 export type Theme = 'light' | 'dark'
 
 const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState<Theme>('dark')
+  const [theme, setTheme] = useLocalStorage<Theme>('gps-tools_theme', 'dark')
 
   useEffect(() => {
     document.querySelector('html')?.setAttribute('data-theme', theme)
