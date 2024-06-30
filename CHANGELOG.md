@@ -1,3 +1,10 @@
+## [0.16.9](https://github.com/devshred/gps-tools-frontend/compare/v0.16.8...v0.16.9) (2024-06-30)
+
+
+### Bug Fixes
+
+* **react:** store selected theme locally ([869e8dc](https://github.com/devshred/gps-tools-frontend/commit/869e8dc536e0576084563d811b69fc2ba8484ca2))
+
 ## [0.16.8](https://github.com/devshred/gps-tools-frontend/compare/v0.16.7...v0.16.8) (2024-06-28)
 
 
