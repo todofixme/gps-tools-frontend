@@ -14,7 +14,10 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as FaqIndexImport } from './routes/faq/index'
 import { Route as AboutIndexImport } from './routes/about/index'
 import { Route as rootIndexImport } from './routes/(root)/index'
+import { Route as LangIndexImport } from './routes/$lang/index'
 import { Route as TrackTrackIdImport } from './routes/track/$trackId'
+import { Route as LangFaqIndexImport } from './routes/$lang/faq/index'
+import { Route as LangAboutIndexImport } from './routes/$lang/about/index'
 
 // Create/Update Routes
 
@@ -33,8 +36,23 @@ const rootIndexRoute = rootIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const LangIndexRoute = LangIndexImport.update({
+  path: '/$lang/',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const TrackTrackIdRoute = TrackTrackIdImport.update({
   path: '/track/$trackId',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LangFaqIndexRoute = LangFaqIndexImport.update({
+  path: '/$lang/faq/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const LangAboutIndexRoute = LangAboutIndexImport.update({
+  path: '/$lang/about/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -47,6 +65,13 @@ declare module '@tanstack/react-router' {
       path: '/track/$trackId'
       fullPath: '/track/$trackId'
       preLoaderRoute: typeof TrackTrackIdImport
+      parentRoute: typeof rootRoute
+    }
+    '/$lang/': {
+      id: '/$lang/'
+      path: '/$lang'
+      fullPath: '/$lang'
+      preLoaderRoute: typeof LangIndexImport
       parentRoute: typeof rootRoute
     }
     '/(root)/': {
@@ -70,6 +95,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqIndexImport
       parentRoute: typeof rootRoute
     }
+    '/$lang/about/': {
+      id: '/$lang/about/'
+      path: '/$lang/about'
+      fullPath: '/$lang/about'
+      preLoaderRoute: typeof LangAboutIndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/$lang/faq/': {
+      id: '/$lang/faq/'
+      path: '/$lang/faq'
+      fullPath: '/$lang/faq'
+      preLoaderRoute: typeof LangFaqIndexImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -77,9 +116,12 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   TrackTrackIdRoute,
+  LangIndexRoute,
   rootIndexRoute,
   AboutIndexRoute,
   FaqIndexRoute,
+  LangAboutIndexRoute,
+  LangFaqIndexRoute,
 })
 
 /* prettier-ignore-end */
@@ -91,13 +133,19 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "__root.tsx",
       "children": [
         "/track/$trackId",
+        "/$lang/",
         "/",
         "/about/",
-        "/faq/"
+        "/faq/",
+        "/$lang/about/",
+        "/$lang/faq/"
       ]
     },
     "/track/$trackId": {
       "filePath": "track/$trackId.tsx"
+    },
+    "/$lang/": {
+      "filePath": "$lang/index.tsx"
     },
     "/": {
       "filePath": "(root)/index.tsx"
@@ -107,6 +155,12 @@ export const routeTree = rootRoute.addChildren({
     },
     "/faq/": {
       "filePath": "faq/index.tsx"
+    },
+    "/$lang/about/": {
+      "filePath": "$lang/about/index.tsx"
+    },
+    "/$lang/faq/": {
+      "filePath": "$lang/faq/index.tsx"
     }
   }
 }
