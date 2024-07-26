@@ -3,7 +3,7 @@ import { DropzoneRootProps, useDropzone } from 'react-dropzone'
 import { FiUpload } from 'react-icons/fi'
 import { Loading } from 'react-daisyui'
 import { useUploadContext } from '../../../hooks/useUploadContext'
-import useLanguage from '../../../hooks/useLanguage'
+import { useTranslation } from 'react-i18next'
 
 const baseStyle = {
   flex: 1,
@@ -37,7 +37,7 @@ const rejectStyle = {
 
 const UploadForm: React.FC = () => {
   const { uploadFile, uploadedFiles, mergedFile, isLoading } = useUploadContext()
-  const { getMessage } = useLanguage()
+  const { t } = useTranslation('merge')
 
   const onDrop = useCallback((acceptedFiles: Array<File>) => {
     acceptedFiles.map((file) => uploadFile(file))
@@ -81,7 +81,7 @@ const UploadForm: React.FC = () => {
                         : 'highlight-color inline relative bottom-0.5 text-6xl mt-8 mb-8'
                     }
                   />
-                  {getMessage('uploader_drop')}
+                  {t('uploader.drop')}
                 </>
               ) : (
                 <>
@@ -92,7 +92,7 @@ const UploadForm: React.FC = () => {
                         : 'highlight-color inline relative bottom-0.5 text-6xl mt-8 mb-8'
                     }
                   />
-                  {getMessage('uploader_description')}
+                  {t('uploader.description')}
                 </>
               )}
             </div>

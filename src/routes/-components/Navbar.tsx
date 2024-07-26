@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import { Link } from '@tanstack/react-router'
 import NavDesktop from './NavDesktop'
 import NavMobile from './NavMobile'
@@ -33,7 +33,9 @@ const Navbar: React.FC<NavbarProps> = ({ title = DEFAULT_TITLE }) => {
       <div className="flex flex-1 justify-end">
         <NavDesktop />
 
-        <LanguageSelector />
+        <Suspense fallback={<div>Loading...</div>}>
+          <LanguageSelector />
+        </Suspense>
         <ThemeSwitcher />
 
         <NavMobile />

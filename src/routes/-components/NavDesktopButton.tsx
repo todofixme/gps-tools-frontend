@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from '@tanstack/react-router'
-import useLanguage from '../../hooks/useLanguage'
+import { useTranslation } from 'react-i18next'
 
 type NavDesktopButtonProps = {
   label: string
@@ -8,10 +8,10 @@ type NavDesktopButtonProps = {
 }
 
 const NavDesktopButton: React.FC<NavDesktopButtonProps> = ({ label, linkTo }) => {
-  const { getMessage } = useLanguage()
+  const { t } = useTranslation()
   return (
     <Link to={linkTo} className="btn-nav mx-1 text-nav-theme">
-      {getMessage(label)}
+      {t(label)}
     </Link>
   )
 }

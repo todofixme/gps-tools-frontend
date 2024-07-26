@@ -1,0 +1,16 @@
+{
+  "headline": "Error",
+  "generic": "Something went wrong. We're sorry about that!",
+  "backend_server_na": "The backend server is not available at the moment. Sorry!",
+  "not_gps_data": "Couldn't process some files. Was it really GPS data?",
+  "upload_failure": "Failed to upload files. Sorry!",
+  "download_failure_sn": "The file could not be found on the server. Please upload again!",
+  "download_failure_pl": "The files could not be found on the server. Please upload again!",
+  "delete": "Failed to delete file. Sorry!",
+  "loading_track": "Failed to load track. Sorry!",
+  "not_found": {
+    "headline": "Not found",
+    "text": "Whatever you were looking for, I couldn't find it.",
+    "back": "Back to homepage"
+  }
+}

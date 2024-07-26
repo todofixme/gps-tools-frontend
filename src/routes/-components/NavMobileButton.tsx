@@ -1,5 +1,5 @@
 import React, { Dispatch, ReactElement, SetStateAction } from 'react'
-import useLanguage from '../../hooks/useLanguage'
+import { useTranslation } from 'react-i18next'
 import { Link } from '@tanstack/react-router'
 
 type NavMobileButtonProps = {
@@ -10,7 +10,7 @@ type NavMobileButtonProps = {
 }
 
 const NavMobileButton: React.FC<NavMobileButtonProps> = ({ label, linkTo, icon, setOpen }) => {
-  const { getMessage } = useLanguage()
+  const { t } = useTranslation()
   return (
     <div className="text-base-content text-xl">
       <Link
@@ -18,7 +18,7 @@ const NavMobileButton: React.FC<NavMobileButtonProps> = ({ label, linkTo, icon, 
         className={'flex items-center justify-between w-full p-5'}
         to={linkTo}
       >
-        <span className="flex gap-1">{getMessage(label)}</span>
+        <span className="flex gap-1">{t(label)}</span>
         {icon}
       </Link>
     </div>

@@ -1,26 +1,28 @@
 import { FaArrowRight } from 'react-icons/fa6'
-import useLanguage from '../../../hooks/useLanguage'
+import { useTranslation } from 'react-i18next'
 import { useUploadContext } from '../../../hooks/useUploadContext'
 
 const Intro = () => {
   const { mergedFile } = useUploadContext()
-  const { getMessage } = useLanguage()
+  const { t } = useTranslation('merge')
+
+  const descriptions = t('description', { returnObjects: true }) as Record<string, string>
 
   return (
     <>
       {mergedFile === null && (
         <div className="text-base-content mt-4 font-normal text-lg">
           <div className="font-medium" id="introHeader">
-            {getMessage('intro_header')}
+            {t('header')}
           </div>
           <ul className="list-none list-inside">
-            {(getMessage('intro_description_list') as Array<string>).map((item, index) => (
-              <li key={index}>
+            {Object.entries(descriptions).map(([key, value]) => (
+              <li key={key}>
                 <FaArrowRight
                   className="highlight-color inline text- mr-1"
                   style={{ verticalAlign: '-2px' }}
                 />{' '}
-                {item}
+                {value}
               </li>
             ))}
           </ul>

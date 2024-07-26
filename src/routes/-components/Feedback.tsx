@@ -1,10 +1,10 @@
 import { Alert, Button } from 'react-daisyui'
+import { useTranslation } from 'react-i18next'
 import { useFeedbackContext } from '../../hooks/useFeedbackContext'
-import useLanguage from '../../hooks/useLanguage'
 
 function Feedback() {
   const { state, removeFeedback } = useFeedbackContext()
-  const { getMessage } = useLanguage()
+  const { t } = useTranslation()
 
   const handleRemoveFeedback = () => {
     removeFeedback()
@@ -32,9 +32,9 @@ function Feedback() {
             </svg>
           }
         >
-          <span>{getMessage(state.messageKey)}</span>
+          <span>{t(state.messageKey)}</span>
           <Button size="sm" onClick={() => handleRemoveFeedback()}>
-            {getMessage('close')}
+            {t('close')}
           </Button>
         </Alert>
       </div>

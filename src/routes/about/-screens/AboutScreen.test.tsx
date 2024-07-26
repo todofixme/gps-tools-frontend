@@ -2,9 +2,8 @@ import { describe, expect, it, vi } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import AboutScreen from './AboutScreen'
 import React from 'react'
-import { LanguageProvider } from '../../../services/providers/language/LanguageProvider'
-import { Language } from '../../../@types/language'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { changeLanguage } from 'i18next'
 
 const mocks = vi.hoisted(() => ({ get: vi.fn() }))
 
@@ -23,12 +22,8 @@ vi.mock('axios', async (importActual) => {
 
 describe('About Page', () => {
   const queryClient = new QueryClient()
-  const renderWithProviders = (children: React.ReactNode, language: Language = 'en') => {
-    render(
-      <QueryClientProvider client={queryClient}>
-        <LanguageProvider initialLanguage={language}>{children}</LanguageProvider>
-      </QueryClientProvider>,
-    )
+  const renderWithProviders = (children: React.ReactNode) => {
+    render(<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>)
   }
 
   const version = 'v1.2.3'
@@ -38,25 +33,28 @@ describe('About Page', () => {
     })
   })
 
-  it('load page', () => {
+  it('load page with default language', () => {
     renderWithProviders(<AboutScreen />)
-    waitFor(() => {
-      expect(screen.getByText('An app dealing with GPS files.')).toBeInTheDocument()
-    })
+    expect(screen.getByText('An app dealing with GPS files.')).toBeInTheDocument()
   })
 
-  it('load page german page', () => {
-    renderWithProviders(<AboutScreen />, 'de')
-    waitFor(() => {
-      expect(screen.getByText('Eine Anwendung zum Bearbeiten von GPS-Dateien.')).toBeInTheDocument()
-    })
+  it('load german page', () => {
+    changeLanguage('de-DE')
+    renderWithProviders(<AboutScreen />)
+    expect(screen.getByText('Eine Anwendung zum Bearbeiten von GPS-Dateien.')).toBeInTheDocument()
+  })
+
+  it('load english page', () => {
+    changeLanguage('en-GB')
+    renderWithProviders(<AboutScreen />)
+    expect(screen.getByText('An app dealing with GPS files.')).toBeInTheDocument()
   })
 
   it('show version of backend', () => {
     renderWithProviders(<AboutScreen />)
 
     waitFor(async () => {
-      expect(await screen.findByText(version)).toBeInTheDocument()
+      expect(await screen.findByText('dsfav')).toBeInTheDocument()
       expect(mocks.get).toHaveBeenCalled()
     })
   })

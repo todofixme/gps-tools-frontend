@@ -1,0 +1,34 @@
+{
+  "header": "This app allows you to:",
+  "description": {
+    "upload": "Upload a single or multiple files in GPX- or FIT-format.",
+    "merge": "Merge them into a single file.",
+    "visualize": "Visualize the merged file.",
+    "waypoints": "Add, change and remove waypoints.",
+    "download": "Download the merged file as GPX or TCX."
+  },
+  "uploader": {
+    "drop": "Drop the files here ...",
+    "description": "Drag 'n' drop GPX- or FIT-files, or click to select files."
+  },
+  "visualize": {
+    "file": "Visualize the file.",
+    "files": "Merged and visualize the files."
+  },
+  "download_as": "Download as",
+  "tooltip": {
+    "mute": "Mute track on map (M)",
+    "newmarker": "Add waypoint",
+    "fitbounds": "Center the map"
+  },
+  "search_for_waypoints": "Search for waypoints…",
+  "optimize_waypoints": {
+    "label": "Optimize Waypoints",
+    "tooltip": "Waypoints that are closer than 500m to the track will be moved to a point on the track. This can improve readability on some GPS-devices, since these are having problems with points located not directly on the track."
+  },
+  "track_not_found": {
+    "text": "Track not found.",
+    "headline": "Track not found.",
+    "description": "Tracks are not stored permanently on the server. Simply create a new one!"
+  }
+}

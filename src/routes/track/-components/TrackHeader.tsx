@@ -1,9 +1,9 @@
 import DownloadLink from './DownloadLink'
+import { useTranslation } from 'react-i18next'
 import { FaCircleInfo, FaEllipsis, FaEye, FaEyeSlash, FaPenToSquare } from 'react-icons/fa6'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
 import React, { useMemo, useRef, useState } from 'react'
 import { sanitizeFilename } from '../../../utils/tools'
-import useLanguage from '../../../hooks/useLanguage'
 
 type TrackHeaderProps = {
   trackId: string
@@ -23,7 +23,7 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
   const [optimizeWaypoints, setOptimizeWaypoints] = useState<boolean>(false)
   const tracknameInputFieldRef: React.RefObject<HTMLElement> = useRef(null)
   const tracknameRef = useRef('')
-  const { getMessage } = useLanguage()
+  const { t } = useTranslation('merge')
 
   useMemo(() => {
     tracknameRef.current = trackname
@@ -62,7 +62,7 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
       </div>
       <div
         className="mx-5 mb-2 tooltip top-6 hidden md:flex"
-        data-tip={getMessage('tooltip_mute') as string}
+        data-tip={t('tooltip.mute') as string}
       >
         {showPolyline ? (
           <FaEye className="text-3xl" onClick={() => setShowPolyline(false)} />
@@ -87,10 +87,10 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
             className="w-4 h-4"
           />
           <label htmlFor="default-checkbox" className="ms-2">
-            {getMessage('optimize_waypoints')}
+            {t('optimize_waypoints.label')}
           </label>
           &nbsp;
-          <div className="tooltip tooltip-left" data-tip={getMessage('optimize_waypoints_tooltip')}>
+          <div className="tooltip tooltip-left" data-tip={t('optimize_waypoints.tooltip')}>
             <FaCircleInfo className="" />
           </div>
         </div>

@@ -4,6 +4,7 @@ import Navbar from './-components/Navbar'
 import Feedback from './-components/Feedback'
 import Providers from '../services/providers'
 import Footer from './-components/Footer'
+import '../i18n/config'
 
 const TanStackRouterDevtools =
   process.env.NODE_ENV === 'development'

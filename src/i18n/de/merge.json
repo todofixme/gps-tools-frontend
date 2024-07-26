@@ -1,0 +1,34 @@
+{
+  "header": "Diese Anwendung bietet folgende Funktionalitäten:",
+  "description": {
+    "upload": "Upload von Dateien im GPX- oder FIT-format.",
+    "merge": "Zusammenfassen/Mergen dieser Dateien in eine Datei.",
+    "visualize": "Kartendarstellung der zusammengefassten Datei.",
+    "waypoints": "Hinzufügen, Ändern und Löschen von Wegpunkten.",
+    "download": "Download der bearbeiteten Datei im GPX– oder TCX-Format."
+  },
+  "uploader": {
+    "drop": "Dateien hierher ziehen ...",
+    "description": "GPX- oder FIT-Dateien hierher ziehen oder klicken, um die Dateien auszuwählen."
+  },
+  "visualize": {
+    "file": "Die Datei anzeigen.",
+    "files": "Die Dateien zusammenfügen/mergen und anzeigen."
+  },
+  "download_as": "Download als",
+  "tooltip": {
+    "mute": "Track auf der Karte ausblenden (M)",
+    "fitbounds": "Karte zentrieren",
+    "newmarker": "Wegpunkt hinzufügen"
+  },
+  "search_for_waypoints": "Wegpunkte suchen…",
+  "optimize_waypoints": {
+    "label": "Wegpunkte optimieren",
+    "tooltip": "Wegpunkte, die näher als 500m zum Track liegen, werden auf den nächsten Punkt des Tracks verschoben. Dies erhöht die Kompatibilität mit einigen GPS-Geräten, die Probleme mit der Darstellung von Punkten, die nicht exakt auf dem Track liegen, haben."
+  },
+  "track_not_found": {
+    "text": "Der Track wurde nicht gefunden.",
+    "headline": "Strecke nicht gefunden.",
+    "description": "Strecken werden nicht dauerhaft auf dem Server gespeichert. Lege einfach eine neue an!"
+  }
+}

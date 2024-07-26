@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { RouterProvider, createRouter, lazyRouteComponent } from '@tanstack/react-router'
 import './index.css'
 import { routeTree } from './routeTree.gen'
+import './i18n/config'
 
 const router = createRouter({
   routeTree,

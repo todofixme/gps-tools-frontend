@@ -1,12 +1,12 @@
 import { useParams } from '@tanstack/react-router'
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import API from '../../../services/backend/gps-backend-api'
 import { WayPoint } from '../../../@types/gps'
 import { LatLngBoundsExpression, LatLngExpression } from 'leaflet'
 import { generateFeatureCollection } from '../../../utils/tools'
 import VisualizeTrack from '../-components/VisualizeTrack'
 import TrackHeader from '../-components/TrackHeader'
-import useLanguage from '../../../hooks/useLanguage'
 import { useThrottle } from '@uidotdev/usehooks'
 import { BsEmojiDizzy } from 'react-icons/bs'
 import { FaAngleRight } from 'react-icons/fa6'
@@ -16,7 +16,7 @@ import { Loading } from 'react-daisyui'
 const TrackScreen = () => {
   const { trackId } = useParams({ from: '/track/$trackId' })
 
-  const { getMessage } = useLanguage()
+  const { t } = useTranslation(['merge', 'error'])
 
   const [trackname, setTrackname] = useState<string>('')
   const [showPolyline, setShowPolyline] = useState(true)
@@ -132,13 +132,13 @@ const TrackScreen = () => {
         <>
           <div className="ml-2 md:ml-6 lg:ml-10 mt-8 text-base-content">
             <h1 className="text-6xl font-medium tracking-wide flex items-center">
-              {getMessage('track_not_found_headline')}
+              {t('track_not_found.headline')}
               <BsEmojiDizzy className="ml-3" />
             </h1>
             <div className="mb-4 text-2xl font-light mt-8">
-              {getMessage('track_not_found_text')}
+              {t('track_not_found.text')}
               <br />
-              {getMessage('not_found_back')}:
+              {t('error:not_found.back')}:
               <a href="/">
                 <FaAngleRight className="inline" />
                 <div className="inline font-bold">GPS-Tools</div>

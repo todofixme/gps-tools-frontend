@@ -2,11 +2,11 @@ import { DragDropContext, Draggable, Droppable, DropResult } from '@hello-pangea
 import { FaEllipsisVertical, FaEye, FaTrashCan } from 'react-icons/fa6'
 import { useUploadContext } from '../../../hooks/useUploadContext'
 import { UploadedFile } from '../../../@types/upload'
-import useLanguage from '../../../hooks/useLanguage'
+import { useTranslation } from 'react-i18next'
 
 const MergeFiles = () => {
   const { uploadedFiles, setUploadedFiles, removeUploadedFile, mergeFiles } = useUploadContext()
-  const { getMessage } = useLanguage()
+  const { t } = useTranslation('merge')
 
   const reorder = (list: Array<UploadedFile>, startIndex: number, endIndex: number) => {
     const result = Array.from(list)
@@ -73,8 +73,8 @@ const MergeFiles = () => {
             style={{ width: '100%' }}
           >
             <FaEye className="top-1 text-2xl inline-block mr-2" />
-            {uploadedFiles.length == 1 && getMessage('visualize_file')}
-            {uploadedFiles.length > 1 && getMessage('visualize_files')}
+            {uploadedFiles.length == 1 && t('visualize.file')}
+            {uploadedFiles.length > 1 && t('visualize.files')}
           </button>
         )}
       </div>

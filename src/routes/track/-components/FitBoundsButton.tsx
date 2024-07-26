@@ -1,8 +1,8 @@
 import React, { RefObject } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Polyline as LeafletPolyline } from 'leaflet'
 import { useMap } from 'react-leaflet'
 import { MdCenterFocusStrong } from 'react-icons/md'
-import useLanguage from '../../../hooks/useLanguage'
 
 type FitBoundsButtonProps = {
   polylineRef: RefObject<LeafletPolyline>
@@ -10,7 +10,7 @@ type FitBoundsButtonProps = {
 
 const FitBoundsButton: React.FC<FitBoundsButtonProps> = ({ polylineRef }) => {
   const map = useMap()
-  const { getMessage } = useLanguage()
+  const { t } = useTranslation('merge')
 
   const handleFitBounds = () => {
     map.fitBounds(polylineRef.current!.getBounds())
@@ -21,7 +21,7 @@ const FitBoundsButton: React.FC<FitBoundsButtonProps> = ({ polylineRef }) => {
       id="controlButton"
       onClick={handleFitBounds}
       className="tooltip tooltip-left"
-      data-tip={getMessage('tooltip_fitbounds') as string}
+      data-tip={t('tooltip.fitbounds') as string}
     >
       <MdCenterFocusStrong className="text-5xl text-black" />
     </button>

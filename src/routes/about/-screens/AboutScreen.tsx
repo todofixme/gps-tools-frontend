@@ -1,19 +1,20 @@
 import { useBackendVersion } from '../../../services/backend/gps-backend-api'
-import useLanguage from '../../../hooks/useLanguage'
 import { FaArrowRight, FaGithub, FaStrava } from 'react-icons/fa6'
 import { SiKomoot } from 'react-icons/si'
 import ErtIcon from '../../../icons/ErtIcon'
+import '../../../i18n/config'
+import { useTranslation } from 'react-i18next'
 
 const NO_VERSION = { app: 'N/A', git: 'N/A' }
 
 const AboutScreen = () => {
-  const { getMessage } = useLanguage()
   const { data: backendVersion, isLoading, isError } = useBackendVersion()
+  const { t } = useTranslation(['common', 'about'])
 
   return (
     <div className="ml-2 md:ml-6 lg:ml-10 mt-8 text-base-content">
-      <h1 className="text-6xl font-medium tracking-wide">GPS-Tools</h1>
-      <p className="mb-4 text-2xl font-light">{getMessage('app_description')}</p>
+      <h1 className="text-6xl font-medium tracking-wide">{t('title')}</h1>
+      <p className="mb-4 text-2xl font-light">{t('about:description')}</p>
       <p className="text-lg flex items-center space-x-2">
         <a
           href="https://github.com/devshred/gps-tools-frontend"
@@ -55,7 +56,7 @@ const AboutScreen = () => {
           {isLoading || isError ? NO_VERSION.app : backendVersion?.app}
         </a>
       </p>
-      <p className="text-lg mt-4">{getMessage('technologies_header')}</p>
+      <p className="text-lg mt-4">{t('about:technologies')}</p>
       <ul className="text-lg mt-4 list-none list-inside">
         <li>
           <FaArrowRight
@@ -180,9 +181,9 @@ const AboutScreen = () => {
           </a>
         </li>
       </ul>
-      <p className="text-lg mt-4">{getMessage('contact')}: gps minus tools ät tigerflanke dot de</p>
+      <p className="text-lg mt-4">{t('about:contact')}: gps minus tools ät tigerflanke dot de</p>
       <p className="text-lg mt-4 flex items-center space-x-2">
-        {getMessage('prefix_social_icons')}
+        {t('about:prefix_social_icons')}
         <a
           href="https://www.strava.com/athletes/2768818"
           className="hover:highlight-color ml-1"
