@@ -12,7 +12,7 @@ const NotFoundScreen = () => {
         <BsEmojiDizzy className="ml-3" />
       </h1>
       <p className="mb-4 text-2xl font-light mt-8">
-        {t('not_found_text')}
+        {t('not_found.text')}
         <br />
         {t('not_found.back')}:
         <a href="/">
