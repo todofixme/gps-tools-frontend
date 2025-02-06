@@ -7,12 +7,12 @@ import {
   Polyline as LeafletPolyline,
 } from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import Control from 'react-leaflet-custom-control'
 import { PoiType, WayPoint } from '../../../@types/gps'
 import DraggableMarker from './DraggableMarker'
 import FitBoundsButton from './FitBoundsButton'
 import NewMarkerButton from './NewMarkerButton'
 import MarkerSearch from './MarkerSearch'
+import CustomControl from './CustomControl'
 
 type VisualizeTrackProps = {
   bounds: LatLngBoundsExpression
@@ -80,9 +80,9 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Control position="topleft">
+      <CustomControl position="topleft">
         <MarkerSearch setMarkerPositions={setMarkerPositions} />
-      </Control>
+      </CustomControl>
       <LayersControl position="topright">
         <LayersControl.BaseLayer name="Streets" checked={true}>
           <TileLayer
@@ -121,12 +121,12 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
         />
       ))}
       <ZoomControl position="topright" />
-      <Control prepend position="topright">
+      <CustomControl prepend position="topright">
         <div className="flex flex-col">
           <FitBoundsButton polylineRef={polylineRef} />
           <NewMarkerButton setMarkerPositions={setMarkerPositions} />
         </div>
-      </Control>
+      </CustomControl>
     </MapContainer>
   )
 }
