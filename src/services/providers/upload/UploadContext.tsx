@@ -8,7 +8,7 @@ export type UploadContextType = {
   setMergedFile: (mergedFile: UploadedFile | null) => void
   uploadFile: (fileToUpload: File) => void
   removeUploadedFile: (fileToRemove: UploadedFile) => void
-  mergeFiles: () => void
+  mergeFiles: () => Promise<string>
   isLoading: boolean
 }
 

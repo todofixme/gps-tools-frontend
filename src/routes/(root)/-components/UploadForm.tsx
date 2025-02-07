@@ -71,7 +71,7 @@ const UploadForm: React.FC = () => {
               {...getRootProps({ style })}
               className="text-base-content dropzone w-80 sm:w-[480px]"
             >
-              <input {...getInputProps()} />
+              <input {...getInputProps()} aria-label="File Upload" />
               {isDragActive ? (
                 <>
                   <FiUpload

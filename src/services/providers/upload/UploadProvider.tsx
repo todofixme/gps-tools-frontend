@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { UploadedFile } from '../../../@types/upload'
 import { useFeedbackContext } from '../../../hooks/useFeedbackContext'
-import { useNavigate } from '@tanstack/react-router'
 import API from '../../backend/gps-backend-api'
 import { UploadContext } from './UploadContext'
 
@@ -14,7 +13,6 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
   const [mergedFile, setMergedFile] = useState<UploadedFile | null>(null)
   const [isLoading, setLoading] = useState<boolean>(false)
   const { setError } = useFeedbackContext()
-  const navigate = useNavigate()
 
   const uploadFile = async (file: File) => {
     setLoading(true)
@@ -62,21 +60,21 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
       })
   }
 
-  const mergeFiles = () => {
+  const mergeFiles = (): Promise<string> => {
     if (uploadedFiles.length == 1) {
       // no need to merge
       setMergedFile(uploadedFiles[0])
       setUploadedFiles([])
-      navigate({ to: '/track/' + uploadedFiles[0].id })
+      return Promise.resolve('/track/' + uploadedFiles[0].id)
     } else {
       const params = uploadedFiles.map((file) => 'trackIds=' + file.id)
       const joinedParams = params.join('&')
 
-      API.post('/merge?' + joinedParams)
+      return API.post('/merge?' + joinedParams)
         .then((response) => {
           setMergedFile(response.data)
           setUploadedFiles([])
-          navigate({ to: '/track/' + response.data.id })
+          return '/track/' + response.data.id
         })
         .catch((error) => {
           if (error.code === 'ERR_NETWORK') {
@@ -89,6 +87,7 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
           } else {
             setError('Failed to merge files. Sorry!')
           }
+          throw new Error('Failed to merge files. Sorry!')
         })
     }
   }
