@@ -3,10 +3,12 @@ import { FaEllipsisVertical, FaEye, FaTrashCan } from 'react-icons/fa6'
 import { useUploadContext } from '../../../hooks/useUploadContext'
 import { UploadedFile } from '../../../@types/upload'
 import useLanguage from '../../../hooks/useLanguage'
+import { useNavigate } from '@tanstack/react-router'
 
 const MergeFiles = () => {
   const { uploadedFiles, setUploadedFiles, removeUploadedFile, mergeFiles } = useUploadContext()
   const { getMessage } = useLanguage()
+  const navigate = useNavigate({ from: '/' })
 
   const reorder = (list: Array<UploadedFile>, startIndex: number, endIndex: number) => {
     const result = Array.from(list)
@@ -24,6 +26,11 @@ const MergeFiles = () => {
 
   const removeFile = (file: UploadedFile) => () => {
     removeUploadedFile(file)
+  }
+
+  const handleUpload = async () => {
+    const redirectPath = await mergeFiles()
+    navigate({ to: redirectPath })
   }
 
   return (
@@ -68,7 +75,7 @@ const MergeFiles = () => {
       <div>
         {uploadedFiles.length > 0 && (
           <button
-            onClick={mergeFiles}
+            onClick={handleUpload}
             className="pl-4 p-2 my-3 max-w-[480px] outline-button text-left"
             style={{ width: '100%' }}
           >
