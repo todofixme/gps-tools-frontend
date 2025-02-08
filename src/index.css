@@ -1,8 +1,144 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes:
+    light --default,
+    dark --prefersdark;
+}
 
+@theme {
+  --font-sans: Roboto-Regular, sans-serif;
+  --font-serif: Cooper, serif;
+}
+
+[data-theme='dark'] {
+  .bg-navbar {
+    background-color: #06d26a;
+    background-image: linear-gradient(to right, #06d26a, #00918c);
+  }
+  .bg-footer {
+    background-color: #263241;
+    box-shadow: 0px 0px 0.5px 0.5px #000000;
+  }
+  .dropzone {
+    background-color: #263241;
+    border-color: #06d26a;
+  }
+  .inline-button {
+    border-color: #06d26a;
+    border-width: 1.5px;
+    border-radius: 9999px;
+    color: #eaeaea;
+  }
+  .inline-button:hover {
+    border-color: #06d26a;
+    border-width: 1.5px;
+    border-radius: 9999px;
+    color: #202936;
+    background-color: #06d26a;
+  }
+  .outline-button {
+    border-width: 0px;
+    border-radius: 9999px;
+    background-color: #06d26a;
+    color: #263241;
+  }
+  .text-base-content {
+    color: #eaeaea;
+  }
+  .highlight-color {
+    color: #06d26a;
+  }
+  background-color: #202936;
+  .svg-symbol {
+    fill: #06d26a;
+  }
+  .svg-line {
+    stroke: #06d26a;
+  }
+  .svg-icon {
+    fill: #eaeaea;
+  }
+  .svg-icon:hover {
+    fill: #06d26a;
+  }
+  .logo {
+    fill: #202936;
+  }
+}
+
+[data-theme='light'] {
+  .bg-navbar {
+    background-color: #ff3e3e;
+    background-image: linear-gradient(to right, #ff3e3e, #ffa400);
+  }
+  .bg-footer {
+    background-color: #fff8f9;
+    box-shadow: 0px 0px 0.5px 0.5px #474f5a;
+  }
+  .dropzone {
+    background-color: #fff8f9;
+    border-color: #ff3e3e;
+  }
+  .inline-button {
+    border-color: #ff3e3e;
+    border-width: 1.5px;
+    border-radius: 9999px;
+    color: #474f5a;
+  }
+  .inline-button:hover {
+    border-color: #ff3e3e;
+    border-width: 1.5px;
+    border-radius: 9999px;
+    color: white;
+    background-color: #ff3e3e;
+  }
+  .outline-button {
+    border-width: 0px;
+    border-radius: 9999px;
+    background-color: #ff3e3e;
+    color: white;
+  }
+  .text-base-content {
+    color: #474f5a;
+  }
+  .highlight-color {
+    color: #ff3e3e;
+  }
+  background-color: white;
+  .svg-symbol {
+    fill: #ff7917;
+  }
+  .svg-line {
+    stroke: #ff3e3e;
+  }
+  .svg-icon {
+    fill: #474f5a;
+  }
+  .svg-icon:hover {
+    fill: #ff3e3e;
+  }
+  .logo {
+    fill: white;
+  }
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
 @layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+
   @font-face {
     font-family: 'Roboto-Thin';
     font-style: normal;
@@ -71,14 +207,6 @@
   height: 44px !important;
   font-size: 28px;
   padding: 5px;
-}
-
-[data-theme='light'] .logo {
-  fill: white;
-}
-
-[data-theme='dark'] .logo {
-  fill: #202936;
 }
 
 .btn-nav {

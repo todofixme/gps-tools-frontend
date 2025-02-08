@@ -28,7 +28,7 @@ export const Route = createRootRoute({
     <Providers>
       <div className="flex flex-col min-h-screen">
         <Navbar />
-        <main className="flex-grow h-0">
+        <main className="grow h-0">
           <Feedback />
           <Outlet />
         </main>

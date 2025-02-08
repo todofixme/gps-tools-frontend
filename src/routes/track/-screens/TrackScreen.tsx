@@ -118,7 +118,7 @@ const TrackScreen = () => {
             showPolyline={showPolyline}
             setShowPolyline={setShowPolyline}
           />
-          <div className="flex flex-grow">
+          <div className="flex grow">
             <VisualizeTrack
               bounds={bounds}
               positions={positions}
