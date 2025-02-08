@@ -52,10 +52,10 @@ const MergeFiles = () => {
                         <div className="flex-none">
                           <FaEllipsisVertical className="relative top-1" />
                         </div>
-                        <div className="flex-grow overflow-hidden text-ellipsis whitespace-nowrap">
+                        <div className="grow overflow-hidden text-ellipsis whitespace-nowrap">
                           {file.name}
                         </div>
-                        <div className="flex-shrink justify-end">
+                        <div className="shrink justify-end">
                           <FaTrashCan
                             className="ml-1 relative top-1 mr-1"
                             onClick={removeFile(file)}
