@@ -11,7 +11,7 @@ import { useThrottle } from '@uidotdev/usehooks'
 import { BsEmojiDizzy } from 'react-icons/bs'
 import { FaAngleRight } from 'react-icons/fa6'
 import { useFetchTrack } from '../../../services/backend/trackService'
-import { Loading } from 'react-daisyui'
+import Loading from '../../-components/Loading'
 
 const TrackScreen = () => {
   const { trackId } = useParams({ from: '/track/$trackId' })

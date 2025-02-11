@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo } from 'react'
 import { DropzoneRootProps, useDropzone } from 'react-dropzone'
 import { FiUpload } from 'react-icons/fi'
-import { Loading } from 'react-daisyui'
 import { useUploadContext } from '../../../hooks/useUploadContext'
 import useLanguage from '../../../hooks/useLanguage'
+import Loading from '../../-components/Loading'
 
 const baseStyle = {
   flex: 1,

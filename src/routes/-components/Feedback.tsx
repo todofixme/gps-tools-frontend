@@ -1,14 +1,11 @@
-import { Alert, Button } from 'react-daisyui'
 import { useFeedbackContext } from '../../hooks/useFeedbackContext'
 import useLanguage from '../../hooks/useLanguage'
+import Alert from './Alert'
+import Button from './Button'
 
 function Feedback() {
   const { state, removeFeedback } = useFeedbackContext()
   const { getMessage } = useLanguage()
-
-  const handleRemoveFeedback = () => {
-    removeFeedback()
-  }
 
   return (
     state !== null && (
@@ -33,7 +30,7 @@ function Feedback() {
           }
         >
           <span>{getMessage(state.messageKey)}</span>
-          <Button size="sm" onClick={() => handleRemoveFeedback()}>
+          <Button size="sm" onClick={removeFeedback}>
             {getMessage('close')}
           </Button>
         </Alert>
