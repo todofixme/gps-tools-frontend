@@ -80,9 +80,8 @@ export const UploadProvider: React.FC<UploadProviderType> = ({ children }) => {
           if (error.code === 'ERR_NETWORK') {
             setError('error_backend_server_na')
           } else if (error.code === 'ERR_BAD_REQUEST') {
-            uploadedFiles.length == 1
-              ? setError('error_download_failure_sn')
-              : setError('error_download_failure_pl')
+            if (uploadedFiles.length == 1) setError('error_download_failure_sn')
+            else setError('error_download_failure_pl')
             uploadedFiles.map((file) => removeUploadedFile(file))
           } else {
             setError('Failed to merge files. Sorry!')

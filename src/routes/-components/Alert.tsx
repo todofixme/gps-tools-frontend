@@ -9,8 +9,8 @@ type AlertProps = React.HTMLAttributes<HTMLDivElement> & {
 
 const Alert: React.FC<AlertProps> = ({ icon, status, className, children, ...props }) => {
   const combinedClassName = ['alert']
-  status && combinedClassName.push(`alert-${status}`)
-  className && combinedClassName.push(className)
+  if (status) combinedClassName.push(`alert-${status}`)
+  if (className) combinedClassName.push(className)
 
   return (
     <div role="alert" className={combinedClassName.join(' ')} {...props}>
