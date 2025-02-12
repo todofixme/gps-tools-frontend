@@ -1,4 +1,4 @@
-import React, { createRef, useCallback } from 'react'
+import React, { useCallback, useRef } from 'react'
 import { LayersControl, MapContainer, Polyline, TileLayer, ZoomControl } from 'react-leaflet'
 import {
   LatLng,
@@ -29,7 +29,7 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
   setMarkerPositions,
   showPolyline,
 }) => {
-  const polylineRef = createRef<LeafletPolyline>()
+  const polylineRef = useRef<LeafletPolyline>(null as unknown as LeafletPolyline)
 
   const changeMarkerPosition = useCallback((markerId: string, newPosition: LatLng) => {
     setMarkerPositions((prevState) =>

@@ -21,7 +21,7 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
   setShowPolyline,
 }) => {
   const [optimizeWaypoints, setOptimizeWaypoints] = useState<boolean>(false)
-  const tracknameInputFieldRef: React.RefObject<HTMLElement> = useRef(null)
+  const tracknameInputFieldRef = useRef<HTMLElement>(null as unknown as HTMLElement)
   const tracknameRef = useRef('')
   const { getMessage } = useLanguage()
 

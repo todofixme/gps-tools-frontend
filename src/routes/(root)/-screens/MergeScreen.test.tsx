@@ -9,7 +9,7 @@ import {
   createRouter,
   RouterProvider,
 } from '@tanstack/react-router'
-import type { RouterHistory } from '@tanstack/react-router'
+import type { AnyRouter, RouterHistory } from '@tanstack/react-router'
 
 let history: RouterHistory
 
@@ -41,7 +41,7 @@ describe('Root/Merge Screen', () => {
     })
 
     const routeTree = rootRoute.addChildren([indexRoute])
-    const router = createRouter({ routeTree, history })
+    const router: AnyRouter = createRouter({ routeTree, history })
 
     render(<RouterProvider router={router} />)
 
