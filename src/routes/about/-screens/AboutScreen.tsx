@@ -22,9 +22,8 @@ const AboutScreen = () => {
           rel="noreferrer"
         >
           <FaGithub className="hover:highlight-color" />
-          &nbsp;Frontend Version
+          &nbsp;Frontend Version:
         </a>
-        :{' '}
         <a
           href="https://github.com/devshred/gps-tools-frontend/releases"
           className="hover:underline"
@@ -42,9 +41,8 @@ const AboutScreen = () => {
           rel="noreferrer"
         >
           <FaGithub className="hover:highlight-color" />
-          &nbsp;Backend Version
+          &nbsp;Backend Version:
         </a>
-        :{' '}
         <a
           id="backendVersion"
           href="https://github.com/devshred/gps-tools-backend/releases"
