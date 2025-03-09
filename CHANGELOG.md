@@ -1,3 +1,10 @@
+## [0.16.10](https://github.com/todofixme/gps-tools-frontend/compare/v0.16.9...v0.16.10) (2025-03-09)
+
+
+### Bug Fixes
+
+* **layout:** fix blank spaces ([52d578b](https://github.com/todofixme/gps-tools-frontend/commit/52d578b441eeec050338d349d103e0b895d79454))
+
 ## [0.16.9](https://github.com/devshred/gps-tools-frontend/compare/v0.16.8...v0.16.9) (2024-06-30)
 
 
