@@ -8,6 +8,7 @@
   "close": "Close",
   "toggle_language": "Switch to German",
   "toggle_theme": "Switch Theme",
+  "preserve_waypoints": "Apply the existing waypoints.",
   "visualize_file": "Visualize the file.",
   "visualize_files": "Merged and visualize the files.",
   "button_new_process": "Start working on a new file.",
@@ -56,5 +57,8 @@
   "faq_devices_directory": "Directory",
   "faq_devices_note": "If anything is missing or works differently for you, please let us know.",
   "faq_merge_question": "Why would I want to merge tracks?",
-  "faq_merge_answer": "There are various reasons for merging tracks. In the simplest case, of course, because you want to create a combined route from several partial routes. For example, because you have accidentally stopped recording an activity on the way and started another activity and want to merge the activities again before uploading them to Strava. This app also transfers all the values for speed, cadence and heart rate as well as the power data when merging. And if your Garmin crashes on the way and the automatic upload does not work, you can also upload the FIT files directly in this application and merge them if necessary."
+  "faq_merge_answer": "There are various reasons for merging tracks. In the simplest case, of course, because you want to create a combined route from several partial routes. For example, because you have accidentally stopped recording an activity on the way and started another activity and want to merge the activities again before uploading them to Strava. This app also transfers all the values for speed, cadence and heart rate as well as the power data when merging. And if your Garmin crashes on the way and the automatic upload does not work, you can also upload the FIT files directly in this application and merge them if necessary.",
+  "reload_tracks_short": "New",
+  "reload_tracks": "Load new tracks",
+  "reload_close": "Close dialog"
 }

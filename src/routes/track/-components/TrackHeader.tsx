@@ -4,6 +4,7 @@ import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
 import React, { useMemo, useRef, useState } from 'react'
 import { sanitizeFilename } from '../../../utils/tools'
 import useLanguage from '../../../hooks/useLanguage'
+import ReloadLink from './ReloadLink.tsx'
 
 type TrackHeaderProps = {
   trackId: string
@@ -27,7 +28,7 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
 
   useMemo(() => {
     tracknameRef.current = trackname
-  }, [])
+  }, [trackname])
 
   const handleChange = (evt: ContentEditableEvent) => {
     tracknameRef.current = evt.currentTarget.innerHTML
@@ -75,18 +76,19 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
       </div>
       <div className="hidden md:flex flex-1 mb-4 justify-end items-center">
         <div className="flex flex-row flex-1 justify-end items-center">
+          <ReloadLink />
           <DownloadLink trackId={trackId} type="gpx" optimizeWaypoints={optimizeWaypoints} />
           <DownloadLink trackId={trackId} type="tcx" optimizeWaypoints={optimizeWaypoints} />
         </div>
         <div className="ml-3 mr-5">
           <input
-            id="default-checkbox"
+            id="optimize_waypoints_checkbox"
             type="checkbox"
             onChange={(e) => setOptimizeWaypoints(e.target.checked)}
             value=""
             className="w-4 h-4"
           />
-          <label htmlFor="default-checkbox" className="ms-2">
+          <label htmlFor="optimize_waypoints_checkbox" className="ms-2">
             {getMessage('optimize_waypoints')}
           </label>
           &nbsp;
