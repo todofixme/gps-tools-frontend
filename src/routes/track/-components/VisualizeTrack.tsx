@@ -1,5 +1,12 @@
-import React, { useCallback, useRef } from 'react'
-import { LayersControl, MapContainer, Polyline, TileLayer, ZoomControl } from 'react-leaflet'
+import React, { useCallback, useEffect, useRef } from 'react'
+import {
+  LayersControl,
+  MapContainer,
+  Polyline,
+  TileLayer,
+  useMap,
+  ZoomControl,
+} from 'react-leaflet'
 import {
   LatLng,
   LatLngBoundsExpression,
@@ -13,6 +20,15 @@ import FitBoundsButton from './FitBoundsButton'
 import NewMarkerButton from './NewMarkerButton'
 import MarkerSearch from './MarkerSearch'
 import CustomControl from './CustomControl'
+
+const SetBounds: React.FC<{ bounds: LatLngBoundsExpression }> = ({ bounds }) => {
+  const map = useMap()
+  useEffect(() => {
+    map.fitBounds(bounds)
+  }, [map, bounds])
+
+  return null
+}
 
 type VisualizeTrackProps = {
   bounds: LatLngBoundsExpression
@@ -92,7 +108,7 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
         </LayersControl.BaseLayer>
         <LayersControl.BaseLayer name="Topo">
           <TileLayer
-            attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+            attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
             url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
           />
         </LayersControl.BaseLayer>
@@ -127,6 +143,7 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
           <NewMarkerButton setMarkerPositions={setMarkerPositions} />
         </div>
       </CustomControl>
+      <SetBounds bounds={bounds} />
     </MapContainer>
   )
 }

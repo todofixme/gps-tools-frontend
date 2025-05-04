@@ -12,11 +12,14 @@ import { BsEmojiDizzy } from 'react-icons/bs'
 import { FaAngleRight } from 'react-icons/fa6'
 import { useFetchTrack } from '../../../services/backend/trackService'
 import Loading from '../../-components/Loading'
+import ReloadModal from '../../(root)/-components/ReloadModal.tsx'
+import useAppContext from '../../../hooks/useAppContext.ts'
 
 const TrackScreen = () => {
   const { trackId } = useParams({ from: '/track/$trackId' })
 
   const { getMessage } = useLanguage()
+  const { preserveWaypoints, reloadModalOpen, setReloadModalOpen } = useAppContext()
 
   const [trackname, setTrackname] = useState<string>('')
   const [showPolyline, setShowPolyline] = useState(true)
@@ -30,7 +33,11 @@ const TrackScreen = () => {
   const { data: trackResult, isLoading, isError } = useFetchTrack(trackId)
   useEffect(() => {
     if (!isLoading && !isError && trackResult) {
-      setMarkerPositions(trackResult.markerPositions)
+      if (preserveWaypoints) {
+        setMarkerPositions((prevState) => [...prevState, ...trackResult.markerPositions])
+      } else {
+        setMarkerPositions(trackResult.markerPositions)
+      }
       setPositions(trackResult.positions)
       setBounds(trackResult.bounds)
       setTrackname(trackResult.trackName)
@@ -127,6 +134,7 @@ const TrackScreen = () => {
               showPolyline={showPolyline}
             />
           </div>
+          <ReloadModal open={reloadModalOpen} onClose={() => setReloadModalOpen(false)} />
         </div>
       ) : (
         <>

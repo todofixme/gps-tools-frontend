@@ -8,6 +8,7 @@
   "close": "Schließen",
   "toggle_language": "Sprache zu Englisch wechseln",
   "toggle_theme": "Theme wechseln",
+  "preserve_waypoints": "Bestehende Wegpunkte übernehmen.",
   "visualize_file": "Die Datei anzeigen.",
   "visualize_files": "Die Dateien zusammenfügen/mergen und anzeigen.",
   "button_new_process": "Eine neue Datei bearbeiten.",
@@ -56,5 +57,8 @@
   "faq_devices_directory": "Verzeichnis",
   "faq_devices_note": "Falls irgendetwas fehlt oder bei Dir anders funktioniert, gib bitte Bescheid.",
   "faq_merge_question": "Warum sollte ich Strecken mergen?",
-  "faq_merge_answer": "Für das Mergen/Zusammenführen von Strecken gibt es unterschiedliche Gründe. Im einfachsten Fall natürlich, weil Du aus mehreren Teilstrecken eine Gesamtstrecke erstellen möchtest. Zum Beispiel weil Du unterwegs aus Versehen die Aufzeichnung einer Aktivität beendet und eine weitere Aufzeichnung gestartet hast und vor dem Upload z.B. nach Strava die Aktivitäten wieder zusammenführen möchtest. Diese App übernimmt beim Zusammenführen auch alle Werte für Geschwindigkeit, Tritt- und Herzfrequenz, sowie die Leistungsdaten. Und wenn Dein Garmin unterwegs mal wieder abgestürzt ist und der automatische Upload nicht funktioniert, kannst Du in dieser Anwendung auch direkt die FIT-Dateien hochladen und ggfls. zusammenführen lassen."
+  "faq_merge_answer": "Für das Mergen/Zusammenführen von Strecken gibt es unterschiedliche Gründe. Im einfachsten Fall natürlich, weil Du aus mehreren Teilstrecken eine Gesamtstrecke erstellen möchtest. Zum Beispiel weil Du unterwegs aus Versehen die Aufzeichnung einer Aktivität beendet und eine weitere Aufzeichnung gestartet hast und vor dem Upload z.B. nach Strava die Aktivitäten wieder zusammenführen möchtest. Diese App übernimmt beim Zusammenführen auch alle Werte für Geschwindigkeit, Tritt- und Herzfrequenz, sowie die Leistungsdaten. Und wenn Dein Garmin unterwegs mal wieder abgestürzt ist und der automatische Upload nicht funktioniert, kannst Du in dieser Anwendung auch direkt die FIT-Dateien hochladen und ggfls. zusammenführen lassen.",
+  "reload_tracks_short": "Neu",
+  "reload_tracks": "Neue Strecken laden",
+  "reload_close": "Fenster schließen"
 }

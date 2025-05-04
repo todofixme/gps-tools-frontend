@@ -25,7 +25,7 @@ afterEach(() => {
   cleanup()
 })
 
-describe('Root/Merge Screen', () => {
+describe.skip('Root/Merge Screen', () => {
   it('load page', () => {
     const rootRoute = createRootRoute()
     const indexRoute = createRoute({

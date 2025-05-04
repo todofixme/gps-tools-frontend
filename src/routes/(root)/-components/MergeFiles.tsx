@@ -4,11 +4,14 @@ import { useUploadContext } from '../../../hooks/useUploadContext'
 import { UploadedFile } from '../../../@types/upload'
 import useLanguage from '../../../hooks/useLanguage'
 import { useNavigate } from '@tanstack/react-router'
+import useAppContext from '../../../hooks/useAppContext.ts'
 
 const MergeFiles = () => {
   const { uploadedFiles, setUploadedFiles, removeUploadedFile, mergeFiles } = useUploadContext()
   const { getMessage } = useLanguage()
+  const { setReloadModalOpen } = useAppContext()
   const navigate = useNavigate({ from: '/' })
+  const { preserveWaypoints, setPreserveWaypoints, reloadModalOpen } = useAppContext()
 
   const reorder = (list: Array<UploadedFile>, startIndex: number, endIndex: number) => {
     const result = Array.from(list)
@@ -30,7 +33,8 @@ const MergeFiles = () => {
 
   const handleUpload = async () => {
     const redirectPath = await mergeFiles()
-    navigate({ to: redirectPath })
+    await navigate({ to: redirectPath })
+    setReloadModalOpen(false)
   }
 
   return (
@@ -74,15 +78,32 @@ const MergeFiles = () => {
 
       <div>
         {uploadedFiles.length > 0 && (
-          <button
-            onClick={handleUpload}
-            className="pl-4 p-2 my-3 max-w-[480px] outline-button text-left"
-            style={{ width: '100%' }}
-          >
-            <FaEye className="top-1 text-2xl inline-block mr-2" />
-            {uploadedFiles.length == 1 && getMessage('visualize_file')}
-            {uploadedFiles.length > 1 && getMessage('visualize_files')}
-          </button>
+          <>
+            {reloadModalOpen && (
+              <div>
+                <input
+                  id="preserveWaypoints-checkbox"
+                  type="checkbox"
+                  onChange={(e) => setPreserveWaypoints(e.target.checked)}
+                  checked={preserveWaypoints}
+                  value=""
+                  className="w-4 h-4"
+                />
+                <label htmlFor="preserveWaypoints-checkbox" className="ms-2">
+                  {getMessage('preserve_waypoints')}
+                </label>
+              </div>
+            )}
+            <button
+              onClick={handleUpload}
+              className="pl-4 p-2 my-3 max-w-[480px] outline-button text-left"
+              style={{ width: '100%' }}
+            >
+              <FaEye className="top-1 text-2xl inline-block mr-2" />
+              {uploadedFiles.length == 1 && getMessage('visualize_file')}
+              {uploadedFiles.length > 1 && getMessage('visualize_files')}
+            </button>
+          </>
         )}
       </div>
     </>
