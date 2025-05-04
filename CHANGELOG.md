@@ -1,3 +1,10 @@
+# [0.17.0](https://github.com/todofixme/gps-tools-frontend/compare/v0.16.10...v0.17.0) (2025-05-04)
+
+
+### Features
+
+* **waypoints:** preserve waypoints of previous track at reload ([ff249c2](https://github.com/todofixme/gps-tools-frontend/commit/ff249c2ad7115481be48ec1b8be447127d639c01))
+
 ## [0.16.10](https://github.com/todofixme/gps-tools-frontend/compare/v0.16.9...v0.16.10) (2025-03-09)
 
 
