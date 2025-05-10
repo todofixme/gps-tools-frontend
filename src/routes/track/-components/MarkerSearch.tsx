@@ -61,7 +61,21 @@ const MarkerSearch: React.FC<MarkerSearchProps> = ({ setMarkerPositions }) => {
       type: poiType,
       position: [point.coordinates[1], point.coordinates[0]],
     }
-    setMarkerPositions((prevState) => [...prevState, newWayPoint])
+
+    setMarkerPositions((prevState) => {
+      const exists = prevState.some(
+        (wp) =>
+          wp.position[0] === newWayPoint.position[0] &&
+          wp.position[1] === newWayPoint.position[1]
+      )
+
+      if (exists) {
+        console.log('A marker already exists at this position!')
+        return prevState
+      }
+
+      return [...prevState, newWayPoint]
+    })
 
     // clear input
     setSearchTerm('')

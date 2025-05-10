@@ -23,7 +23,21 @@ const NewMarkerButton: React.FC<NewMarkerButtonProps> = ({
       name: 'unnamed',
       type: 'GENERIC',
     }
-    setMarkerPositions((prevState) => [...prevState, waypoint])
+
+    setMarkerPositions((prevState) => {
+      const exists = prevState.some(
+        (wp) =>
+          wp.position[0] === waypoint.position[0] &&
+          wp.position[1] === waypoint.position[1]
+      )
+
+      if (exists) {
+        console.log('A marker already exists at this position!')
+        return prevState
+      }
+
+      return [...prevState, waypoint]
+    })
   }
 
   return (
@@ -33,7 +47,7 @@ const NewMarkerButton: React.FC<NewMarkerButtonProps> = ({
       className="tooltip tooltip-left"
       data-tip={getMessage('tooltip_newmarker') as string}
     >
-      <MdAddLocation className="text-5xl text-black" />
+      <MdAddLocation className="text-5xl text-black"/>
     </button>
   )
 }
