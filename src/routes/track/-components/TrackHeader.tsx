@@ -1,10 +1,11 @@
 import DownloadLink from './DownloadLink'
 import { FaCircleInfo, FaEllipsis, FaEye, FaEyeSlash, FaPenToSquare } from 'react-icons/fa6'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
-import React, { useMemo, useRef, useState } from 'react'
+import React, { useMemo, useRef } from 'react'
 import { sanitizeFilename } from '../../../utils/tools'
 import useLanguage from '../../../hooks/useLanguage'
 import ReloadLink from './ReloadLink.tsx'
+import useAppContext from "../../../hooks/useAppContext.ts";
 
 type TrackHeaderProps = {
   trackId: string
@@ -21,10 +22,10 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
   showPolyline,
   setShowPolyline,
 }) => {
-  const [optimizeWaypoints, setOptimizeWaypoints] = useState<boolean>(false)
   const tracknameInputFieldRef = useRef<HTMLElement>(null as unknown as HTMLElement)
   const tracknameRef = useRef('')
   const { getMessage } = useLanguage()
+  const { optimizeWaypoints, setOptimizeWaypoints } = useAppContext()
 
   useMemo(() => {
     tracknameRef.current = trackname
@@ -66,19 +67,19 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
         data-tip={getMessage('tooltip_mute') as string}
       >
         {showPolyline ? (
-          <FaEye className="text-3xl" onClick={() => setShowPolyline(false)} />
+          <FaEye className="text-3xl" onClick={() => setShowPolyline(false)}/>
         ) : (
-          <FaEyeSlash className="text-3xl" onClick={() => setShowPolyline(true)} />
+          <FaEyeSlash className="text-3xl" onClick={() => setShowPolyline(true)}/>
         )}
       </div>
       <div className="flex flex-1 justify-end md:hidden mr-8">
-        <FaEllipsis className="ms-2 relative top-[15px] text-xl" />
+        <FaEllipsis className="ms-2 relative top-[15px] text-xl"/>
       </div>
       <div className="hidden md:flex flex-1 mb-4 justify-end items-center">
         <div className="flex flex-row flex-1 justify-end items-center">
-          <ReloadLink />
-          <DownloadLink trackId={trackId} type="gpx" optimizeWaypoints={optimizeWaypoints} />
-          <DownloadLink trackId={trackId} type="tcx" optimizeWaypoints={optimizeWaypoints} />
+          <ReloadLink/>
+          <DownloadLink trackId={trackId} type="gpx" />
+          <DownloadLink trackId={trackId} type="tcx" />
         </div>
         <div className="ml-3 mr-5">
           <input
@@ -87,13 +88,14 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
             onChange={(e) => setOptimizeWaypoints(e.target.checked)}
             value=""
             className="w-4 h-4"
+            checked={optimizeWaypoints}
           />
           <label htmlFor="optimize_waypoints_checkbox" className="ms-2">
             {getMessage('optimize_waypoints')}
           </label>
           &nbsp;
           <div className="tooltip tooltip-left" data-tip={getMessage('optimize_waypoints_tooltip')}>
-            <FaCircleInfo className="" />
+            <FaCircleInfo className=""/>
           </div>
         </div>
       </div>
