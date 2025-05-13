@@ -14,11 +14,11 @@
   "button_new_process": "Start working on a new file.",
   "app_description": "An app dealing with GPS files.",
   "technologies_header": "This app was created to showcase some technologies.",
-  "uploader_description": "Drag 'n' drop GPX-, TCX- or FIT-files, or click to select files.",
+  "uploader_description": "Drag 'n' drop GPX, TCX, or FIT files, or click to select files.",
   "uploader_drop": "Drop the files here ...",
   "intro_header": "This app allows you to:",
   "intro_description_list": [
-    "Upload a single or multiple files in GPX-, TCX- or FIT-format.",
+    "Upload a single or multiple files GPX, TCX, or FIT files.",
     "Merge them into a single file.",
     "Visualize the merged file.",
     "Add, change and remove waypoints.",
