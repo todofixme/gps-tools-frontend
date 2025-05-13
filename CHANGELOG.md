@@ -1,3 +1,16 @@
+# [0.18.0](https://github.com/todofixme/gps-tools-frontend/compare/v0.17.1...v0.18.0) (2025-05-13)
+
+
+### Bug Fixes
+
+* **visual:** fix hyphens ([afa11b3](https://github.com/todofixme/gps-tools-frontend/commit/afa11b33cba691d10ec0dcbf4119615af2707b95))
+
+
+### Features
+
+* **download:** memorize state of optimize flag ([4a3254f](https://github.com/todofixme/gps-tools-frontend/commit/4a3254fb3b8fb1030da68a42bc17d071562e7dea))
+* **upload:** import TCX files ([49d99d8](https://github.com/todofixme/gps-tools-frontend/commit/49d99d87f4c5837072e4fd956edf0492a60d40b3))
+
 ## [0.17.1](https://github.com/todofixme/gps-tools-frontend/compare/v0.17.0...v0.17.1) (2025-05-10)
 
 
