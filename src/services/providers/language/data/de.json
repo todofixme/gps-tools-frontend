@@ -14,15 +14,15 @@
   "button_new_process": "Eine neue Datei bearbeiten.",
   "app_description": "Eine Anwendung zum Bearbeiten von GPS-Dateien.",
   "technologies_header": "Diese Anwendung entstand, um einige Technologien zu demonstrieren.",
-  "uploader_description": "GPX-, TCX- oder FIT-Dateien hierher ziehen oder klicken, um die Dateien auszuwählen.",
+  "uploader_description": "GPX–, TCX– oder FIT–Dateien hierher ziehen oder klicken, um die Dateien auszuwählen.",
   "uploader_drop": "Dateien hierher ziehen ...",
   "intro_header": "Diese Anwendung bietet folgende Funktionalitäten:",
   "intro_description_list": [
-    "Upload von Dateien im GPX-, TCX- oder FIT-format.",
+    "Upload von Dateien im GPX–, TCX– oder FIT–format.",
     "Zusammenfassen/Mergen dieser Dateien in eine Datei.",
     "Kartendarstellung der zusammengefassten Datei.",
     "Hinzufügen, Ändern und Löschen von Wegpunkten.",
-    "Download der bearbeiteten Datei im GPX– oder TCX-Format."
+    "Download der bearbeiteten Datei im GPX– oder TCX–Format."
   ],
   "download_as": "Download als",
   "optimize_waypoints": "Wegpunkte optimieren",
