@@ -7,6 +7,8 @@ type AppContextType = {
   setOptimizeWaypoints: React.Dispatch<React.SetStateAction<boolean>>
   reloadModalOpen: boolean
   setReloadModalOpen: React.Dispatch<React.SetStateAction<boolean>>
+  downloadModalOpen: boolean
+  setDownloadModalOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const AppContext = createContext<AppContextType | null>(null)

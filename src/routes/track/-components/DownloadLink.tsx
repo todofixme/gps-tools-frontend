@@ -23,11 +23,11 @@ const DownloadLink: React.FC<DownloadLinkProps> = ({ trackId, type }) => {
 
   return (
     <>
-      <Link to={linkTo} className="lg:hidden flex flex-1 inline-button py-2 px-3 mx-2">
+      <Link to={linkTo} className="sm:hidden flex flex-1 inline-button py-2 px-3 mx-2">
         <FiDownload className="inline mr-1 relative -bottom-0.5"/>
         {type.toUpperCase()}
       </Link>
-      <Link to={linkTo} className="hidden lg:flex inline-button py-2 px-3 mx-2">
+      <Link to={linkTo} className="hidden sm:flex inline-button py-2 px-3 mx-2">
         <FiDownload className="inline mr-1 relative -bottom-0.5"/>
         {getMessage('download_as')} {type.toUpperCase()}
       </Link>
