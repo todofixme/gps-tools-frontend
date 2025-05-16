@@ -4,14 +4,15 @@ import MergeFiles from './MergeFiles.tsx'
 import { UploadProvider } from '../../../services/providers/upload/UploadProvider.tsx'
 import React, { useEffect } from 'react'
 import useLanguage from '../../../hooks/useLanguage.ts'
+import useAppContext from "../../../hooks/useAppContext.ts";
 
-type ReloadModalProps = {
-  open: boolean
-  onClose: () => void
-}
-
-const ReloadModal: React.FC<ReloadModalProps> = ({ open, onClose }) => {
+const ReloadModal: React.FC = () => {
   const { getMessage } = useLanguage()
+  const { reloadModalOpen, setReloadModalOpen } = useAppContext()
+
+  const onClose = () => {
+    setReloadModalOpen(false)
+  }
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -25,7 +26,7 @@ const ReloadModal: React.FC<ReloadModalProps> = ({ open, onClose }) => {
     <div
       className={classNames(
         'fixed inset-0 z-1000 p-8 text-white bg-gray-600/90',
-        `${open ? 'block' : 'hidden'}`,
+        `${reloadModalOpen ? 'block' : 'hidden'}`,
       )}
     >
       <div className="relative w-130 mx-auto mt-8">
@@ -38,8 +39,8 @@ const ReloadModal: React.FC<ReloadModalProps> = ({ open, onClose }) => {
         </button>
         <div className="overflow-hidden bg-gray-800 rounded shadow-xl px-5 pb-5">
           <UploadProvider>
-            <UploadForm />
-            <MergeFiles />
+            <UploadForm/>
+            <MergeFiles/>
           </UploadProvider>
         </div>
       </div>

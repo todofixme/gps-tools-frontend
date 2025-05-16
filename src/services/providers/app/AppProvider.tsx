@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AppContext from './AppContext'
 
 export type AppProviderType = {
@@ -9,6 +9,7 @@ export const AppProvider: React.FC<AppProviderType> = ({ children }) => {
   const [preserveWaypoints, setPreserveWaypoints] = React.useState(false)
   const [optimizeWaypoints, setOptimizeWaypoints] = React.useState(true)
   const [reloadModalOpen, setReloadModalOpen] = React.useState(false)
+  const [downloadModalOpen, setDownloadModalOpen] = useState(false)
 
   return (
     <AppContext.Provider
@@ -18,7 +19,9 @@ export const AppProvider: React.FC<AppProviderType> = ({ children }) => {
         optimizeWaypoints,
         setOptimizeWaypoints,
         reloadModalOpen,
-        setReloadModalOpen
+        setReloadModalOpen,
+        downloadModalOpen,
+        setDownloadModalOpen,
       }}
     >
       {children}

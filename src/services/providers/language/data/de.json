@@ -60,5 +60,6 @@
   "faq_merge_answer": "Für das Mergen/Zusammenführen von Strecken gibt es unterschiedliche Gründe. Im einfachsten Fall natürlich, weil Du aus mehreren Teilstrecken eine Gesamtstrecke erstellen möchtest. Zum Beispiel weil Du unterwegs aus Versehen die Aufzeichnung einer Aktivität beendet und eine weitere Aufzeichnung gestartet hast und vor dem Upload z.B. nach Strava die Aktivitäten wieder zusammenführen möchtest. Diese App übernimmt beim Zusammenführen auch alle Werte für Geschwindigkeit, Tritt- und Herzfrequenz, sowie die Leistungsdaten. Und wenn Dein Garmin unterwegs mal wieder abgestürzt ist und der automatische Upload nicht funktioniert, kannst Du in dieser Anwendung auch direkt die FIT-Dateien hochladen und ggfls. zusammenführen lassen.",
   "reload_tracks_short": "Neu",
   "reload_tracks": "Neue Strecken laden",
-  "reload_close": "Fenster schließen"
+  "reload_close": "Fenster schließen",
+  "download": "Download"
 }

@@ -3,7 +3,7 @@ import useLanguage from '../../../hooks/useLanguage'
 import { FaSyncAlt } from 'react-icons/fa'
 import useAppContext from '../../../hooks/useAppContext.ts'
 
-const ReloadLink: React.FC = () => {
+const ReloadButton: React.FC = () => {
   const { getMessage } = useLanguage()
   const { setReloadModalOpen } = useAppContext()
 
@@ -27,4 +27,4 @@ const ReloadLink: React.FC = () => {
   )
 }
 
-export default ReloadLink
+export default ReloadButton

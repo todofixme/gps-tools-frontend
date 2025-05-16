@@ -1,14 +1,12 @@
-import DownloadLink from './DownloadLink'
-import { FaCircleInfo, FaEllipsis, FaEye, FaEyeSlash, FaPenToSquare } from 'react-icons/fa6'
+import { FaEllipsis, FaEye, FaEyeSlash, FaPenToSquare } from 'react-icons/fa6'
 import ContentEditable, { ContentEditableEvent } from 'react-contenteditable'
 import React, { useMemo, useRef } from 'react'
 import { sanitizeFilename } from '../../../utils/tools'
 import useLanguage from '../../../hooks/useLanguage'
-import ReloadLink from './ReloadLink.tsx'
-import useAppContext from "../../../hooks/useAppContext.ts";
+import ReloadButton from './ReloadButton.tsx'
+import DownloadButton from "./DownloadButton.tsx";
 
 type TrackHeaderProps = {
-  trackId: string
   trackname: string
   setTrackname: React.Dispatch<React.SetStateAction<string>>
   showPolyline: boolean
@@ -16,7 +14,6 @@ type TrackHeaderProps = {
 }
 
 const TrackHeader: React.FC<TrackHeaderProps> = ({
-  trackId,
   trackname,
   setTrackname,
   showPolyline,
@@ -25,7 +22,6 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
   const tracknameInputFieldRef = useRef<HTMLElement>(null as unknown as HTMLElement)
   const tracknameRef = useRef('')
   const { getMessage } = useLanguage()
-  const { optimizeWaypoints, setOptimizeWaypoints } = useAppContext()
 
   useMemo(() => {
     tracknameRef.current = trackname
@@ -42,7 +38,7 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
   }
 
   return (
-    <div className="flex flex-row ml-5 text-base-content">
+    <div className="flex flex-row ml-5 text-base-content mr-4">
       <div className="mb-4">
         <div className="text-">Trackname</div>
         <div className="flex text-2xl">
@@ -77,26 +73,8 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
       </div>
       <div className="hidden md:flex flex-1 mb-4 justify-end items-center">
         <div className="flex flex-row flex-1 justify-end items-center">
-          <ReloadLink/>
-          <DownloadLink trackId={trackId} type="gpx" />
-          <DownloadLink trackId={trackId} type="tcx" />
-        </div>
-        <div className="ml-3 mr-5">
-          <input
-            id="optimize_waypoints_checkbox"
-            type="checkbox"
-            onChange={(e) => setOptimizeWaypoints(e.target.checked)}
-            value=""
-            className="w-4 h-4"
-            checked={optimizeWaypoints}
-          />
-          <label htmlFor="optimize_waypoints_checkbox" className="ms-2">
-            {getMessage('optimize_waypoints')}
-          </label>
-          &nbsp;
-          <div className="tooltip tooltip-left" data-tip={getMessage('optimize_waypoints_tooltip')}>
-            <FaCircleInfo className=""/>
-          </div>
+          <ReloadButton/>
+          <DownloadButton/>
         </div>
       </div>
     </div>
