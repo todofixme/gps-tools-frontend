@@ -1,3 +1,10 @@
+# [0.19.0](https://github.com/todofixme/gps-tools-frontend/compare/v0.18.0...v0.19.0) (2025-05-16)
+
+
+### Features
+
+* add download modal ([ac116f1](https://github.com/todofixme/gps-tools-frontend/commit/ac116f10a428f0bb9c5deb825b29588a665ebe79))
+
 # [0.18.0](https://github.com/todofixme/gps-tools-frontend/compare/v0.17.1...v0.18.0) (2025-05-13)
 
 
