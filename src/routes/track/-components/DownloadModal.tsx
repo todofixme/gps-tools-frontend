@@ -42,6 +42,7 @@ const DownloadModal: React.FC<DownloadModalProps> = ({ trackId }) => {
           <span className="text-2xl leading-7 select-none">&times;</span>
         </button>
         <div className="bg-gray-800 rounded shadow-xl p-5 space-y-3">
+          <div className="text-2xl ml-2">{getMessage('download_track')}</div>
           <DownloadLink trackId={trackId} type="gpx"/>
           <DownloadLink trackId={trackId} type="tcx"/>
           <div className="ml-3 mr-5 flex items-center gap-2">
@@ -67,6 +68,9 @@ const DownloadModal: React.FC<DownloadModalProps> = ({ trackId }) => {
             </button>
             <Tooltip id="optimize-waypoints-tooltip" className="max-w-xs break-words"/>
           </div>
+          <hr className="mt-7 mb-5"/>
+          <div className="text-2xl ml-2">{getMessage('download_waypoints')}</div>
+          <DownloadLink trackId={trackId} type="points"/>
         </div>
       </div>
     </div>

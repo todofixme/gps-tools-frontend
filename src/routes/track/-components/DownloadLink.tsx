@@ -13,13 +13,10 @@ const DownloadLink: React.FC<DownloadLinkProps> = ({ trackId, type }) => {
   const { getMessage } = useLanguage()
   const { optimizeWaypoints } = useAppContext()
   const baseUrl = import.meta.env.VITE_BACKEND_BASE_URL
-  const linkTo: string =
-    baseUrl +
-    '/tracks/' +
-    trackId +
-    '?mode=dl&type=' +
-    type +
-    (optimizeWaypoints ? '&mode=opt' : '')
+  const [linkTo, downloadAs] = type === "points"
+    ? [`${baseUrl}/tracks/${trackId}/points?mode=dl`, "GeoJSON"]
+    : [`${baseUrl}/tracks/${trackId}?mode=dl&type=${type}` +
+    (optimizeWaypoints ? '&mode=opt' : ''), type.toUpperCase()]
 
   return (
     <>
@@ -29,7 +26,7 @@ const DownloadLink: React.FC<DownloadLinkProps> = ({ trackId, type }) => {
       </Link>
       <Link to={linkTo} className="hidden sm:flex inline-button py-2 px-3 mx-2">
         <FiDownload className="inline mr-1 relative -bottom-0.5"/>
-        {getMessage('download_as')} {type.toUpperCase()}
+        {getMessage('download_as')} {downloadAs}
       </Link>
     </>
   )
