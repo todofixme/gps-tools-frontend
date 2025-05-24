@@ -61,5 +61,7 @@
   "reload_tracks_short": "Neu",
   "reload_tracks": "Neue Strecken laden",
   "reload_close": "Fenster schließen",
-  "download": "Download"
+  "download": "Download",
+  "download_track": "Download Strecke",
+  "download_waypoints": "Download Wegpunkte"
 }
