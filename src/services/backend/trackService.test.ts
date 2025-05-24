@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest'
 import { LatLngTuple } from 'leaflet'
 import { findBounds, findMarkerPositions, findPositions, findTrackName } from './trackService'
 import { FeatureCollection } from 'geojson'
+import { WayPoint } from "../../@types/gps.ts";
+import { v4 as uuidv4 } from "uuid";
 
 describe('process track', () => {
   it('find marker positions', () => {
@@ -169,7 +171,24 @@ describe('process track', () => {
       [2, 4],
     ] as LatLngTuple[]
 
-    const actual = findBounds(positions)
+    const actual = findBounds(positions, [])
+
+    expect(actual).toStrictEqual([
+      [1, 1],
+      [5, 5],
+    ])
+  })
+
+  it('find bounds, use markerPositions as fallback', () => {
+    const markerPositions = [
+      { position: [1, 3], id: uuidv4(), name: "rand", type: "GENERIC" },
+      { position: [3, 5], id: uuidv4(), name: "rand", type: "GENERIC" },
+      { position: [5, 2], id: uuidv4(), name: "rand", type: "GENERIC" },
+      { position: [4, 1], id: uuidv4(), name: "rand", type: "GENERIC" },
+      { position: [2, 4], id: uuidv4(), name: "rand", type: "GENERIC" }
+    ] as WayPoint[]
+
+    const actual = findBounds([], markerPositions)
 
     expect(actual).toStrictEqual([
       [1, 1],

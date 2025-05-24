@@ -44,7 +44,7 @@ const UploadForm: React.FC = () => {
   }, [])
 
   const { getRootProps, getInputProps, isDragActive, isFocused, isDragAccept, isDragReject } =
-    useDropzone({ onDrop, accept: { '*/*': ['.gpx', '.tcx', '.fit'] } })
+    useDropzone({ onDrop, accept: { 'application/gpx+xml': ['.gpx'], 'application/geo+json': ['.json'], 'application/octet-stream': ['.fit', '.tcx'] } })
 
   const style: DropzoneRootProps = useMemo(
     () => ({

@@ -119,7 +119,7 @@ const VisualizeTrack: React.FC<VisualizeTrackProps> = ({
           />
         </LayersControl.BaseLayer>
       </LayersControl>
-      {showPolyline && (
+      {showPolyline && positions && (
         <Polyline
           pathOptions={{ fillColor: 'red', color: '#27e' }}
           positions={positions}
