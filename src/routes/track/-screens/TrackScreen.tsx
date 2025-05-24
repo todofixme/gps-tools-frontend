@@ -117,7 +117,7 @@ const TrackScreen = () => {
         <div className="ml-2 md:ml-6 lg:ml-10 mt-8 text-base-content">
           <Loading size="lg"/>
         </div>
-      ) : positions.length > 0 && trackId !== undefined ? (
+      ) : (positions.length > 0 || markerPositions.length > 0) && trackId !== undefined ? (
         <div className="flex flex-col" style={{ height: '100%' }}>
           <TrackHeader
             trackname={trackname}

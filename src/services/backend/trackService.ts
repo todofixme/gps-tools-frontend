@@ -24,12 +24,13 @@ const fetchTrack = async (trackId: string): Promise<TrackResult> => {
     .then((track) => {
       const featureCollection: FeatureCollection = track.data as FeatureCollection
       const positions = findPositions(featureCollection)
+      const markerPositions = findMarkerPositions(featureCollection);
 
       return {
         trackName: findTrackName(featureCollection),
         positions: positions,
-        markerPositions: findMarkerPositions(featureCollection),
-        bounds: findBounds(positions),
+        markerPositions: markerPositions,
+        bounds: findBounds(positions, markerPositions),
       }
     })
     .catch((error) => {
@@ -63,32 +64,25 @@ export const findMarkerPositions = (featureCollection: FeatureCollection): WayPo
     }) as WayPoint[]
 }
 
-export const findPositions = (featureCollection: FeatureCollection): LatLngTuple[] => {
-  return featureCollection.features
-    .filter((f) => f.geometry.type == 'LineString')
-    .flatMap((line) => (line.geometry as LineString).coordinates)
-    .map((position) => [position[1], position[0]]) as LatLngTuple[]
-}
+export const findPositions = (featureCollection: FeatureCollection): LatLngTuple[] =>
+  featureCollection.features
+    .filter(({ geometry }) => geometry.type === 'LineString' && geometry.coordinates?.length)
+    .flatMap(({ geometry }) => (geometry as LineString).coordinates)
+    .map(([lng, lat]) => [lat, lng] as LatLngTuple)
 
-export const findBounds = (positions: LatLngTuple[]) => {
-  const lats = []
-  const lngs = []
-  for (let i = 0; i < positions.length; i++) {
-    lats.push(positions[i][0])
-    lngs.push(positions[i][1])
-  }
+export const findBounds = (positions: LatLngTuple[], markerPositions: WayPoint[]) => {
+  const lats = positions.length > 0
+    ? positions.map(([lat]) => lat)
+    : markerPositions.map(({ position: [lat] }) => lat)
 
-  const minlat = Math.min.apply(null, lats)
-  const maxlat = Math.max.apply(null, lats)
-  const minlng = Math.min.apply(null, lngs)
-  const maxlng = Math.max.apply(null, lngs)
+  const lngs = positions.length > 0
+    ? positions.map(([, lng]) => lng)
+    : markerPositions.map(({ position: [, lng] }) => lng)
 
-  const bounds = [
-    [minlat, minlng],
-    [maxlat, maxlng],
+  return [
+    [Math.min(...lats), Math.min(...lngs)],
+    [Math.max(...lats), Math.max(...lngs)],
   ] as LatLngBoundsExpression
-
-  return bounds
 }
 
 export const findTrackName = (featureCollection: FeatureCollection) => {
