@@ -1,3 +1,11 @@
+# [0.20.0](https://github.com/todofixme/gps-tools-frontend/compare/v0.19.0...v0.20.0) (2025-05-24)
+
+
+### Features
+
+* **download:** download waypoints as GeoJSON ([9b1b2b2](https://github.com/todofixme/gps-tools-frontend/commit/9b1b2b2e8465528c6bbdf32f3140a045a27ff976))
+* **upload:** upload waypoints as GeoJSON ([82deb70](https://github.com/todofixme/gps-tools-frontend/commit/82deb70c801c7593196291a9f8d5a970903a96b1))
+
 # [0.19.0](https://github.com/todofixme/gps-tools-frontend/compare/v0.18.0...v0.19.0) (2025-05-16)
 
 
