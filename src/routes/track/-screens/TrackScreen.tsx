@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import API from '../../../services/backend/gps-backend-api'
 import { WayPoint } from '../../../@types/gps'
 import { LatLngBoundsExpression, LatLngExpression } from 'leaflet'
-import { generateFeatureCollection } from '../../../utils/tools'
+import { generateFeatureCollection, removeDuplicateWaypoints } from '../../../utils/tools'
 import VisualizeTrack from '../-components/VisualizeTrack'
 import TrackHeader from '../-components/TrackHeader'
 import useLanguage from '../../../hooks/useLanguage'
@@ -33,17 +33,18 @@ const TrackScreen = () => {
 
   const { data: trackResult, isLoading, isError } = useFetchTrack(trackId)
   useEffect(() => {
-    if (!isLoading && !isError && trackResult) {
-      if (preserveWaypoints) {
-        setMarkerPositions((prevState) => [...prevState, ...trackResult.markerPositions])
-      } else {
-        setMarkerPositions(trackResult.markerPositions)
+    if (isLoading || isError || !trackResult) return;
+
+    setMarkerPositions((prevState) => {
+        return preserveWaypoints
+          ? removeDuplicateWaypoints([...prevState, ...trackResult.markerPositions])
+          : trackResult.markerPositions
       }
-      setPositions(trackResult.positions)
-      setBounds(trackResult.bounds)
-      setTrackname(trackResult.trackName)
-    }
-  }, [isLoading, isError, trackResult])
+    );
+    setPositions(trackResult.positions);
+    setBounds(trackResult.bounds);
+    setTrackname(trackResult.trackName);
+  }, [isLoading, isError, trackResult]);
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
