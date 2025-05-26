@@ -4,6 +4,7 @@ import {
   decodeFromBase64,
   encodeToBase64,
   generateFeatureCollection,
+  removeDuplicateWaypoints,
   sanitizeFilename,
 } from './tools'
 import { WayPoint } from '../@types/gps'
@@ -156,3 +157,75 @@ describe('convert OSM key and value to PoiType', () => {
     expect(actual).toStrictEqual('GENERIC')
   })
 })
+
+describe('removeDuplicateWaypoints', () => {
+  it('should return an empty array when given an empty array', () => {
+    const input: WayPoint[] = [];
+    const output = removeDuplicateWaypoints(input);
+
+    expect(output).toEqual([]);
+    expect(output).toHaveLength(0);
+  });
+
+  it('should return the same array when there are no duplicates', () => {
+    const input: WayPoint[] = [
+      { id: '1', position: [50.1, 8.1], name: 'Point A', type: 'GENERIC' },
+      { id: '2', position: [50.2, 8.2], name: 'Point B', type: 'SPRINT' },
+      { id: '3', position: [50.3, 8.3], name: 'Point C', type: 'SUMMIT' }
+    ];
+
+    const output = removeDuplicateWaypoints(input);
+
+    expect(output).toHaveLength(3);
+    expect(output).toEqual(expect.arrayContaining(input));
+  });
+
+  it('should remove exact duplicates', () => {
+    const waypoint1 = { id: '1', position: [50.1, 8.1], name: 'Point A', type: 'GENERIC' as const } as WayPoint;
+    const waypoint2 = { id: '2', position: [50.2, 8.2], name: 'Point B', type: 'GENERIC' as const } as WayPoint;
+
+    const input: WayPoint[] = [
+      waypoint1,
+      waypoint2,
+      { ...waypoint1, id: '3' } // Same position and name, but different ID
+    ];
+
+    const output = removeDuplicateWaypoints(input);
+
+    expect(output).toHaveLength(2);
+  });
+
+  it('should remove duplicates based on position and name, regardless of type', () => {
+    const input: WayPoint[] = [
+      { id: '1', position: [50.1, 8.1], name: 'Point A', type: 'GENERIC' },
+      { id: '2', position: [50.1, 8.1], name: 'Point A', type: 'SUMMIT' } // Same position and name, different type
+    ];
+
+    const output = removeDuplicateWaypoints(input);
+
+    expect(output).toHaveLength(1);
+  });
+
+  it('should keep waypoints with same position but different names', () => {
+    const input: WayPoint[] = [
+      { id: '1', position: [50.1, 8.1], name: 'Point A', type: 'GENERIC' },
+      { id: '2', position: [50.1, 8.1], name: 'Point B', type: 'GENERIC' } // Same position, different name
+    ];
+
+    const output = removeDuplicateWaypoints(input);
+
+    expect(output).toHaveLength(2);
+    expect(output.map(wp => wp.name)).toEqual(expect.arrayContaining(['Point A', 'Point B']));
+  });
+
+  it('should handle coordinate precision correctly', () => {
+    const input: WayPoint[] = [
+      { id: '1', position: [50.123456, 8.123456], name: 'Point A', type: 'GENERIC' },
+      { id: '2', position: [50.123457, 8.123455], name: 'Point A', type: 'GENERIC' } // Very similar, but not identical coordinates
+    ];
+
+    const output = removeDuplicateWaypoints(input);
+
+    expect(output).toHaveLength(2);
+  });
+});
