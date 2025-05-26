@@ -1,3 +1,10 @@
+## [0.20.1](https://github.com/todofixme/gps-tools-frontend/compare/v0.20.0...v0.20.1) (2025-05-26)
+
+
+### Bug Fixes
+
+* remove duplicate waypoints ([5b70174](https://github.com/todofixme/gps-tools-frontend/commit/5b70174908029a2dfa821aa95459026afcd95565))
+
 # [0.20.0](https://github.com/todofixme/gps-tools-frontend/compare/v0.19.0...v0.20.0) (2025-05-24)
 
 
