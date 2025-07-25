@@ -65,8 +65,7 @@ const MarkerSearch: React.FC<MarkerSearchProps> = ({ setMarkerPositions }) => {
     setMarkerPositions((prevState) => {
       const exists = prevState.some(
         (wp) =>
-          wp.position[0] === newWayPoint.position[0] &&
-          wp.position[1] === newWayPoint.position[1]
+          wp.position[0] === newWayPoint.position[0] && wp.position[1] === newWayPoint.position[1],
       )
 
       if (exists) {

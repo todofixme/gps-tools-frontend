@@ -36,6 +36,7 @@ describe('About Page', () => {
     mocks.get.mockResolvedValueOnce({
       data: { app: version, git: 'githash' },
     })
+    localStorage.clear() // Clear localStorage before each test to reset language
   })
 
   it('load page', () => {
@@ -45,19 +46,18 @@ describe('About Page', () => {
     })
   })
 
-  it('load page german page', () => {
+  it('load page german page', async () => {
     renderWithProviders(<AboutScreen />, 'de')
-    waitFor(() => {
-      expect(screen.getByText('Eine Anwendung zum Bearbeiten von GPS-Dateien.')).toBeInTheDocument()
-    })
+
+    const germanText = await screen.findByText('Eine Anwendung zum Bearbeiten von GPS-Dateien.')
+    expect(germanText).toBeInTheDocument()
   })
 
-  it('show version of backend', () => {
+  it('show version of backend', async () => {
     renderWithProviders(<AboutScreen />)
 
-    waitFor(async () => {
-      expect(await screen.findByText(version)).toBeInTheDocument()
-      expect(mocks.get).toHaveBeenCalled()
-    })
+    const versionText = await screen.findByText(version)
+    expect(versionText).toBeInTheDocument()
+    expect(mocks.get).toHaveBeenCalled()
   })
 })

@@ -4,7 +4,7 @@ import MergeFiles from './MergeFiles.tsx'
 import { UploadProvider } from '../../../services/providers/upload/UploadProvider.tsx'
 import React, { useEffect } from 'react'
 import useLanguage from '../../../hooks/useLanguage.ts'
-import useAppContext from "../../../hooks/useAppContext.ts";
+import useAppContext from '../../../hooks/useAppContext.ts'
 
 const ReloadModal: React.FC = () => {
   const { getMessage } = useLanguage()
@@ -39,8 +39,8 @@ const ReloadModal: React.FC = () => {
         </button>
         <div className="overflow-hidden bg-gray-800 rounded shadow-xl px-5 pb-5">
           <UploadProvider>
-            <UploadForm/>
-            <MergeFiles/>
+            <UploadForm />
+            <MergeFiles />
           </UploadProvider>
         </div>
       </div>
