@@ -24,7 +24,7 @@ const fetchTrack = async (trackId: string): Promise<TrackResult> => {
     .then((track) => {
       const featureCollection: FeatureCollection = track.data as FeatureCollection
       const positions = findPositions(featureCollection)
-      const markerPositions = findMarkerPositions(featureCollection);
+      const markerPositions = findMarkerPositions(featureCollection)
 
       return {
         trackName: findTrackName(featureCollection),
@@ -71,13 +71,15 @@ export const findPositions = (featureCollection: FeatureCollection): LatLngTuple
     .map(([lng, lat]) => [lat, lng] as LatLngTuple)
 
 export const findBounds = (positions: LatLngTuple[], markerPositions: WayPoint[]) => {
-  const lats = positions.length > 0
-    ? positions.map(([lat]) => lat)
-    : markerPositions.map(({ position: [lat] }) => lat)
+  const lats =
+    positions.length > 0
+      ? positions.map(([lat]) => lat)
+      : markerPositions.map(({ position: [lat] }) => lat)
 
-  const lngs = positions.length > 0
-    ? positions.map(([, lng]) => lng)
-    : markerPositions.map(({ position: [, lng] }) => lng)
+  const lngs =
+    positions.length > 0
+      ? positions.map(([, lng]) => lng)
+      : markerPositions.map(({ position: [, lng] }) => lng)
 
   return [
     [Math.min(...lats), Math.min(...lngs)],

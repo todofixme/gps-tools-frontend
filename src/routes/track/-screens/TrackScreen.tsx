@@ -14,13 +14,13 @@ import { useFetchTrack } from '../../../services/backend/trackService'
 import Loading from '../../-components/Loading'
 import ReloadModal from '../../(root)/-components/ReloadModal.tsx'
 import useAppContext from '../../../hooks/useAppContext.ts'
-import DownloadModal from "../-components/DownloadModal.tsx";
+import DownloadModal from '../-components/DownloadModal.tsx'
 
 const TrackScreen = () => {
   const { trackId } = useParams({ from: '/track/$trackId' })
 
   const { getMessage } = useLanguage()
-  const { preserveWaypoints, } = useAppContext()
+  const { preserveWaypoints } = useAppContext()
 
   const [trackname, setTrackname] = useState<string>('')
   const [showPolyline, setShowPolyline] = useState(true)
@@ -33,18 +33,17 @@ const TrackScreen = () => {
 
   const { data: trackResult, isLoading, isError } = useFetchTrack(trackId)
   useEffect(() => {
-    if (isLoading || isError || !trackResult) return;
+    if (isLoading || isError || !trackResult) return
 
     setMarkerPositions((prevState) => {
-        return preserveWaypoints
-          ? removeDuplicateWaypoints([...prevState, ...trackResult.markerPositions])
-          : trackResult.markerPositions
-      }
-    );
-    setPositions(trackResult.positions);
-    setBounds(trackResult.bounds);
-    setTrackname(trackResult.trackName);
-  }, [isLoading, isError, trackResult]);
+      return preserveWaypoints
+        ? removeDuplicateWaypoints([...prevState, ...trackResult.markerPositions])
+        : trackResult.markerPositions
+    })
+    setPositions(trackResult.positions)
+    setBounds(trackResult.bounds)
+    setTrackname(trackResult.trackName)
+  }, [isLoading, isError, trackResult])
 
   useEffect(() => {
     const handleKeyPress = (event: KeyboardEvent) => {
@@ -116,7 +115,7 @@ const TrackScreen = () => {
     <>
       {isLoading ? (
         <div className="ml-2 md:ml-6 lg:ml-10 mt-8 text-base-content">
-          <Loading size="lg"/>
+          <Loading size="lg" />
         </div>
       ) : (positions.length > 0 || markerPositions.length > 0) && trackId !== undefined ? (
         <div className="flex flex-col" style={{ height: '100%' }}>
@@ -135,22 +134,22 @@ const TrackScreen = () => {
               showPolyline={showPolyline}
             />
           </div>
-          <ReloadModal/>
-          <DownloadModal trackId={trackId}/>
+          <ReloadModal />
+          <DownloadModal trackId={trackId} />
         </div>
       ) : (
         <>
           <div className="ml-2 md:ml-6 lg:ml-10 mt-8 text-base-content">
             <h1 className="text-6xl font-medium tracking-wide flex items-center">
               {getMessage('track_not_found_headline')}
-              <BsEmojiDizzy className="ml-3"/>
+              <BsEmojiDizzy className="ml-3" />
             </h1>
             <div className="mb-4 text-2xl font-light mt-8">
               {getMessage('track_not_found_text')}
-              <br/>
+              <br />
               {getMessage('not_found_back')}:
               <a href="/">
-                <FaAngleRight className="inline"/>
+                <FaAngleRight className="inline" />
                 <div className="inline font-bold">GPS-Tools</div>
               </a>
             </div>

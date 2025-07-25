@@ -4,7 +4,7 @@ import React, { useMemo, useRef } from 'react'
 import { sanitizeFilename } from '../../../utils/tools'
 import useLanguage from '../../../hooks/useLanguage'
 import ReloadButton from './ReloadButton.tsx'
-import DownloadButton from "./DownloadButton.tsx";
+import DownloadButton from './DownloadButton.tsx'
 
 type TrackHeaderProps = {
   trackname: string
@@ -63,18 +63,18 @@ const TrackHeader: React.FC<TrackHeaderProps> = ({
         data-tip={getMessage('tooltip_mute') as string}
       >
         {showPolyline ? (
-          <FaEye className="text-3xl" onClick={() => setShowPolyline(false)}/>
+          <FaEye className="text-3xl" onClick={() => setShowPolyline(false)} />
         ) : (
-          <FaEyeSlash className="text-3xl" onClick={() => setShowPolyline(true)}/>
+          <FaEyeSlash className="text-3xl" onClick={() => setShowPolyline(true)} />
         )}
       </div>
       <div className="flex flex-1 justify-end md:hidden mr-8">
-        <FaEllipsis className="ms-2 relative top-[15px] text-xl"/>
+        <FaEllipsis className="ms-2 relative top-[15px] text-xl" />
       </div>
       <div className="hidden md:flex flex-1 mb-4 justify-end items-center">
         <div className="flex flex-row flex-1 justify-end items-center">
-          <ReloadButton/>
-          <DownloadButton/>
+          <ReloadButton />
+          <DownloadButton />
         </div>
       </div>
     </div>

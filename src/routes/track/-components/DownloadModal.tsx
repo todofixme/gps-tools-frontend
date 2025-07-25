@@ -1,10 +1,10 @@
 import classNames from 'classnames'
 import React, { useEffect } from 'react'
 import useLanguage from '../../../hooks/useLanguage.ts'
-import DownloadLink from "./DownloadLink.tsx";
-import { FaCircleInfo } from "react-icons/fa6";
+import DownloadLink from './DownloadLink.tsx'
+import { FaCircleInfo } from 'react-icons/fa6'
 import { Tooltip } from 'react-tooltip'
-import useAppContext from "../../../hooks/useAppContext.ts";
+import useAppContext from '../../../hooks/useAppContext.ts'
 
 type DownloadModalProps = {
   trackId: string
@@ -12,7 +12,8 @@ type DownloadModalProps = {
 
 const DownloadModal: React.FC<DownloadModalProps> = ({ trackId }) => {
   const { getMessage } = useLanguage()
-  const { optimizeWaypoints, setOptimizeWaypoints, downloadModalOpen, setDownloadModalOpen } = useAppContext()
+  const { optimizeWaypoints, setOptimizeWaypoints, downloadModalOpen, setDownloadModalOpen } =
+    useAppContext()
 
   const onClose = () => {
     setDownloadModalOpen(false)
@@ -43,8 +44,8 @@ const DownloadModal: React.FC<DownloadModalProps> = ({ trackId }) => {
         </button>
         <div className="bg-gray-800 rounded shadow-xl p-5 space-y-3">
           <div className="text-2xl ml-2">{getMessage('download_track')}</div>
-          <DownloadLink trackId={trackId} type="gpx"/>
-          <DownloadLink trackId={trackId} type="tcx"/>
+          <DownloadLink trackId={trackId} type="gpx" />
+          <DownloadLink trackId={trackId} type="tcx" />
           <div className="ml-3 mr-5 flex items-center gap-2">
             <input
               id="optimize-waypoints-checkbox"
@@ -64,13 +65,13 @@ const DownloadModal: React.FC<DownloadModalProps> = ({ trackId }) => {
               className="cursor-pointer p-0 bg-transparent border-0 align-middle"
               aria-label={getMessage('optimize_waypoints_tooltip') as string}
             >
-              <FaCircleInfo/>
+              <FaCircleInfo />
             </button>
-            <Tooltip id="optimize-waypoints-tooltip" className="max-w-xs break-words"/>
+            <Tooltip id="optimize-waypoints-tooltip" className="max-w-xs break-words" />
           </div>
-          <hr className="mt-7 mb-5"/>
+          <hr className="mt-7 mb-5" />
           <div className="text-2xl ml-2">{getMessage('download_waypoints')}</div>
-          <DownloadLink trackId={trackId} type="points"/>
+          <DownloadLink trackId={trackId} type="points" />
         </div>
       </div>
     </div>

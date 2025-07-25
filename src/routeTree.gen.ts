@@ -8,76 +8,32 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-// Import Routes
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as FaqIndexRouteImport } from './routes/faq/index'
+import { Route as AboutIndexRouteImport } from './routes/about/index'
+import { Route as rootIndexRouteImport } from './routes/(root)/index'
+import { Route as TrackTrackIdRouteImport } from './routes/track/$trackId'
 
-import { Route as rootRoute } from './routes/__root'
-import { Route as FaqIndexImport } from './routes/faq/index'
-import { Route as AboutIndexImport } from './routes/about/index'
-import { Route as rootIndexImport } from './routes/(root)/index'
-import { Route as TrackTrackIdImport } from './routes/track/$trackId'
-
-// Create/Update Routes
-
-const FaqIndexRoute = FaqIndexImport.update({
+const FaqIndexRoute = FaqIndexRouteImport.update({
   id: '/faq/',
   path: '/faq/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const AboutIndexRoute = AboutIndexImport.update({
+const AboutIndexRoute = AboutIndexRouteImport.update({
   id: '/about/',
   path: '/about/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const rootIndexRoute = rootIndexImport.update({
+const rootIndexRoute = rootIndexRouteImport.update({
   id: '/(root)/',
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-const TrackTrackIdRoute = TrackTrackIdImport.update({
+const TrackTrackIdRoute = TrackTrackIdRouteImport.update({
   id: '/track/$trackId',
   path: '/track/$trackId',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => rootRouteImport,
 } as any)
-
-// Populate the FileRoutesByPath interface
-
-declare module '@tanstack/react-router' {
-  interface FileRoutesByPath {
-    '/track/$trackId': {
-      id: '/track/$trackId'
-      path: '/track/$trackId'
-      fullPath: '/track/$trackId'
-      preLoaderRoute: typeof TrackTrackIdImport
-      parentRoute: typeof rootRoute
-    }
-    '/(root)/': {
-      id: '/(root)/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof rootIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/about/': {
-      id: '/about/'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutIndexImport
-      parentRoute: typeof rootRoute
-    }
-    '/faq/': {
-      id: '/faq/'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqIndexImport
-      parentRoute: typeof rootRoute
-    }
-  }
-}
-
-// Create and export the route tree
 
 export interface FileRoutesByFullPath {
   '/track/$trackId': typeof TrackTrackIdRoute
@@ -85,22 +41,19 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutIndexRoute
   '/faq': typeof FaqIndexRoute
 }
-
 export interface FileRoutesByTo {
   '/track/$trackId': typeof TrackTrackIdRoute
   '/': typeof rootIndexRoute
   '/about': typeof AboutIndexRoute
   '/faq': typeof FaqIndexRoute
 }
-
 export interface FileRoutesById {
-  __root__: typeof rootRoute
+  __root__: typeof rootRouteImport
   '/track/$trackId': typeof TrackTrackIdRoute
   '/(root)/': typeof rootIndexRoute
   '/about/': typeof AboutIndexRoute
   '/faq/': typeof FaqIndexRoute
 }
-
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/track/$trackId' | '/' | '/about' | '/faq'
@@ -109,12 +62,44 @@ export interface FileRouteTypes {
   id: '__root__' | '/track/$trackId' | '/(root)/' | '/about/' | '/faq/'
   fileRoutesById: FileRoutesById
 }
-
 export interface RootRouteChildren {
   TrackTrackIdRoute: typeof TrackTrackIdRoute
   rootIndexRoute: typeof rootIndexRoute
   AboutIndexRoute: typeof AboutIndexRoute
   FaqIndexRoute: typeof FaqIndexRoute
+}
+
+declare module '@tanstack/react-router' {
+  interface FileRoutesByPath {
+    '/faq/': {
+      id: '/faq/'
+      path: '/faq'
+      fullPath: '/faq'
+      preLoaderRoute: typeof FaqIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about/': {
+      id: '/about/'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/(root)/': {
+      id: '/(root)/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof rootIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/track/$trackId': {
+      id: '/track/$trackId'
+      path: '/track/$trackId'
+      fullPath: '/track/$trackId'
+      preLoaderRoute: typeof TrackTrackIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+  }
 }
 
 const rootRouteChildren: RootRouteChildren = {
@@ -123,35 +108,6 @@ const rootRouteChildren: RootRouteChildren = {
   AboutIndexRoute: AboutIndexRoute,
   FaqIndexRoute: FaqIndexRoute,
 }
-
-export const routeTree = rootRoute
+export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-/* ROUTE_MANIFEST_START
-{
-  "routes": {
-    "__root__": {
-      "filePath": "__root.tsx",
-      "children": [
-        "/track/$trackId",
-        "/(root)/",
-        "/about/",
-        "/faq/"
-      ]
-    },
-    "/track/$trackId": {
-      "filePath": "track/$trackId.tsx"
-    },
-    "/(root)/": {
-      "filePath": "(root)/index.tsx"
-    },
-    "/about/": {
-      "filePath": "about/index.tsx"
-    },
-    "/faq/": {
-      "filePath": "faq/index.tsx"
-    }
-  }
-}
-ROUTE_MANIFEST_END */

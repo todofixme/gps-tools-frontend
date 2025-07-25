@@ -111,10 +111,10 @@ export const convertOsmToPoiType = (osm_key: string, osm_value: string): PoiType
 
 export const removeDuplicateWaypoints = (waypoints: WayPoint[]): WayPoint[] => {
   const uniqueMap = new Map(
-    waypoints.map(waypoint => [
+    waypoints.map((waypoint) => [
       `${waypoint.position[0]},${waypoint.position[1]}-${waypoint.name}`,
-      waypoint
-    ])
-  );
-  return Array.from(uniqueMap.values());
+      waypoint,
+    ]),
+  )
+  return Array.from(uniqueMap.values())
 }
