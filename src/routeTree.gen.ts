@@ -9,104 +9,160 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as FaqIndexRouteImport } from './routes/faq/index'
-import { Route as AboutIndexRouteImport } from './routes/about/index'
-import { Route as rootIndexRouteImport } from './routes/(root)/index'
-import { Route as TrackTrackIdRouteImport } from './routes/track/$trackId'
+import { Route as LangRouteImport } from './routes/$lang'
+import { Route as SplatRouteImport } from './routes/$'
+import { Route as LangIndexRouteImport } from './routes/$lang/index'
+import { Route as LangFaqRouteImport } from './routes/$lang/faq'
+import { Route as LangAboutRouteImport } from './routes/$lang/about'
+import { Route as LangTrackTrackIdRouteImport } from './routes/$lang/track.$trackId'
 
-const FaqIndexRoute = FaqIndexRouteImport.update({
-  id: '/faq/',
-  path: '/faq/',
+const LangRoute = LangRouteImport.update({
+  id: '/$lang',
+  path: '/$lang',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AboutIndexRoute = AboutIndexRouteImport.update({
-  id: '/about/',
-  path: '/about/',
+const SplatRoute = SplatRouteImport.update({
+  id: '/$',
+  path: '/$',
   getParentRoute: () => rootRouteImport,
 } as any)
-const rootIndexRoute = rootIndexRouteImport.update({
-  id: '/(root)/',
+const LangIndexRoute = LangIndexRouteImport.update({
+  id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LangRoute,
 } as any)
-const TrackTrackIdRoute = TrackTrackIdRouteImport.update({
+const LangFaqRoute = LangFaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
+  getParentRoute: () => LangRoute,
+} as any)
+const LangAboutRoute = LangAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => LangRoute,
+} as any)
+const LangTrackTrackIdRoute = LangTrackTrackIdRouteImport.update({
   id: '/track/$trackId',
   path: '/track/$trackId',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LangRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/track/$trackId': typeof TrackTrackIdRoute
-  '/': typeof rootIndexRoute
-  '/about': typeof AboutIndexRoute
-  '/faq': typeof FaqIndexRoute
+  '/$': typeof SplatRoute
+  '/$lang': typeof LangRouteWithChildren
+  '/$lang/about': typeof LangAboutRoute
+  '/$lang/faq': typeof LangFaqRoute
+  '/$lang/': typeof LangIndexRoute
+  '/$lang/track/$trackId': typeof LangTrackTrackIdRoute
 }
 export interface FileRoutesByTo {
-  '/track/$trackId': typeof TrackTrackIdRoute
-  '/': typeof rootIndexRoute
-  '/about': typeof AboutIndexRoute
-  '/faq': typeof FaqIndexRoute
+  '/$': typeof SplatRoute
+  '/$lang/about': typeof LangAboutRoute
+  '/$lang/faq': typeof LangFaqRoute
+  '/$lang': typeof LangIndexRoute
+  '/$lang/track/$trackId': typeof LangTrackTrackIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/track/$trackId': typeof TrackTrackIdRoute
-  '/(root)/': typeof rootIndexRoute
-  '/about/': typeof AboutIndexRoute
-  '/faq/': typeof FaqIndexRoute
+  '/$': typeof SplatRoute
+  '/$lang': typeof LangRouteWithChildren
+  '/$lang/about': typeof LangAboutRoute
+  '/$lang/faq': typeof LangFaqRoute
+  '/$lang/': typeof LangIndexRoute
+  '/$lang/track/$trackId': typeof LangTrackTrackIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/track/$trackId' | '/' | '/about' | '/faq'
+  fullPaths:
+    | '/$'
+    | '/$lang'
+    | '/$lang/about'
+    | '/$lang/faq'
+    | '/$lang/'
+    | '/$lang/track/$trackId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/track/$trackId' | '/' | '/about' | '/faq'
-  id: '__root__' | '/track/$trackId' | '/(root)/' | '/about/' | '/faq/'
+  to: '/$' | '/$lang/about' | '/$lang/faq' | '/$lang' | '/$lang/track/$trackId'
+  id:
+    | '__root__'
+    | '/$'
+    | '/$lang'
+    | '/$lang/about'
+    | '/$lang/faq'
+    | '/$lang/'
+    | '/$lang/track/$trackId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  TrackTrackIdRoute: typeof TrackTrackIdRoute
-  rootIndexRoute: typeof rootIndexRoute
-  AboutIndexRoute: typeof AboutIndexRoute
-  FaqIndexRoute: typeof FaqIndexRoute
+  SplatRoute: typeof SplatRoute
+  LangRoute: typeof LangRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/faq/': {
-      id: '/faq/'
-      path: '/faq'
-      fullPath: '/faq'
-      preLoaderRoute: typeof FaqIndexRouteImport
+    '/$lang': {
+      id: '/$lang'
+      path: '/$lang'
+      fullPath: '/$lang'
+      preLoaderRoute: typeof LangRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/about/': {
-      id: '/about/'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutIndexRouteImport
+    '/$': {
+      id: '/$'
+      path: '/$'
+      fullPath: '/$'
+      preLoaderRoute: typeof SplatRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/(root)/': {
-      id: '/(root)/'
+    '/$lang/': {
+      id: '/$lang/'
       path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof rootIndexRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/$lang/'
+      preLoaderRoute: typeof LangIndexRouteImport
+      parentRoute: typeof LangRoute
     }
-    '/track/$trackId': {
-      id: '/track/$trackId'
+    '/$lang/faq': {
+      id: '/$lang/faq'
+      path: '/faq'
+      fullPath: '/$lang/faq'
+      preLoaderRoute: typeof LangFaqRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/$lang/about': {
+      id: '/$lang/about'
+      path: '/about'
+      fullPath: '/$lang/about'
+      preLoaderRoute: typeof LangAboutRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/$lang/track/$trackId': {
+      id: '/$lang/track/$trackId'
       path: '/track/$trackId'
-      fullPath: '/track/$trackId'
-      preLoaderRoute: typeof TrackTrackIdRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/$lang/track/$trackId'
+      preLoaderRoute: typeof LangTrackTrackIdRouteImport
+      parentRoute: typeof LangRoute
     }
   }
 }
 
+interface LangRouteChildren {
+  LangAboutRoute: typeof LangAboutRoute
+  LangFaqRoute: typeof LangFaqRoute
+  LangIndexRoute: typeof LangIndexRoute
+  LangTrackTrackIdRoute: typeof LangTrackTrackIdRoute
+}
+
+const LangRouteChildren: LangRouteChildren = {
+  LangAboutRoute: LangAboutRoute,
+  LangFaqRoute: LangFaqRoute,
+  LangIndexRoute: LangIndexRoute,
+  LangTrackTrackIdRoute: LangTrackTrackIdRoute,
+}
+
+const LangRouteWithChildren = LangRoute._addFileChildren(LangRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  TrackTrackIdRoute: TrackTrackIdRoute,
-  rootIndexRoute: rootIndexRoute,
-  AboutIndexRoute: AboutIndexRoute,
-  FaqIndexRoute: FaqIndexRoute,
+  SplatRoute: SplatRoute,
+  LangRoute: LangRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

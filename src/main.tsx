@@ -6,7 +6,7 @@ import { routeTree } from './routeTree.gen'
 
 const router = createRouter({
   routeTree,
-  defaultNotFoundComponent: lazyRouteComponent(() => import('./routes/-screens/NotFoundScreen')),
+  defaultNotFoundComponent: lazyRouteComponent(() => import('./screens/NotFoundScreen')),
   defaultPreload: 'intent',
 })
 
