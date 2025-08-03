@@ -1,3 +1,10 @@
+# [0.21.0](https://github.com/todofixme/gps-tools-frontend/compare/v0.20.1...v0.21.0) (2025-08-03)
+
+
+### Features
+
+* **routing:** introduce language-prefixed routes ([4c93335](https://github.com/todofixme/gps-tools-frontend/commit/4c93335005bc1f4782a60845137fb9b8ab23dca4))
+
 ## [0.20.1](https://github.com/todofixme/gps-tools-frontend/compare/v0.20.0...v0.20.1) (2025-05-26)
 
 
