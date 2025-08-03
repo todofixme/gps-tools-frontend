@@ -3,7 +3,6 @@ import { Language } from '../../../@types/language'
 
 type LanguageContextType = {
   language: Language
-  toggleLanguage: () => void
   getMessage: (labelId: string) => string | Array<string>
 }
 

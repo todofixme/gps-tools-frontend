@@ -4,7 +4,7 @@ type IconProps = {
   className?: string | undefined
 }
 
-const EnglishIcon: React.FC<IconProps> = ({ className }) => {
+export const EnglishIcon: React.FC<IconProps> = ({ className }) => {
   return (
     <svg
       id="English Language"
@@ -137,5 +137,3 @@ const EnglishIcon: React.FC<IconProps> = ({ className }) => {
     </svg>
   )
 }
-
-export default EnglishIcon

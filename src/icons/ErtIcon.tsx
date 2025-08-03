@@ -1,4 +1,4 @@
-const ErtIcon = () => {
+export const ErtIcon = () => {
   return (
     <svg
       id="ERT Logo"
@@ -25,5 +25,3 @@ const ErtIcon = () => {
     </svg>
   )
 }
-
-export default ErtIcon
