@@ -1,3 +1,10 @@
+## [0.21.1](https://github.com/todofixme/gps-tools-frontend/compare/v0.21.0...v0.21.1) (2025-11-01)
+
+
+### Bug Fixes
+
+* update sitemap ([9a54a5e](https://github.com/todofixme/gps-tools-frontend/commit/9a54a5e428e85daa4cda82a94cd691d084e36b04))
+
 # [0.21.0](https://github.com/todofixme/gps-tools-frontend/compare/v0.20.1...v0.21.0) (2025-08-03)
 
 
