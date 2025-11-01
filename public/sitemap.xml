@@ -1,21 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset 
-        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+    <!-- Home -->
     <url>
-        <loc>https://gps-tools.pages.dev/</loc>
-        <lastmod>2024-06-16T18:03:17+01:00</lastmod>
-        <priority>0.8</priority>
+        <loc>https://gps-tools.pages.dev/en</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://gps-tools.pages.dev/en"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://gps-tools.pages.dev/de"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://gps-tools.pages.dev/en"/>
     </url>
+
     <url>
-        <loc>https://gps-tools.pages.dev/faq/</loc>
-        <lastmod>2024-06-16T18:03:17+01:00</lastmod>
-        <priority>0.8</priority>
+        <loc>https://gps-tools.pages.dev/de</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://gps-tools.pages.dev/en"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://gps-tools.pages.dev/de"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://gps-tools.pages.dev/en"/>
     </url>
+
+    <!-- FAQ -->
     <url>
-        <loc>https://gps-tools.pages.dev/about/</loc>
-        <lastmod>2024-06-16T18:03:17+01:00</lastmod>
-        <priority>0.8</priority>
+        <loc>https://gps-tools.pages.dev/en/faq</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://gps-tools.pages.dev/en/faq"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://gps-tools.pages.dev/de/faq"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://gps-tools.pages.dev/en/faq"/>
     </url>
+
+    <url>
+        <loc>https://gps-tools.pages.dev/de/faq</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://gps-tools.pages.dev/en/faq"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://gps-tools.pages.dev/de/faq"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://gps-tools.pages.dev/en/faq"/>
+    </url>
+
+    <!-- About -->
+    <url>
+        <loc>https://gps-tools.pages.dev/en/about</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://gps-tools.pages.dev/en/about"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://gps-tools.pages.dev/de/about"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://gps-tools.pages.dev/en/about"/>
+    </url>
+
+    <url>
+        <loc>https://gps-tools.pages.dev/de/about</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="https://gps-tools.pages.dev/en/about"/>
+        <xhtml:link rel="alternate" hreflang="de" href="https://gps-tools.pages.dev/de/about"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://gps-tools.pages.dev/en/about"/>
+    </url>
+
 </urlset>
