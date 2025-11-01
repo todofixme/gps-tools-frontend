@@ -1,33 +1,28 @@
 import React, { Suspense } from 'react'
 import { createRootRoute, Outlet, redirect } from '@tanstack/react-router'
 import Providers from '../services/providers'
-import {
-  defaultLanguage,
-  Language,
-  languageIndexPathPattern,
-  languagePagePathPattern,
-} from '../@types/language.ts'
+import { defaultLanguage, Language, languageIndexPathPattern, languagePagePathPattern, } from '../@types/language.ts'
 import { isKnownRoute } from '../utils/routing.ts'
 import { LanguageProvider } from '../services/providers/language/LanguageProvider.tsx'
 import { Feedback, Footer, Navbar } from '../components'
 import { NotFoundScreen } from '../screens'
 
 const TanStackRouterDevtools =
-  process.env.NODE_ENV === 'development'
+  import.meta.env.DEV
     ? React.lazy(() =>
-        import('@tanstack/router-devtools').then((res) => ({
-          default: res.TanStackRouterDevtools,
-        })),
-      )
+      import('@tanstack/router-devtools').then((res) => ({
+        default: res.TanStackRouterDevtools,
+      })),
+    )
     : () => null
 
 const TanStackQueryDevtools =
-  process.env.NODE_ENV === 'development'
+  import.meta.env.DEV
     ? React.lazy(() =>
-        import('@tanstack/react-query-devtools').then((res) => ({
-          default: res.ReactQueryDevtools,
-        })),
-      )
+      import('@tanstack/react-query-devtools').then((res) => ({
+        default: res.ReactQueryDevtools,
+      })),
+    )
     : () => null
 
 export const Route = createRootRoute({
@@ -75,16 +70,16 @@ export const Route = createRootRoute({
       <LanguageProvider language={language}>
         <Providers>
           <div className="flex flex-col min-h-screen">
-            <Navbar />
+            <Navbar/>
             <main className="grow h-0">
-              <Feedback />
-              {showNotFound ? <NotFoundScreen /> : <Outlet />}
+              <Feedback/>
+              {showNotFound ? <NotFoundScreen/> : <Outlet/>}
             </main>
-            <Footer />
+            <Footer/>
           </div>
           <Suspense>
-            <TanStackRouterDevtools position="bottom-left" />
-            <TanStackQueryDevtools position="bottom" initialIsOpen={false} />
+            <TanStackRouterDevtools position="bottom-left"/>
+            <TanStackQueryDevtools position="bottom" initialIsOpen={false}/>
           </Suspense>
         </Providers>
       </LanguageProvider>
