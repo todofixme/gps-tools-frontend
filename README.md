@@ -1,6 +1,7 @@
-<p align="center">
-    <a href="https://github.com/devshred/gps-tools-frontend/actions/workflows/release.yaml" alt="Release Pipeline">
-        <img src="https://github.com/devshred/gps-tools-frontend/actions/workflows/release.yaml/badge.svg" /></a>
+<p style="text-align: center;">
+    <a href="https://github.com/devshred/gps-tools-frontend/actions/workflows/release.yaml">
+        <img src="https://github.com/devshred/gps-tools-frontend/actions/workflows/release.yaml/badge.svg" alt="Release Pipeline" />
+    </a>
 </p>
 
 # Frontend of GPS-Tools based on React and Leaflet
@@ -39,6 +40,12 @@ npm run preview
 ```
 
 Open http://localhost:4173/
+
+### update dependencies
+Run dependency check:
+```sh
+npx npm-check-updates -i
+```
 
 ## Release process
 This project is using [semantic versioning](https://semver.org/) and [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/). It's recommended to use [Commitizen](https://commitizen-tools.github.io/commitizen/) to commit changes.
