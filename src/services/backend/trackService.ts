@@ -57,7 +57,7 @@ export const findMarkerPositions = (featureCollection: FeatureCollection): WayPo
 
       return {
         id: feat.properties?.id ?? uuidv4(),
-        position: [point.coordinates[0], point.coordinates[1]],
+        position: [point.coordinates[1], point.coordinates[0]],
         name: feat.properties?.name ?? 'unnamed',
         type: type,
       }
