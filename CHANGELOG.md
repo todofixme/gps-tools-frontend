@@ -1,3 +1,15 @@
+# [0.22.0](https://github.com/todofixme/gps-tools-frontend/compare/v0.21.1...v0.22.0) (2026-02-16)
+
+
+### Bug Fixes
+
+* correct coordinate order to match GeoJSON spec ([d8b7ac9](https://github.com/todofixme/gps-tools-frontend/commit/d8b7ac978b082c76a616c78d1787a487503727e3))
+
+
+### Features
+
+* add favicons and OG preview settings ([d98e280](https://github.com/todofixme/gps-tools-frontend/commit/d98e2807fbff563455413e407533f50dc9073c11))
+
 ## [0.21.1](https://github.com/todofixme/gps-tools-frontend/compare/v0.21.0...v0.21.1) (2025-11-01)
 
 
