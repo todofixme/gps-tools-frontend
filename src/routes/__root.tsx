@@ -1,29 +1,32 @@
 import React, { Suspense } from 'react'
 import { createRootRoute, Outlet, redirect } from '@tanstack/react-router'
 import Providers from '../services/providers'
-import { defaultLanguage, Language, languageIndexPathPattern, languagePagePathPattern, } from '../@types/language.ts'
+import {
+  defaultLanguage,
+  Language,
+  languageIndexPathPattern,
+  languagePagePathPattern,
+} from '../@types/language.ts'
 import { isKnownRoute } from '../utils/routing.ts'
 import { LanguageProvider } from '../services/providers/language/LanguageProvider.tsx'
 import { Feedback, Footer, Navbar } from '../components'
 import { NotFoundScreen } from '../screens'
 
-const TanStackRouterDevtools =
-  import.meta.env.DEV
-    ? React.lazy(() =>
+const TanStackRouterDevtools = import.meta.env.DEV
+  ? React.lazy(() =>
       import('@tanstack/router-devtools').then((res) => ({
         default: res.TanStackRouterDevtools,
       })),
     )
-    : () => null
+  : () => null
 
-const TanStackQueryDevtools =
-  import.meta.env.DEV
-    ? React.lazy(() =>
+const TanStackQueryDevtools = import.meta.env.DEV
+  ? React.lazy(() =>
       import('@tanstack/react-query-devtools').then((res) => ({
         default: res.ReactQueryDevtools,
       })),
     )
-    : () => null
+  : () => null
 
 export const Route = createRootRoute({
   beforeLoad: ({ location }) => {
@@ -70,16 +73,16 @@ export const Route = createRootRoute({
       <LanguageProvider language={language}>
         <Providers>
           <div className="flex flex-col min-h-screen">
-            <Navbar/>
+            <Navbar />
             <main className="grow h-0">
-              <Feedback/>
-              {showNotFound ? <NotFoundScreen/> : <Outlet/>}
+              <Feedback />
+              {showNotFound ? <NotFoundScreen /> : <Outlet />}
             </main>
-            <Footer/>
+            <Footer />
           </div>
           <Suspense>
-            <TanStackRouterDevtools position="bottom-left"/>
-            <TanStackQueryDevtools position="bottom" initialIsOpen={false}/>
+            <TanStackRouterDevtools position="bottom-left" />
+            <TanStackQueryDevtools position="bottom" initialIsOpen={false} />
           </Suspense>
         </Providers>
       </LanguageProvider>
