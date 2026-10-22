@@ -48,6 +48,7 @@ export default [
       },
 
       'import/resolver': {
+        typescript: true,
         node: {
           paths: ['src'],
           extensions: ['.js', '.jsx', '.ts', '.tsx'],

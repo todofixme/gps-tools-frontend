@@ -9,21 +9,21 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as LangRouteImport } from './routes/$lang'
 import { Route as SplatRouteImport } from './routes/$'
+import { Route as LangRouteImport } from './routes/$lang'
 import { Route as LangIndexRouteImport } from './routes/$lang/index'
-import { Route as LangFaqRouteImport } from './routes/$lang/faq'
 import { Route as LangAboutRouteImport } from './routes/$lang/about'
+import { Route as LangFaqRouteImport } from './routes/$lang/faq'
 import { Route as LangTrackTrackIdRouteImport } from './routes/$lang/track.$trackId'
 
-const LangRoute = LangRouteImport.update({
-  id: '/$lang',
-  path: '/$lang',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SplatRoute = SplatRouteImport.update({
   id: '/$',
   path: '/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LangRoute = LangRouteImport.update({
+  id: '/$lang',
+  path: '/$lang',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LangIndexRoute = LangIndexRouteImport.update({
@@ -31,14 +31,14 @@ const LangIndexRoute = LangIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LangRoute,
 } as any)
-const LangFaqRoute = LangFaqRouteImport.update({
-  id: '/faq',
-  path: '/faq',
-  getParentRoute: () => LangRoute,
-} as any)
 const LangAboutRoute = LangAboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => LangRoute,
+} as any)
+const LangFaqRoute = LangFaqRouteImport.update({
+  id: '/faq',
+  path: '/faq',
   getParentRoute: () => LangRoute,
 } as any)
 const LangTrackTrackIdRoute = LangTrackTrackIdRouteImport.update({
@@ -99,18 +99,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/$lang': {
-      id: '/$lang'
-      path: '/$lang'
-      fullPath: '/$lang'
-      preLoaderRoute: typeof LangRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/$': {
       id: '/$'
       path: '/$'
       fullPath: '/$'
       preLoaderRoute: typeof SplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$lang': {
+      id: '/$lang'
+      path: '/$lang'
+      fullPath: '/$lang'
+      preLoaderRoute: typeof LangRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$lang/': {
@@ -120,18 +120,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LangIndexRouteImport
       parentRoute: typeof LangRoute
     }
-    '/$lang/faq': {
-      id: '/$lang/faq'
-      path: '/faq'
-      fullPath: '/$lang/faq'
-      preLoaderRoute: typeof LangFaqRouteImport
-      parentRoute: typeof LangRoute
-    }
     '/$lang/about': {
       id: '/$lang/about'
       path: '/about'
       fullPath: '/$lang/about'
       preLoaderRoute: typeof LangAboutRouteImport
+      parentRoute: typeof LangRoute
+    }
+    '/$lang/faq': {
+      id: '/$lang/faq'
+      path: '/faq'
+      fullPath: '/$lang/faq'
+      preLoaderRoute: typeof LangFaqRouteImport
       parentRoute: typeof LangRoute
     }
     '/$lang/track/$trackId': {
